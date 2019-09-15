@@ -8,6 +8,7 @@ import br.com.caelum.vraptor.model.AtletaLogado;
 import br.com.caelum.vraptor.model.TipoAtleta;
 import br.com.caelum.vraptor.negocio.LoginNegocio;
 import br.com.caelum.vraptor.util.Criptografia;
+import br.com.caelum.vraptor.util.mensagemCustominizada;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 
 import javax.inject.Inject;
@@ -41,6 +42,8 @@ public class LoginController extends Controlador {
             this.resultado.redirectTo(InicioController.class).index();
         } else{
             this.resultado.include("mensagem", new SimpleMessage("error","login.dadoIncorreto"));
+//            this.resultado.include("mensagem", new mensagemCustominizada("falhou","error"));
+
             this.resultado.of(this).form();
         }
     }

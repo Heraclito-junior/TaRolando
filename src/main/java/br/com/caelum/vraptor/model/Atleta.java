@@ -40,6 +40,10 @@ public class Atleta extends Entidade {
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Evento> eventos;
+    
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Atleta> amigos;
+    
 
 //    @ManyToOne(cascade = CascadeType.ALL    )
 //    private Convite convite;
@@ -162,4 +166,14 @@ public class Atleta extends Entidade {
     public void setEventos(List<Evento> eventos) {
         this.eventos = eventos;
     }
+
+
+	public List<Atleta> getAmigos() {
+		return amigos;
+	}
+
+
+	public void setAmigos(List<Atleta> amigos) {
+		this.amigos = amigos;
+	}
 }

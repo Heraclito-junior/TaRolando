@@ -12,10 +12,10 @@ public class Convite extends Entidade {
     private boolean aceito;
     private boolean pendente;
 
-    @ManyToOne
+    @OneToOne
     private Atleta atleta;
 
-    @ManyToOne
+    @OneToOne
     private Evento evento;
 
     @Deprecated

@@ -29,7 +29,7 @@
     <title>Tá Rolando! WEB</title>
 </head>
 <body style="background-color: #3498db;">
-    <jsp:include page="/WEB-INF/jsp/errors/msgError.jsp"/>
+    <jsp:include page="/WEB-INF/jsp/errors/msgErrorCustominizada.jsp"/>
     <div class="container">
         <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 

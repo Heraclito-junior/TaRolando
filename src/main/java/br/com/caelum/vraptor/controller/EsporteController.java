@@ -5,48 +5,45 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.anotacoes.Seguranca;
 import br.com.caelum.vraptor.anotacoes.Transacional;
-import br.com.caelum.vraptor.dao.EsporteDAO;
-import br.com.caelum.vraptor.model.Atleta;
-import br.com.caelum.vraptor.model.AtletaLogado;
 import br.com.caelum.vraptor.model.Esporte;
 import br.com.caelum.vraptor.model.TipoAtleta;
-
+import br.com.caelum.vraptor.negocio.EsporteNegocio;
 import javax.inject.Inject;
 
 @Seguranca(tipoUsuario = TipoAtleta.ADMINISTRADOR)
 @Path("/esporte")
 @Controller
-public class EsporteController extends Controlador{
+public class EsporteController extends Controlador {
 
-    private EsporteDAO dao;
-    @Inject
-    private AtletaLogado atletaLogado;
+	private EsporteNegocio negocio;
 
-    @Deprecated
-    public EsporteController() { this(null, null);}
+	@Deprecated
+	public EsporteController() {
+		this(null, null);
+	}
 
-    @Inject
-    public EsporteController(Result resultado, EsporteDAO dao) {
-        super(resultado);
-        this.dao = dao;
-    }
+	@Inject
+	public EsporteController(Result resultado, EsporteNegocio negocio) {
+		super(resultado);
+		this.negocio = negocio;
+	}
 
-    public void form() {}
+	public void form() {
+	}
 
-    @Transacional
-    public void salvar(Esporte esporte){
-        this.dao.salvar(esporte);
-        System.out.println(atletaLogado.getAtleta().getNome());
-        this.resultado.redirectTo(EsporteController.class).lista();
-    }
+	@Transacional
+	public void salvar(Esporte esporte) {
+		negocio.salvar(esporte);
+		this.resultado.redirectTo(EsporteController.class).lista();
+	}
 
-    @Transacional
-    public void remover(Long id) {
-        Esporte esporte = this.dao.buscarPorId(id);
-        esporte.setDeletado(true);
-        this.dao.salvar(esporte);
-        this.resultado.redirectTo(this).lista();
-    }
+	@Transacional
+	public void remover(Long id) {
+		negocio.remover(id);
+		this.resultado.redirectTo(this).lista();
+	}
 
-    public void lista() { this.resultado.include("esportes", this.dao.listar()); }
+	public void lista() {
+		this.resultado.include("esportes", negocio.listar());
+	}
 }

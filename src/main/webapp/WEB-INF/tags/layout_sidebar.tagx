@@ -97,6 +97,9 @@
                         <li>
                             <a href="${linkTo[EventoController].lista}"><i class="fa fa-th-list fa-fw"><c:out value=""/></i> Todos os Eventos</a>
                         </li>
+                        <li>
+                            <a href="${linkTo[AlertaController].lista}"><i class="fa fa-th-list fa-fw"><c:out value=""/></i> Meus Alertas</a>
+                        </li>
                         <c:if test="${atletaLogado.isAdmin()}">
                         <li>
                             <a href="${linkTo[EsporteController].lista}"><i class="fa fa-futbol-o fa-fw"><c:out value=""/></i> Esportes</a>

@@ -10,61 +10,64 @@ import br.com.caelum.vraptor.model.TipoAtleta;
 import br.com.caelum.vraptor.negocio.AtletaNegocio;
 import br.com.caelum.vraptor.util.Criptografia;
 import br.com.caelum.vraptor.util.OpcaoSelect;
+import br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
 
 import javax.inject.Inject;
 
 @Controller
 public class AtletaController extends ControladorTaRolando<Atleta> {
+	@Inject
+	private AtletaNegocio negocio;
 
-    private AtletaDAO dao;
-    private AtletaNegocio negocio;
+	@Deprecated
+	public AtletaController() {
+		this(null, null);
+	}
 
-    @Deprecated
-    public AtletaController() { this(null, null, null);}
+	@Inject
+	public AtletaController(Result resultado, AtletaNegocio negocio) {
+		super(resultado);
+		this.negocio = negocio;
+	}
 
-    @Inject
-    public AtletaController(Result resultado, AtletaDAO dao, AtletaNegocio negocio) {
-        super(resultado);
-        this.dao = dao;
-        this.negocio = negocio;
-    }
+	public void form() {
+		resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
+	}
 
-    public void form() {
-        resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
-    }
+	@Post
+	@Transacional
+	public void salvar(Atleta atleta) {
 
-    @Post
-    @Transacional
-    public void salvar(Atleta atleta) {
+		try {
+			negocio.salvar(atleta);
+			atleta.setSenha(criptografarSenha(atleta.getSenha()));
 
-        atleta.setSenha(criptografarSenha(atleta.getSenha()));
+			this.resultado.redirectTo(InicioController.class).index();
 
-        if (atleta.getId() == null) {
-            this.dao.salvar(atleta);
-            this.resultado.redirectTo(LoginController.class).form();
-        } else {
-            this.dao.salvar(atleta);
-            this.resultado.redirectTo(InicioController.class).index();
-        }
+		} catch (AtletaInexistenteException e) {
+			this.resultado.redirectTo(LoginController.class).form();
 
-    }
+		}
 
-    public void atualizarSenha(){}
+	}
 
-    public void remover(Long id) {
+	public void atualizarSenha() {
+	}
 
-    }
+	public void remover(Long id) {
 
-    public void perfil(Long id) {
-        Atleta atleta = this.dao.buscarPorId(id);
-        this.resultado.include("atleta", atleta);
-        this.resultado.include("tipoAtleta", OpcaoSelect.toListaOpcoes(TipoAtleta.values()));
-        this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
+	}
 
-    }
+	public void perfil(Long id) {
+		
+		Atleta atleta = negocio.perfil(id);
+		this.resultado.include("atleta", atleta);
+		this.resultado.include("tipoAtleta", OpcaoSelect.toListaOpcoes(TipoAtleta.values()));
+		this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
+	}
 
-    private String criptografarSenha(String senha) {
-        return Criptografia.criptografar(senha);
-    }
+	private String criptografarSenha(String senha) {
+		return Criptografia.criptografar(senha);
+	}
 
 }

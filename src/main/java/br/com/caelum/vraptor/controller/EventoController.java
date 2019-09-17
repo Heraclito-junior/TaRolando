@@ -36,18 +36,11 @@ public class EventoController extends ControladorTaRolando<Evento> {
 		resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
 	}
 
-	@Transacional
-	@Post
-	public void salvar(Evento evento) {
-		this.validator.onErrorRedirectTo(this).form();
-		negocio.definirAdministradorESalvar(evento);
-		this.resultado.redirectTo(this).lista();
-	}
-
+	
 	@Transacional
 	public void remover(Long id) {
 		try {
-			negocio.buscar(id);
+			negocio.buscarEDeletar(id);
 			this.resultado.redirectTo(this).lista();
 		} catch (AtletaInexistenteException e) {
 			this.resultado.redirectTo(this).lista();
@@ -73,6 +66,11 @@ public class EventoController extends ControladorTaRolando<Evento> {
 
 	@Transacional
 	public void convidarAtleta(Long id, String login) {
+		
+//		negocio.criarAlerta(id,login);
+//		this.resultado.redirectTo(this).detalhar(id);
+//
+//return;
 		try {
 			negocio.inserirAtleta(id, login);
 		} catch (AtletaInexistenteException e) {
@@ -88,6 +86,20 @@ public class EventoController extends ControladorTaRolando<Evento> {
 		negocio.removerAtleta(id,login);
 		this.resultado.redirectTo(this).detalhar(id);
 
+	}
+	@Transacional
+	@Post
+	public void salvar(Evento evento) {
+		this.validator.onErrorRedirectTo(this).form();
+		negocio.definirAdministradorESalvar(evento);
+		this.resultado.redirectTo(this).lista();
+	}
+	
+	public void criarAlerta(Long id, String login) {
+		negocio.criarAlerta(id,login);
+
+	}
+	public void teste() {
 	}
 
 

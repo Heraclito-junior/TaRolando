@@ -12,15 +12,15 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AtletaNegocio {
+public class AlertaNegocio {
 
     private AtletaDAO dao;
     private EsporteDAO esporteDAO;
 
-    public AtletaNegocio() {this(null, null);}
+    public AlertaNegocio() {this(null, null);}
 
     @Inject
-    public AtletaNegocio(AtletaDAO atletaDAO, EsporteDAO esporteDAO) {
+    public AlertaNegocio(AtletaDAO atletaDAO, EsporteDAO esporteDAO) {
         this.dao = atletaDAO;
         this.esporteDAO = esporteDAO;
     }

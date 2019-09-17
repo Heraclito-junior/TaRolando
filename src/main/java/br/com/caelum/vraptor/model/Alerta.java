@@ -14,17 +14,18 @@ public class Alerta extends Entidade{
     private Long id;
 
     private String nome;
-    private String descricao;
     
     @OneToOne
     private Evento evento;
+    
+    @OneToOne
+    private Atleta atleta;
     
 
     @Deprecated
     public Alerta() {
     }
-
-
+    
     @Override
     public Long getId() {
         return id;
@@ -47,12 +48,13 @@ public class Alerta extends Entidade{
         this.nome = nome;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public Atleta getAtleta() {
+		return atleta;
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public void setAtleta(Atleta atleta) {
+		this.atleta = atleta;
+	}
+
 
 }

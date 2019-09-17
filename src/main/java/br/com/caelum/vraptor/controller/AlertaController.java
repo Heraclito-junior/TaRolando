@@ -59,7 +59,6 @@ public class AlertaController extends ControladorTaRolando<Evento> {
 	}
 
 	public void form() {
-//        this.resultado.include("atletaLogado", this.atletaLogado);
 		resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
 	}
 
@@ -82,11 +81,17 @@ public class AlertaController extends ControladorTaRolando<Evento> {
 	}
 
 	public void lista() {
-		this.resultado.include("eventos", this.dao.listar());
+
+		this.resultado.include("AlertaTabela", this.dao.meusAlertas());
 	}
 
 	public void meusEventos() {
 		this.resultado.include("eventos", this.dao.meusEventos());
+	}
+
+	public void meusAlertas() {
+
+		this.resultado.include("eventos", this.dao.meusAlertas());
 	}
 
 	public void detalhar(Long id) {
@@ -106,8 +111,7 @@ public class AlertaController extends ControladorTaRolando<Evento> {
 
 			Optional<Atleta> atleta = this.atletaDAO.buscarPorLogin(login);
 			if (!atleta.isPresent()) {
-//				mensagemCustominizada falha = new mensagemCustominizada("falhou", "error");
-//				this.resultado.include("mensagem", falha);
+
 				this.resultado.redirectTo(this).detalhar(id);
 				this.resultado.of(this).form();
 
@@ -119,10 +123,7 @@ public class AlertaController extends ControladorTaRolando<Evento> {
 			this.dao.salvar(evento);
 			this.resultado.redirectTo(this).detalhar(id);
 
-//        Atleta atleta = this.atletaDAO.buscarPorLogin(login).get();
-//        convite.setEvento(evento);
-//        convite.setAtleta(atleta);
-//        conviteDAO.salvar(convite);
+
 		} catch (Exception e) {
 			System.out.println("Quebrou");
 			System.out.println(e);
@@ -130,19 +131,18 @@ public class AlertaController extends ControladorTaRolando<Evento> {
 
 	}
 
-
 	@Transacional
-    public void deletarAtleta(Long id, String login) {
-      Evento evento = this.dao.buscarPorId(id);
-      Optional<Atleta> atleta = this.atletaDAO.buscarPorLogin(login);
+	public void deletarAtleta(Long id, String login) {
+		Evento evento = this.dao.buscarPorId(id);
+		Optional<Atleta> atleta = this.atletaDAO.buscarPorLogin(login);
 
-      if (!evento.getParticipantes().contains(atleta)) {
-          evento.getParticipantes().remove(atleta.get());
-      }
-      this.dao.salvar(evento);
-      this.resultado.redirectTo(this).detalhar(id);
-      
-    }
+		if (!evento.getParticipantes().contains(atleta)) {
+			evento.getParticipantes().remove(atleta.get());
+		}
+		this.dao.salvar(evento);
+		this.resultado.redirectTo(this).detalhar(id);
+
+	}
 
 	@Transacional
 	public void teste() {

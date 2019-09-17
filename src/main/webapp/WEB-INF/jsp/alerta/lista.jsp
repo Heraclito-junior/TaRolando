@@ -51,66 +51,28 @@
         <div class="panel painel-sisint">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">Todos os Eventos e Atividades</h2>
+                    <h2 class="page-header">Meus Alertas</h2>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <div class="panel-body" style="padding-top: 0px;">
-                <a class="btn btn-info" style="margin-bottom: 16px;" href="${linkTo[AlertaController].form}">Cadastrar</a>
                 <div class="tabela-servicos">
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>Título</th>
-                            <th>Tipo de <br>Atividade</th>
-                            <th>Data do Evento</th>
-                            <th>Horário <br> Inicial</th>
-                            <th>Horário <br> Final</th>
-                            <th>Num de<br>Vagas</th>
-                            <th>Organizador</th>
-                            <th>Ações</th>
+                            <th>Alerta</th>
+                            <th>Nome do Evento</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${eventos}" var="evento">
+                        <c:forEach items="${AlertaTabela}" var="alertaTabela">
                             <tr>
-                                <td>${evento.titulo}</td>
-                                <td>${evento.tipoEsporte.nome}</td>
-                                <td>${evento.dataInicio}</td>
-                                <td>${evento.horaInicio}</td>
-                                <td>${evento.horaFim}</td>
-                                <td>${evento.numVagasMax}</td>
-                                <td>${evento.organizador.nome}</td>
-                                <td>
-                                    <a title="Detalhar" href="${linkTo[AlertaController].detalhar}?id=${evento.id}">
-                                        <i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
-                                    <c:if test="${atletaLogado.isAdmin() or atletaLogado.atleta.id == evento.organizador.id}">
-                                        <a title="Remover" class="link-remover" href="#delete-modal"
-                                           url-remover="${linkTo[AlertaController].remover}?id=${evento.id}" data-toggle="modal">
-                                            <i class="fa fa-trash fa-lg"></i></a>
-                                    </c:if>
-                                </td>
+                                <td>${alertaTabela.nome}</td>
+                                <td>${alertaTabela.titulo}</td>
                             </tr>
                         </c:forEach>
 
-                        <!-- Modal REMOVER -->
-                        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="modalLabel">Excluir Evento</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        Deseja realmente excluir este evento?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a href="" class="btn btn-primary btn-remover">Sim</a>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         </tbody>
                     </table>

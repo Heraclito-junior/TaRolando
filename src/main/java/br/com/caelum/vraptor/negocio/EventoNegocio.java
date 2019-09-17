@@ -3,6 +3,8 @@ package br.com.caelum.vraptor.negocio;
 import br.com.caelum.vraptor.dao.AtletaDAO;
 import br.com.caelum.vraptor.dao.EsporteDAO;
 import br.com.caelum.vraptor.dao.EventoDAO;
+import br.com.caelum.vraptor.dao.EventoJpaDao;
+import br.com.caelum.vraptor.model.Alerta;
 import br.com.caelum.vraptor.model.Atleta;
 import br.com.caelum.vraptor.model.AtletaLogado;
 import br.com.caelum.vraptor.model.Evento;
@@ -21,6 +23,8 @@ public class EventoNegocio {
     private EsporteDAO esporteDAO;
     @Inject
 	private EventoDAO dao;
+    @Inject
+	private EventoJpaDao daoJpa;
     @Inject
 	private AtletaDAO atletaDAO;
     
@@ -48,7 +52,7 @@ public class EventoNegocio {
 		return;
 	}
 
-	public void buscar(Long id) throws AtletaInexistenteException {
+	public void buscarEDeletar(Long id) throws AtletaInexistenteException {
 		Evento evento = this.dao.buscarPorId(id);
 		if(evento==null) {
 			throw new AtletaInexistenteException("Atleta Não Existe");
@@ -68,7 +72,7 @@ public class EventoNegocio {
 	}
 
 	public void inserirAtleta(Long id, String login) throws AtletaInexistenteException{		
-			Evento evento =detalhar(id);
+			Evento evento=detalhar(id);
 			
 			Optional<Atleta> atleta = this.atletaDAO.buscarPorLogin(login);
 			if (!atleta.isPresent()) {
@@ -76,6 +80,7 @@ public class EventoNegocio {
 			}
 			if (!evento.getParticipantes().contains(atleta)) {
 				evento.getParticipantes().add(atleta.get());
+				
 			}
 			this.dao.salvar(evento);
 
@@ -85,15 +90,47 @@ public class EventoNegocio {
 		Evento evento =detalhar(id);
 
 		Optional<Atleta> atleta = this.atletaDAO.buscarPorLogin(login);
-
+		if(!atleta.isPresent()) {
+			return;
+		}
 		if (!evento.getParticipantes().contains(atleta)) {
 			evento.getParticipantes().remove(atleta.get());
 		}
-		
+		this.dao.salvar(evento);
 	}
 
 	public Object meusEventos() {
 		return this.dao.meusEventos();
+	}
+	public Object meusAlertas() {
+		return this.dao.meusAlertas();
+	}
+
+	public void criarAlerta(Long id, String login) {
+//		System.out.println("goku");
+//		return;
+		
+		Evento evento=detalhar(id);
+		Long ultimoNumero=(long) 0;
+		for(Atleta i: evento.getParticipantes()) {
+			Optional<Alerta> teste=daoJpa.buscarUltimoAlerta();
+			if(teste.isPresent()) {
+			ultimoNumero=teste.get().getId();
+			ultimoNumero=ultimoNumero+1;
+
+			}
+			
+			daoJpa.inserirAlerta(ultimoNumero,login,id,i.getId());
+			if(!teste.isPresent()) {
+				ultimoNumero=(long) 1;
+
+			}
+			
+		}
+		
+		
+		
+		
 	}
 	
 	

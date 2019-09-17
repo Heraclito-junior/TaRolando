@@ -132,6 +132,10 @@
                             <div class="col-md-4 order-md-2 mb-4">
                                 <h4 class="text-center"
 									style="margin-top: 0px; padding-top: 0px;">
+									<button class="btn btn-link"
+												data-toggle="modal" data-target="#addAlerta">
+												Adicionar Alerta
+											</button>
                                     <span class="text-muted bold">Atletas Participantes</span>
                                     <span
 										class="badge badge-secondary badge-pill">${numParticipantes}</span>
@@ -142,6 +146,7 @@
 												data-toggle="modal" data-target="#addParticipante">
                                             <i class="fa fa-plus"></i>
 											</button>
+											
 										</span>
                                     </c:if>
                                 </h4>
@@ -175,7 +180,7 @@
 													</button>
                                                     <form
 														action="${ctx}/evento">
-                                                    <a href="${linkTo[EventoController].deletarAtleta}?id=${evento.id}&login=${participante.nome}" class="
+                                                    <a href="${linkTo[EventoController].deletarAtleta}?id=${evento.id}&login=${participante.login}" class="
 															btnbtn-primary">remover</a>
                                                     </form>
                                                     
@@ -228,6 +233,44 @@
                 </div>
 				<!-- /.modal-dialog -->
             </div>
+            
+             <!-- Large modal -->
+            <div id="addAlerta" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+<%--                    <form action="${linkTo[EventoController].convidarAtleta}?id=${evento.id}&login=${atleta.login}" method="post">--%>
+                        <input type="hidden" name="id"
+						value="${evento.id}" />
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close"
+								data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+                            <h4 class="modal-title">Adicionar Atleta</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="login_participante">Login do Atleta:</label>
+                                <input type="text" name="login"
+									class="form-control" required value="" id="login_participanteAlerta"
+									placeholder="Digite o login do Atleta" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"
+								class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <a id="btnAlerta" href="#"
+								url-alerta="${linkTo[EventoController].criarAlerta}?id=${evento.id}&login="
+								class="btn btn-primary">Convidar</a>
+                        </div>
+                    </div>
+					<!-- /.modal-content -->
+<%--                    </form>--%>
+                </div>
+				<!-- /.modal-dialog -->
+            </div>
+            
+            
             </form>
         </div>
     </jsp:body>

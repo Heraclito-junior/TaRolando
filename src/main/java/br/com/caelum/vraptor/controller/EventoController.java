@@ -67,10 +67,6 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	@Transacional
 	public void convidarAtleta(Long id, String login) {
 		
-//		negocio.criarAlerta(id,login);
-//		this.resultado.redirectTo(this).detalhar(id);
-//
-//return;
 		try {
 			negocio.inserirAtleta(id, login);
 		} catch (AtletaInexistenteException e) {

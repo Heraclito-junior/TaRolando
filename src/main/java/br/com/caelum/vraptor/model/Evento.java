@@ -35,6 +35,9 @@ public class Evento extends Entidade {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Endereco localizacao;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Chat chat;
+
 //    @ManyToOne
 //    private Convite convite;
 
@@ -177,4 +180,11 @@ public class Evento extends Entidade {
         this.descricao = descricao;
     }
 
+    public Chat getChat() {
+        return chat;
+    }
+
+    public void setChat(Chat chat) {
+        this.chat = chat;
+    }
 }

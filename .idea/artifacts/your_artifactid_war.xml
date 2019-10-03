@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="your-artifactid:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>your-artifactid</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="tarolando.war">
+      <element id="artifact" artifact-name="your-artifactid:war exploded" />
+    </root>
+  </artifact>
+</component>

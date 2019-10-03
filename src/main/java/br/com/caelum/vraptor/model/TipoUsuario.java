@@ -2,14 +2,14 @@ package br.com.caelum.vraptor.model;
 
 import br.com.caelum.vraptor.conversor.ConvertivelOpcaoSelect;
 
-public enum TipoAtleta implements ConvertivelOpcaoSelect {
+public enum TipoUsuario implements ConvertivelOpcaoSelect {
     ATLETA("Atleta"),
     ADMINISTRADOR("Administrador"),
     PARCEIRO("Parceiro");
 
     private String chave;
 
-    TipoAtleta(String chave) {
+    TipoUsuario(String chave) {
         this.chave = chave;
     }
 

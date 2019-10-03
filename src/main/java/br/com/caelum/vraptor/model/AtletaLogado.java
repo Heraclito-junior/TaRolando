@@ -31,7 +31,7 @@ public class AtletaLogado extends Sessao {
 
     public boolean isAdmin(){
         if(atleta != null) {
-            if(atleta.getTipoAtleta().equals(TipoAtleta.ADMINISTRADOR)){
+            if(atleta.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR)){
                 return true;
             }
         }
@@ -40,7 +40,7 @@ public class AtletaLogado extends Sessao {
 
     public boolean isAtletaComum(){
         if(atleta != null) {
-            if(atleta.getTipoAtleta().equals(TipoAtleta.ADMINISTRADOR) || atleta.getTipoAtleta().equals(TipoAtleta.ATLETA)){
+            if(atleta.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR) || atleta.getTipoUsuario().equals(TipoUsuario.ATLETA)){
                 return true;
             }
         }

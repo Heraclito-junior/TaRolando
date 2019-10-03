@@ -99,17 +99,6 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <!--<c:if test="${atletaLogado.isAdmin()}">-->
-                        <!--<li class="dropdown">-->
-                            <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Termos de Responsabilidade-->
-                                <!--<span class="caret"></span></a>-->
-                            <!--<ul class="dropdown-menu">-->
-                                <!--<li><a href="${linkTo[TermoController].form}">Cadastrar Termo</a></li>-->
-                                <!--<li class="divider"></li>-->
-                                <!--<li><a href="${linkTo[TermoController].lista}">Termos</a></li>-->
-                            <!--</ul>-->
-                        <!--</li>-->
-                    <!--</c:if>-->
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-sort-desc" aria-hidden="true"><c:out value=""/></i> ${atletaLogado.atleta.primeiroNome}</a>
                         <ul class="dropdown-menu">

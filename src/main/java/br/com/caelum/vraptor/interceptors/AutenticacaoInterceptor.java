@@ -9,28 +9,32 @@ import br.com.caelum.vraptor.controller.LoginController;
 import br.com.caelum.vraptor.interceptor.SimpleInterceptorStack;
 import br.com.caelum.vraptor.model.AtletaLogado;
 import br.com.caelum.vraptor.model.TipoAtleta;
+import br.com.caelum.vraptor.model.TipoUsuario;
+import br.com.caelum.vraptor.model.UsuarioLogado;
 
 import javax.inject.Inject;
 
 @Intercepts
 public class AutenticacaoInterceptor {
 
+    private UsuarioLogado usuario;
     private AtletaLogado atleta;
     private Result resultado;
 
     @Inject
-    public AutenticacaoInterceptor(AtletaLogado atletaLogado, Result resultado) {
+    public AutenticacaoInterceptor(AtletaLogado atletaLogado, Result resultado, UsuarioLogado usuarioLogado) {
         this.atleta = atletaLogado;
         this.resultado = resultado;
+        this.usuario = usuarioLogado;
     }
 
     @Deprecated AutenticacaoInterceptor(){}
 
     @AroundCall
     public void autentica(SimpleInterceptorStack stack){
-        if(atleta.isLogado()){
-            inserirPermissoes(atleta);
-            resultado.include("atletaLogado", atleta);
+        if(usuario.isLogado()){
+            inserirPermissoes(usuario);
+            resultado.include("usuarioLogado", usuario);
             stack.next();
         } else {
             resultado.redirectTo(LoginController.class).form();
@@ -42,14 +46,21 @@ public class AutenticacaoInterceptor {
         return !method.getController().getType().equals(LoginController.class);
     }
 
-    private void inserirPermissoes(AtletaLogado atleta) {
-        TipoAtleta permissao = atleta.getAtleta().getTipoAtleta();
+    private void inserirPermissoes(UsuarioLogado usuarioLogado) {
+        TipoUsuario permissao = usuarioLogado.getUsuario().getTipoUsuario();
 
-        if(permissao.equals(TipoAtleta.ADMINISTRADOR)) {
+        if(permissao.equals(TipoUsuario.ADMINISTRADOR)) {
             resultado.include("permitidoAdministrador", true);
+            resultado.include("permitidoAtleta",false);
+            resultado.include("permitidoParceiro", false);
         }
-        if(permissao.equals(TipoAtleta.ATLETA) || permissao.equals(TipoAtleta.ADMINISTRADOR)){
+        if(permissao.equals(TipoUsuario.ATLETA) || permissao.equals(TipoUsuario.ADMINISTRADOR)){
             resultado.include("permitidoAtleta",true);
+            resultado.include("permitidoParceiro", false);
+        }
+        if (permissao.equals(TipoUsuario.PARCEIRO)) {
+            resultado.include("permitidoParceiro", true);
+            resultado.include("permitidoAtleta",false);
         }
     }
 

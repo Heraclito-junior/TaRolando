@@ -9,7 +9,7 @@ import br.com.caelum.vraptor.controller.ControllerMethod;
 import br.com.caelum.vraptor.controller.LoginController;
 import br.com.caelum.vraptor.interceptor.SimpleInterceptorStack;
 import br.com.caelum.vraptor.model.AtletaLogado;
-import br.com.caelum.vraptor.model.TipoAtleta;
+import br.com.caelum.vraptor.model.TipoUsuario;
 import br.com.caelum.vraptor.view.Results;
 
 import javax.inject.Inject;
@@ -54,16 +54,16 @@ public class SegurancaInterceptor {
         Seguranca anotacaoClasse = method.getController().getType().getAnnotation(Seguranca.class);
         if(possuiAnotacao(anotacaoMethod, anotacaoClasse)) {
             if(anotacaoMethod != null) {
-                if(atletaLogado.getAtleta().getTipoAtleta().equals(anotacaoMethod.tipoUsuario())
-                        || atletaLogado.getAtleta().getTipoAtleta().equals(TipoAtleta.ADMINISTRADOR)){
+                if(atletaLogado.getAtleta().getTipoUsuario().equals(anotacaoMethod.tipoUsuario())
+                        || atletaLogado.getAtleta().getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR)){
                     return true;
                 } else {
                     resultado.use(Results.http()).sendError(403, "Usuário não autorizado");
                 }
             } else {
                 if(anotacaoClasse != null) {
-                    if(atletaLogado.getAtleta().getTipoAtleta().equals(anotacaoClasse.tipoUsuario())
-                            || atletaLogado.getAtleta().getTipoAtleta().equals(TipoAtleta.ADMINISTRADOR)){
+                    if(atletaLogado.getAtleta().getTipoUsuario().equals(anotacaoClasse.tipoUsuario())
+                            || atletaLogado.getAtleta().getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR)){
                         return true;
                     } else {
                         resultado.use(Results.http()).sendError(403, "Usuário não autorizado");
@@ -76,7 +76,7 @@ public class SegurancaInterceptor {
     }
 
     public boolean acessoMethod(Seguranca anotacao){
-        boolean permitido = anotacao.tipoUsuario().equals(atletaLogado.getAtleta().getTipoAtleta());
+        boolean permitido = anotacao.tipoUsuario().equals(atletaLogado.getAtleta().getTipoUsuario());
         return permitido;
     }
 

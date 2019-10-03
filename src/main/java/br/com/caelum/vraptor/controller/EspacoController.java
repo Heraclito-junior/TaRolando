@@ -1,0 +1,65 @@
+package br.com.caelum.vraptor.controller;
+
+import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Post;
+import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.anotacoes.Transacional;
+import br.com.caelum.vraptor.model.Espaco;
+import br.com.caelum.vraptor.negocio.EspacoNegocio;
+
+import javax.inject.Inject;
+
+@Controller
+public class EspacoController extends ControladorTaRolando<Espaco> {
+
+    private EspacoNegocio espacoNegocio;
+
+    @Deprecated
+    public EspacoController() { this(null, null); }
+
+    @Inject
+    public EspacoController(Result resultado, EspacoNegocio espacoNegocio) {
+        super(resultado);
+        this.espacoNegocio = espacoNegocio;
+    }
+
+
+    public void form () {
+
+    }
+
+    @Post
+    @Transacional
+    public void salvar(Espaco espaco) {
+        espacoNegocio.salvar(espaco);
+        resultado.redirectTo(this).meusEspacos();
+    }
+
+    public void editar(Long id) {
+        Espaco espaco = espacoNegocio.editar(id);
+        resultado.of(this).form();
+    }
+
+    @Post
+    @Transacional
+    public void remover(Long id) {
+        espacoNegocio.remover(id);
+        resultado.redirectTo(this).meusEspacos();
+    }
+
+    @Get
+    public void meusEspacos() {
+        resultado.include("espacos", espacoNegocio.meusEspacos());
+    }
+
+    @Get
+    public void lista() {
+        resultado.include("espacos", espacoNegocio.listar());
+    }
+
+    @Get
+    public void detalhar(Long id) {
+        resultado.include("espaco", espacoNegocio.detalhar(id));
+    }
+}

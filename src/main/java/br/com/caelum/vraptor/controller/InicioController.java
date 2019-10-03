@@ -6,6 +6,7 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.dao.EventoDAO;
 import br.com.caelum.vraptor.model.Evento;
+import br.com.caelum.vraptor.negocio.EspacoNegocio;
 import br.com.caelum.vraptor.view.Results;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -21,15 +22,23 @@ public class InicioController extends Controlador {
     @Inject
     EventoDAO eventoDAO;
 
-    public InicioController() { this(null); }
+    private EspacoNegocio espacoNegocio;
+
+    public InicioController() { this(null, null); }
 
     @Inject
-    public InicioController(Result resultado) {
+    public InicioController(Result resultado, EspacoNegocio espacoNegocio) {
         super(resultado);
+        this.espacoNegocio = espacoNegocio;
     }
 
     @Path("/")
     public void index(){
+    }
+
+    @Path("/indexParceiro")
+    public void indexParceiro(){
+        resultado.include("espacos", espacoNegocio.meusEspacos());
     }
 
     @Get

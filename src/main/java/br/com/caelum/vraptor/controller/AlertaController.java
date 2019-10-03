@@ -22,6 +22,7 @@ public class AlertaController extends ControladorTaRolando<Evento> {
 	public AlertaController() {
 		this(null);
 	}
+	
 
 	@Inject
 	public AlertaController(Result resultado) {

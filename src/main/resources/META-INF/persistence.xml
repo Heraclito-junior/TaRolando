@@ -10,16 +10,17 @@
         <class>br.com.caelum.vraptor.model.Endereco</class>
         <class>br.com.caelum.vraptor.model.Esporte</class>
         <class>br.com.caelum.vraptor.model.Evento</class>
-        <class>br.com.caelum.vraptor.model.Sexo</class>
         <class>br.com.caelum.vraptor.model.Convite</class>
+        <class>br.com.caelum.vraptor.model.Chat</class>
+        <class>br.com.caelum.vraptor.model.Mensagem</class>
 
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL94Dialect" />
             <!--dados da conexao -->
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="javax.persistence.jdbc.user" value="postgres" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/postgres" />
-            <property name="javax.persistence.jdbc.password" value="1234" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/trteste" />
+            <property name="javax.persistence.jdbc.password" value="@L0uc051991@" />
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>

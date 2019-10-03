@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="tipo_evento">Tipo de Atividade </label>
-                                    <input id="titulo-evento"
+                                    <input id="tipo_evento"
 										class="form-control" minlength="5" name="evento.titulo"
 										type="text" required value="${evento.tipoEsporte.nome}"
 										disabled>
@@ -132,6 +132,7 @@
                             <div class="col-md-4 order-md-2 mb-4">
                                 <h4 class="text-center"
 									style="margin-top: 0px; padding-top: 0px;">
+                                    <a href="${linkTo[ChatController].chat}?id=${evento.chat.id}">Chat do Grupo</a><br>
 									<button class="btn btn-link"
 												data-toggle="modal" data-target="#addAlerta">
 												Adicionar Alerta

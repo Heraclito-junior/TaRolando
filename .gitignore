@@ -3,3 +3,4 @@ target
 classes/
 your-artifact.iml
 src/main/resources/META-INF/
+src/main/webapp/WEB-INF/classes/

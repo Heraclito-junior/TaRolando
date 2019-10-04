@@ -1,0 +1,5 @@
+.idea
+target
+classes/
+your-artifact.iml
+src/main/resources/META-INF/

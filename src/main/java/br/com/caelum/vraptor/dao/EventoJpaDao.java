@@ -5,6 +5,7 @@ import br.com.caelum.vraptor.model.AlertaTabela;
 import br.com.caelum.vraptor.model.Atleta;
 import br.com.caelum.vraptor.model.AtletaLogado;
 import br.com.caelum.vraptor.model.Evento;
+import br.com.caelum.vraptor.model.UsuarioLogado;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -18,7 +19,7 @@ import java.util.Optional;
 public class EventoJpaDao extends EntidadeJpaDao<Evento> implements EventoDAO {
 
     @Inject
-    private AtletaLogado atletaLogado;
+    private UsuarioLogado usuarioLogado;
 
     @Deprecated
     public EventoJpaDao() { this(null); }
@@ -32,7 +33,7 @@ public class EventoJpaDao extends EntidadeJpaDao<Evento> implements EventoDAO {
     @Override
     public List<Evento> meusEventos() {
         Query query = this.manager.createQuery("SELECT p FROM Evento p WHERE p.organizador.id = :atleta AND p.deletado = false");
-        query.setParameter("atleta", atletaLogado.getAtleta().getId());
+        query.setParameter("atleta", usuarioLogado.getUsuario().getId());
         List<Evento> tarefas = query.getResultList();
         return tarefas;
     }
@@ -44,7 +45,7 @@ public class EventoJpaDao extends EntidadeJpaDao<Evento> implements EventoDAO {
         
         Query query = this.manager.createNativeQuery("SELECT a.nome, b.participantes_id,c.titulo FROM Alerta as a INNER JOIN evento_atleta as b on a.evento_id = b.evento_id and b.participantes_id=:atleta INNER JOIN evento as c on b.evento_id = c.id GROUP BY a.nome,b.participantes_id,c.titulo");
 
-        query.setParameter("atleta", atletaLogado.getAtleta().getId());
+        query.setParameter("atleta", usuarioLogado.getUsuario().getId());
 //        Object[] resultado = (Object[]) query.getResultList();
         List<Object[]> resultado = query.getResultList();
 

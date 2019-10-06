@@ -10,7 +10,7 @@ import br.com.caelum.vraptor.model.TipoAtleta;
 import br.com.caelum.vraptor.negocio.EsporteNegocio;
 import javax.inject.Inject;
 
-@Seguranca(tipoUsuario = TipoAtleta.ADMINISTRADOR)
+//@Seguranca(tipoUsuario = TipoAtleta.ADMINISTRADOR)
 @Path("/esporte")
 @Controller
 public class EsporteController extends Controlador {

@@ -8,6 +8,7 @@ import br.com.caelum.vraptor.model.Alerta;
 import br.com.caelum.vraptor.model.Atleta;
 import br.com.caelum.vraptor.model.AtletaLogado;
 import br.com.caelum.vraptor.model.Evento;
+import br.com.caelum.vraptor.model.UsuarioLogado;
 import br.com.caelum.vraptor.model.Esporte;
 import br.com.caelum.vraptor.util.OpcaoSelect;
 import br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
@@ -25,11 +26,15 @@ public class EventoNegocio {
 	private EventoDAO dao;
 	@Inject
 	private EventoJpaDao daoJpa;
+
 	@Inject
 	private AtletaDAO atletaDAO;
 
+//	@Inject
+//	private AtletaLogado atletaLogado;
+
 	@Inject
-	private AtletaLogado atletaLogado;
+	private UsuarioLogado usuarioLogado;
 
 	@Deprecated
 	public EventoNegocio() {
@@ -47,7 +52,9 @@ public class EventoNegocio {
 	}
 
 	public void definirAdministradorESalvar(Evento evento) {
-		evento.setOrganizador(this.atletaLogado.getAtleta());
+//		evento.setOrganizador(this.atletaLogado.getAtleta());
+		evento.setOrganizador(this.usuarioLogado.getUsuario());
+
 		this.dao.salvar(evento);
 		return;
 	}

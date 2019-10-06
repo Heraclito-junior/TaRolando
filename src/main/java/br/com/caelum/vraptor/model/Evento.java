@@ -74,8 +74,8 @@ public class Evento extends Entidade {
         return organizador;
     }
 
-    public void setOrganizador(Atleta organizador) { this.organizador = organizador; }
-
+//    public void setOrganizador(Atleta organizador) { this.organizador = organizador; }
+    public void setOrganizador(Usuario organizador) { this.organizador = (Atleta) organizador; }
     public List<Atleta> getParticipantes() {
         return participantes;
     }

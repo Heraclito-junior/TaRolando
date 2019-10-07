@@ -7,6 +7,9 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.anotacoes.Transacional;
 import br.com.caelum.vraptor.dao.EventoDAO;
 import br.com.caelum.vraptor.model.Evento;
+import br.com.caelum.vraptor.model.TipoUsuario;
+import br.com.caelum.vraptor.model.UsuarioLogado;
+import br.com.caelum.vraptor.negocio.AtletaNegocio;
 import br.com.caelum.vraptor.negocio.EventoNegocio;
 import br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
 import br.com.caelum.vraptor.validator.Validator;
@@ -19,17 +22,22 @@ public class EventoController extends ControladorTaRolando<Evento> {
 
 	private EventoNegocio negocio;
 	private Validator validator;
+	private AtletaNegocio aNegocio;
+	
+	@Inject
+	private UsuarioLogado usuarioLogado;
 
 	@Deprecated
 	public EventoController() {
-		this(null, null, null);
+		this(null, null, null,null);
 	}
 
 	@Inject
-	public EventoController(Result resultado, EventoNegocio negocio, Validator validator) {
+	public EventoController(Result resultado, EventoNegocio negocio, Validator validator,AtletaNegocio aa) {
 		super(resultado);
 		this.negocio = negocio;
 		this.validator = validator;
+		aNegocio=aa;
 	}
 
 	public void form() {
@@ -49,6 +57,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	}
 
 	public void lista() {
+
 		this.resultado.include("eventos", negocio.listar());
 	}
 
@@ -97,9 +106,9 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	}
 	
     public void editar(Long id) {
-    	System.out.println("oi");
+    	
         Evento evento = this.negocio.detalhar(id);
-        System.out.println("testando "+evento.getOrganizador().getNome());
+
         this.resultado.include("evento", evento);
         this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
 //        this.resultado.redirectTo(this).form();

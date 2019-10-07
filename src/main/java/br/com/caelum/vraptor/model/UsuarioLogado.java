@@ -45,4 +45,11 @@ public class UsuarioLogado extends Sessao {
         }
         return false;
     }
+    public Long retornarUsuario() {
+    	if(usuario==null) {
+    		return (long) -10;
+    	}else {
+    		return usuario.getId();
+    	}
+    }
 }

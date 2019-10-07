@@ -28,10 +28,11 @@
                     <h4 align="center">Detalhes do Evento</h4>
                 </div>
                 <div class="panel-body" style="padding-top: 0px;">
+                <form id="formEvento" action="${linkTo[EventoController].modificar}" method="post">
                     <div class="row">
                         <div class="panel">
                             <div class="panel-body">
-                                <form id="formEvento" action="${linkTo[EventoController].modificar}" method="post">
+                                
                                     <input type="hidden" name="evento.id" value="${evento.id}"/>
                                     <div class="col-md-8">
                                         <div class="form-group col-md-6">
@@ -109,82 +110,21 @@
                                                       required="true" >${evento.descricao}</textarea>
                                         </div>
                                     </div>
-                                    <div class="panel">
-                       					<button class="btn btn-primary" type="submit">Salvar</button>
-                   					 </div>
-                                </form>
-                                <div class="col-md-4 order-md-2 mb-4">
-                                    <h4 class="text-center" style="margin-top: 0px; padding-top: 0px;">
-                                        <span class="text-muted bold">Atletas Participantes</span>
-                                        <span class="badge badge-secondary badge-pill">${numParticipantes}</span>
-                                        <c:if test="${atletaLogado.atleta.id == evento.organizador.id}">
-                                            <span class="icon text-right">
-                                                <button class="btn btn-link" data-toggle="modal" data-target="#addParticipante">
-                                                <i class="fa fa-plus"></i></button></span>
-                                        </c:if>
-                                    </h4>
-                                    <ul class="list-group mb-3">
-                                        <c:forEach items="${participantes}" var="participante">
-                                            <li class="list-group-item justify-content-between" style="padding-left: 0px;">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <img class="img-circle" src="${ctx}/resources/imagens/icons_map/futebol.png"
-                                                             width="60px" height="60px"/>
-                                                    </div>
-                                                    <div class="col-md-7">
-                                                        <h4>${participante.nome}</h4>
-                                                        <span class="badge badge-success badge-pill">Pendente</span>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <button class="btn btn-link"><i class="fa fa-envelope"></i></button>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between">
-                                                <div>
-                                                    <h6 class="my-0">Nome do produto</h6>
-                                                    <small class="text-muted">Breve descrição</small>
-                                                </div>
-                                                <span class="text-muted">R$12</span>
-                                            </li>
-                                        </c:forEach>
-                                    </ul>
-                                </div>
+                       					
+                                
+                                
                             </div>
                         </div>
                     </div>
-
+                    <div class="panel">
+                    <button class="btn btn-primary" type="submit">Salvar</button>
+                    </div>
+                    </form>
+                    <div class="panel">
                     <button href="" class="btn btn-default" onclick="history.back(1)">Voltar</button>
+                    </div>
                 </div>
 
-                <!-- Large modal -->
-                <div id="addParticipante" class="modal fade"role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Adicionar Atleta</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="nome_atleta">Nome do Atleta </label>
-                                    <input id="nome_atleta" class="form-control" minlength="5" name="atleta.nome"
-                                           type="text" required value="" placeholder="Digite o nome do Atleta">
-                                </div>
-                                <div class="form-group">
-                                    <label for="login_participante">Login:</label>
-                                    <input type="login" name="tarefa.titulo" class="form-control" required
-                                           value=""
-                                           id="login_participante" placeholder="Digite o login do Atleta">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <a href="" class="btn btn-primary btn_convidar">Convidar</a>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div>
             </div>
     </jsp:body>
 </tags:layoutSidebar>

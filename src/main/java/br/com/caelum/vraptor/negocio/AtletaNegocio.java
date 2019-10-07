@@ -45,6 +45,18 @@ public class AtletaNegocio {
 	}
 	
 	
+	public void alterar(Atleta atleta) throws AtletaInexistenteException {
+        
+        if (atleta.getId() == null) {
+            this.dao.salvar(atleta);
+            throw new AtletaInexistenteException("Atleta não existe");
+        } else {
+            this.dao.salvar(atleta);
+        }
+        
+	}
+	
+	
 	
 	
 	private String criptografarSenha(String senha) {

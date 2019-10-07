@@ -73,7 +73,7 @@
                         <i class="fa fa-user fa-fw"><c:out value=""/></i> ${usuarioLogado.usuario.nome} <i class="fa fa-caret-down"><c:out value=""/></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="${linkTo[AtletaController].perfil}?id=${atletaLogado.atleta.id}"><i class="fa fa-user fa-fw"><c:out value=""/></i> Perfil</a>
+                        <li><a href="${linkTo[AtletaController].perfil}?id=${usuarioLogado.retornarUsuario()}"><i class="fa fa-user fa-fw"><c:out value=""/></i> Perfil</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="${linkTo[LoginController].logout}"><i class="fa fa-sign-out fa-fw"><c:out value=""/></i> Sair</a>

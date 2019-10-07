@@ -25,29 +25,24 @@
         </div>
         <div class="panel painel-sisint">
             <div class="panel-body">
-                <form id="formAtividade" action="${linkTo[AtletaController].salvar}" method="post">
+                <form id="formAtividade" action="${linkTo[AtletaController].modificar}" method="post">
                     <input type="hidden" name="atleta.id" value="${atleta.id}">
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label for="nome-atleta">Nome </label>
                             <input id="nome-atleta" class="form-control" minlength="5" name="atleta.nome"
-                                   type="text" required value="${atleta.nome}" disabled>
+                                   type="text" required value="${atleta.nome}" >
                         </div>
                         <div class="form-group col-md-4">
                             <label for="sobrenome-atleta">Sobrenome </label>
                             <input id="sobrenome-atleta" class="form-control" minlength="5" name="atleta.sobrenome"
-                                   type="text" required value="${atleta.sobrenome}" disabled>
+                                   type="text" required value="${atleta.sobrenome}" >
                         </div>
-                            <%--<div class="form-group col-md-4 text-center">--%>
-                            <%--<label for="tipo_esporte">Tipo de Esporte </label>--%>
-                            <%--<div style="padding: 0px 60px">--%>
-                            <%--<a id="tipo_esporte" data-toggle="modal" href="#modalEsporte"--%>
-                            <%--class="form-control btn btn-primary">Escolher</a>--%>
-                            <%--</div>--%>
+
                         <div class="form-group col-md-4">
                             <label for="tipo_esporte">Esporte Preferido </label>
                             <select type="text" class="form-control" id="tipo_esporte" placeholder="Esporte Preferido"
-                                    name="atleta.esportePreferido.id" disabled>
+                                    name="atleta.esportePreferido.id" >
                                 <option value=""></option>
                                 <c:forEach items="${esportes}" var="t">
                                     <c:if test="${t.valor == atleta.esportePreferido.id}">
@@ -59,7 +54,11 @@
                                 </c:forEach>
                             </select>
                         </div>
-            </div>
+            	</div>
+            	<div class="panel">
+                	<button class="btn btn-primary" type="submit">Modificar</button>
+                </div>
+            </form>
         </div>
     </jsp:body>
 </tags:layoutSidebar>

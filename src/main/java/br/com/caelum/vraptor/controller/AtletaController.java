@@ -6,6 +6,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.anotacoes.Transacional;
 import br.com.caelum.vraptor.dao.AtletaDAO;
 import br.com.caelum.vraptor.model.Atleta;
+import br.com.caelum.vraptor.model.Evento;
 import br.com.caelum.vraptor.model.TipoAtleta;
 import br.com.caelum.vraptor.negocio.AtletaNegocio;
 import br.com.caelum.vraptor.util.Criptografia;
@@ -68,6 +69,39 @@ public class AtletaController extends ControladorTaRolando<Atleta> {
 
 	private String criptografarSenha(String senha) {
 		return Criptografia.criptografar(senha);
+	}
+	
+	
+	@Transacional
+	@Post
+	public void modificar(Atleta atleta) {
+		
+		Atleta original=negocio.perfil(atleta.getId());
+		
+		if(atleta.getEsportePreferido()!=null) {
+			original.setEsportePreferido(atleta.getEsportePreferido());
+		}
+		System.out.println(original.getLogin());
+		System.out.println(original.getSenha());
+		
+		
+		original.setSobrenome(atleta.getSobrenome());
+		original.setNome(atleta.getNome());
+//		original.setSenha(criptografarSenha(original.getSenha()));
+
+		
+		try {
+			
+			negocio.alterar(original);
+
+//			atleta.setSenha(criptografarSenha(atleta.getSenha()));
+
+			this.resultado.redirectTo(InicioController.class).index();
+
+		} catch (AtletaInexistenteException e) {
+			this.resultado.redirectTo(LoginController.class).form();
+
+		}
 	}
 
 }

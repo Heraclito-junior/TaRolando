@@ -78,7 +78,12 @@ public class AtletaController extends ControladorTaRolando<Atleta> {
 		
 		Atleta original=negocio.perfil(atleta.getId());
 		
-		if(atleta.getEsportePreferido()!=null) {
+		System.out.println(atleta.getEsportePreferido().getNome());
+		System.out.println(atleta.getEsportePreferido().getDescricao());
+//		System.out.println(atleta.getEsportePreferido());
+
+		
+		if(atleta.getEsportePreferido().getNome()!=null) {
 			original.setEsportePreferido(atleta.getEsportePreferido());
 		}
 		System.out.println(original.getLogin());

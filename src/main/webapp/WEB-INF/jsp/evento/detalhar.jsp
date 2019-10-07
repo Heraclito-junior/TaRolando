@@ -261,7 +261,7 @@
                             <button type="button"
 								class="btn btn-default" data-dismiss="modal">Cancelar</button>
                             <a id="btnAlerta" href="#"
-								url-alerta="${linkTo[EventoController].criarAlerta}?id=${evento.id}&login="
+								url-alerta="${linkTo[EventoController].convidarAtleta}?id=${evento.id}&login="
 								class="btn btn-primary">Convidar</a>
                         </div>
                     </div>

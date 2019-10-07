@@ -99,7 +99,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
     public void editar(Long id) {
     	System.out.println("oi");
         Evento evento = this.negocio.detalhar(id);
-
+        System.out.println("testando "+evento.getOrganizador().getNome());
         this.resultado.include("evento", evento);
         this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
 //        this.resultado.redirectTo(this).form();
@@ -108,6 +108,16 @@ public class EventoController extends ControladorTaRolando<Evento> {
     }
 	
 	public void teste() {
+	}
+	
+	
+	@Transacional
+	@Post
+	public void modificar(Evento evento) {
+		evento.setOrganizador(this.negocio.detalhar(evento.getId()).getOrganizador());
+		this.validator.onErrorRedirectTo(this).form();
+		negocio.modificarEvento(evento);
+		this.resultado.redirectTo(this).lista();
 	}
 	
 	

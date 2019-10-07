@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="panel">
                             <div class="panel-body">
-                                <form id="formEvento" action="${linkTo[EventoController].salvar}" method="post">
+                                <form id="formEvento" action="${linkTo[EventoController].modificar}" method="post">
                                     <input type="hidden" name="evento.id" value="${evento.id}"/>
                                     <div class="col-md-8">
                                         <div class="form-group col-md-6">
@@ -109,6 +109,9 @@
                                                       required="true" >${evento.descricao}</textarea>
                                         </div>
                                     </div>
+                                    <div class="panel">
+                       					<button class="btn btn-primary" type="submit">Salvar</button>
+                   					 </div>
                                 </form>
                                 <div class="col-md-4 order-md-2 mb-4">
                                     <h4 class="text-center" style="margin-top: 0px; padding-top: 0px;">

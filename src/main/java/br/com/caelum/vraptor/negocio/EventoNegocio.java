@@ -58,6 +58,24 @@ public class EventoNegocio {
 		this.dao.salvar(evento);
 		return;
 	}
+	
+	
+	public void modificarEvento(Evento evento) {
+////		evento.setOrganizador(this.atletaLogado.getAtleta());
+//		System.out.println("organizador "+evento.getOrganizador());
+//		System.out.println("evento "+evento.getTitulo());
+
+
+//		evento.setOrganizador(this.usuarioLogado.getUsuario());
+
+		this.dao.salvar(evento);
+//		this.dao.
+		return;
+	}
+	
+	
+	
+	
 
 	public void buscarEDeletar(Long id) throws AtletaInexistenteException {
 		Evento evento = this.dao.buscarPorId(id);

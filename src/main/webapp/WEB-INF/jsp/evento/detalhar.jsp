@@ -133,10 +133,12 @@
                                 <h4 class="text-center"
 									style="margin-top: 0px; padding-top: 0px;">
                                     <a href="${linkTo[ChatController].chat}?id=${evento.chat.id}">Chat do Grupo</a><br>
+                                    <c:if test="${usuarioLogado.isAdmin() or usuarioLogado.retornarUsuario() == evento.organizador.id}">
 									<button class="btn btn-link"
 												data-toggle="modal" data-target="#addAlerta">
-												Adicionar Alerta
+												Adicionar Atleta
 											</button>
+									</c:if>
                                     <span class="text-muted bold">Atletas Participantes</span>
                                     <span
 										class="badge badge-secondary badge-pill">${numParticipantes}</span>
@@ -179,11 +181,13 @@
 														class="btn btn-link">
 														<i class="fa fa-envelope"></i>
 													</button>
+													<c:if test="${usuarioLogado.isAdmin() or usuarioLogado.retornarUsuario() == evento.organizador.id}">
                                                     <form
 														action="${ctx}/evento">
                                                     <a href="${linkTo[EventoController].deletarAtleta}?id=${evento.id}&login=${participante.login}" class="
 															btnbtn-primary">remover</a>
                                                     </form>
+                                                    </c:if>
                                                     
                                                 </div>
                                             </div>

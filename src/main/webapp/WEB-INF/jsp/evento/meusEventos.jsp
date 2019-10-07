@@ -84,6 +84,8 @@
                                 <td>
                                     <a title="Detalhar" href="${linkTo[EventoController].detalhar}?id=${evento.id}">
                                         <i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
+                                    <a title="Editar" href="${linkTo[EventoController].editar}?id=${evento.id}">
+                                        <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
                                     <a title="Remover" class="link-remover" href="#delete-modal"
                                        url-remover="${linkTo[EventoController].remover}?id=${evento.id}" data-toggle="modal">
                                         <i class="fa fa-trash fa-lg"></i></a>

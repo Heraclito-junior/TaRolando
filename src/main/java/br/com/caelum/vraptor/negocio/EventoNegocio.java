@@ -75,6 +75,8 @@ public class EventoNegocio {
 	public Evento detalhar(Long id) {
 		return this.dao.buscarPorId(id);
 	}
+	
+
 
 	public void inserirAtleta(Long id, String login) throws AtletaInexistenteException {
 		Evento evento = detalhar(id);

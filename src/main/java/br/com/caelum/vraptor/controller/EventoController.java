@@ -95,8 +95,22 @@ public class EventoController extends ControladorTaRolando<Evento> {
 		negocio.criarAlerta(id,login);
 
 	}
+	
+    public void editar(Long id) {
+    	System.out.println("oi");
+        Evento evento = this.negocio.detalhar(id);
+
+        this.resultado.include("evento", evento);
+        this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
+//        this.resultado.redirectTo(this).form();
+//        this.resultado.redirectTo(this).form();
+
+    }
+	
 	public void teste() {
 	}
+	
+	
 
 
 }

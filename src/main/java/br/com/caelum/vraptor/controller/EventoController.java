@@ -22,22 +22,19 @@ public class EventoController extends ControladorTaRolando<Evento> {
 
 	private EventoNegocio negocio;
 	private Validator validator;
-	private AtletaNegocio aNegocio;
 	
-	@Inject
-	private UsuarioLogado usuarioLogado;
 
 	@Deprecated
 	public EventoController() {
-		this(null, null, null,null);
+		this(null, null, null);
 	}
 
 	@Inject
-	public EventoController(Result resultado, EventoNegocio negocio, Validator validator,AtletaNegocio aa) {
+	public EventoController(Result resultado, EventoNegocio negocio, Validator validator) {
 		super(resultado);
 		this.negocio = negocio;
 		this.validator = validator;
-		aNegocio=aa;
+
 	}
 
 	public void form() {
@@ -107,7 +104,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	
     public void editar(Long id) {
     	
-        Evento evento = this.negocio.detalhar(id);
+        Evento evento = this.negocio.detalhar(id);
 
         this.resultado.include("evento", evento);
         this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());

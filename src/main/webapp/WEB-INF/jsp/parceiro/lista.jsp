@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: pique
-  Date: 26/09/2019
-  Time: 02:38
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" uri="tagTaRolando" %>
@@ -22,7 +15,6 @@
         <script>
             $(document).ready(function () {
                 $.fn.dataTable.moment('DD/MM/YYYY');
-
                 $('.table').DataTable( {
                     pageLength:25,
                     "language":
@@ -58,38 +50,49 @@
         <div class="panel painel-sisint">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Gerenciamento dos Parceiros</h1>
+                    <h2 class="page-header">Todos os Eventos e Atividades</h2>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <div class="panel-body" style="padding-top: 0px;">
-<%--                <a class="btn btn-info" style="margin-bottom: 16px;" href="${linkTo[AtletaController].form}">Cadastrar</a>--%>
+                <a class="btn btn-info" style="margin-bottom: 16px;" href="${linkTo[EventoController].form}">Cadastrar</a>
                 <div class="tabela-servicos">
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>Nome</th>
-                            <th>Sobrenome</th>
-                            <th>Email</th>
-                            <th>Login</th>
-                            <th>Permissão</th>
+                            <th>Título</th>
+                            <th>Tipo de <br>Atividade</th>
+                            <th>Data do Evento</th>
+                            <th>Horário <br> Inicial</th>
+                            <th>Horário <br> Final</th>
+                            <th>Num de<br>Vagas</th>
+                            <th>Organizador</th>
                             <th>Ações</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${parceiros}" var="parceiros">
+                        <c:forEach items="${eventos}" var="evento">
                             <tr>
-                                <td>${parceiro.nome}</td>
-                                <td>${parceiro.sobrenome}</td>
-                                <td>${parceiro.email}</td>
-                                <td>${parceiro.login}</td>
-                                <td>${atleta.esportePreferido.nome}</td>
+                                <td>${evento.titulo}</td>
+                                <td>${evento.tipoEsporte.nome}</td>
+                                <td>${evento.dataInicio}</td>
+                                <td>${evento.horaInicio}</td>
+                                <td>${evento.horaFim}</td>
+                                <td>${evento.numVagasMax}</td>
+                                <td>${evento.organizador.nome}</td>
                                 <td>
-                                    <a title="Editar" href="${linkTo[AtletaController].editar}?id=${atleta.id}">
-                                        <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
-                                    <a title="Remover" class="link-remover" href="#delete-modal"
-                                       url-remover="${linkTo[AtletaController].remover}?id=${atleta.id}" data-toggle="modal">
-                                        <i class="fa fa-trash fa-lg"></i></a>
+                                    <a title="Detalhar" href="${linkTo[EventoController].detalhar}?id=${evento.id}">
+                                        <i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
+                                    <c:if test="${atletaLogado.isAdmin() or usuarioLogado.usuario.id == evento.organizador.id}">
+                                        <a title="Remover" class="link-remover" href="#delete-modal"
+                                           url-remover="${linkTo[EventoController].remover}?id=${evento.id}" data-toggle="modal">
+                                            <i class="fa fa-trash fa-lg"></i></a>
+                                    </c:if>
+                                    <c:if test="${atletaLogado.isAdmin() or usuarioLogado.usuario.id == evento.organizador.id}">
+                                        <a title="Remover" class="link-remover" href="#delete-modal"
+                                           url-remover="${linkTo[EventoController].teste}" data-toggle="modal">
+                                            <i class="fa fa-pencil-square-o fa-lg"></i></a>
+                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -100,13 +103,13 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="modalLabel">Excluir Usuário</h4>
+                                        <h4 class="modal-title" id="modalLabel">Excluir Evento</h4>
                                     </div>
                                     <div class="modal-body">
-                                        Deseja realmente excluir este Usuário?
+                                        Deseja realmente excluir este evento?
                                     </div>
                                     <div class="modal-footer">
-                                        <a id="btn-remover" href="" class="btn btn-primary">Sim</a>
+                                        <a href="" class="btn btn-primary btn-remover">Sim</a>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
                                     </div>
                                 </div>
@@ -120,4 +123,3 @@
         </div>
     </jsp:body>
 </tags:layoutSidebar>
-

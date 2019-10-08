@@ -132,7 +132,7 @@
                             <div class="col-md-4 order-md-2 mb-4">
                                 <h4 class="text-center"
 									style="margin-top: 0px; padding-top: 0px;">
-                                    <a href="${linkTo[ChatController].chat}?id=${evento.chat.id}">Chat do Grupo</a><br>
+                                    <a href="${linkTo[ChatController].chat}?id=${evento.id}">Chat do Grupo</a><br>
                                     <c:if test="${usuarioLogado.isAdmin() or usuarioLogado.retornarUsuario() == evento.organizador.id}">
 									<button class="btn btn-link"
 												data-toggle="modal" data-target="#addAlerta">

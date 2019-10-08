@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: jotapesousa
-  Date: 11/12/18
-  Time: 04:14
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" uri="tagTaRolando" %>
@@ -23,6 +16,8 @@
     </jsp:attribute>
 
     <jsp:body>
+    <jsp:include page="/WEB-INF/jsp/errors/msgErrorCustominizada.jsp" />
+    
             <div class="panel painel-sisint">
                 <div class="panel-heading">
                     <h4 align="center">Detalhes do Evento</h4>

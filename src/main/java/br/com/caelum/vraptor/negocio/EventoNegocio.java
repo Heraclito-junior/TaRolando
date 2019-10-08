@@ -12,6 +12,7 @@ import br.com.caelum.vraptor.model.UsuarioLogado;
 import br.com.caelum.vraptor.model.Esporte;
 import br.com.caelum.vraptor.util.OpcaoSelect;
 import br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
+import br.com.caelum.vraptor.util.exception.VagasInvalidasException;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -51,8 +52,11 @@ public class EventoNegocio {
 				.collect(Collectors.toList());
 	}
 
-	public void definirAdministradorESalvar(Evento evento) {
+	public void definirAdministradorESalvar(Evento evento) throws VagasInvalidasException {
 //		evento.setOrganizador(this.atletaLogado.getAtleta());
+		if(evento.getNumVagasMin()>evento.getNumVagasMax()) {
+			throw new VagasInvalidasException("Numero de vagas minimas nao pode ser superior as maximas");
+		}
 		evento.setOrganizador(this.usuarioLogado.getUsuario());
 
 		this.dao.salvar(evento);

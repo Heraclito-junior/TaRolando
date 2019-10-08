@@ -9,6 +9,8 @@ import br.com.caelum.vraptor.dao.EventoDAO;
 import br.com.caelum.vraptor.model.Evento;
 import br.com.caelum.vraptor.negocio.EventoNegocio;
 import br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
+import br.com.caelum.vraptor.util.exception.VagasInvalidasException;
+import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 
 import javax.inject.Inject;
@@ -85,9 +87,18 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	@Transacional
 	@Post
 	public void salvar(Evento evento) {
+		try {
 		this.validator.onErrorRedirectTo(this).form();
 		negocio.definirAdministradorESalvar(evento);
+//		this.resultado.redirectTo(this).lista();
+		}catch(VagasInvalidasException e) {
+            resultado.include("mensagem", new SimpleMessage("error", e.getMessage()));
+			this.resultado.redirectTo(this).form();
+			return;
+		}
 		this.resultado.redirectTo(this).lista();
+
+		
 	}
 	
 	public void criarAlerta(Long id, String login) {

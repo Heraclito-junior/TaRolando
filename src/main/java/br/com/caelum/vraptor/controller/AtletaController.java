@@ -72,6 +72,14 @@ public class AtletaController extends ControladorTaRolando<Atleta> {
 		this.resultado.include("tipoAtleta", OpcaoSelect.toListaOpcoes(TipoAtleta.values()));
 		this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
 	}
+	
+	public void perfilBloqueado(Long id) {
+		
+		Atleta atleta = negocio.perfil(id);
+		this.resultado.include("atleta", atleta);
+		this.resultado.include("tipoAtleta", OpcaoSelect.toListaOpcoes(TipoAtleta.values()));
+		this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
+	}
 
 	private String criptografarSenha(String senha) {
 		return Criptografia.criptografar(senha);

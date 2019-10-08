@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface AtletaDAO extends EntidadeDAO<Atleta> {
 
-    Optional<Atleta> buscarPorLogin(String login);
+    Atleta buscarPorLogin(String login);
 }

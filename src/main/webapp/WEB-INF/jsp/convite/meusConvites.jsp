@@ -164,7 +164,7 @@
                             <td>${convite.id}</td>
                             <td>${convite.evento.titulo}</td>
                             <td>
-                                <a href="${linkTo[AtletaController].perfil}?id=${convite.convidado.id}">
+                                <a href="${linkTo[AtletaController].perfilBloqueado}?id=${convite.convidado.id}">
                                         ${convite.convidado.nome}
                                 </a>
                             </td>

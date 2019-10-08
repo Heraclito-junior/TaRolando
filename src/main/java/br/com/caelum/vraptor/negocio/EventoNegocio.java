@@ -99,12 +99,12 @@ public class EventoNegocio {
 	public void inserirAtleta(Long id, String login) throws AtletaInexistenteException {
 		Evento evento = detalhar(id);
 
-		Optional<Atleta> atleta = this.atletaDAO.buscarPorLogin(login);
-		if (!atleta.isPresent()) {
+		Atleta atleta = this.atletaDAO.buscarPorLogin(login);
+		if (atleta.getId()==null) {
 			throw new AtletaInexistenteException("Atleta Não Existe");
 		}
 		if (!evento.getParticipantes().contains(atleta)) {
-			evento.getParticipantes().add(atleta.get());
+			evento.getParticipantes().add(atleta);
 
 		}
 		this.dao.salvar(evento);
@@ -114,12 +114,12 @@ public class EventoNegocio {
 	public void removerAtleta(Long id, String login) {
 		Evento evento = detalhar(id);
 
-		Optional<Atleta> atleta = this.atletaDAO.buscarPorLogin(login);
-		if (!atleta.isPresent()) {
+		Atleta atleta = this.atletaDAO.buscarPorLogin(login);
+		if (atleta!=null) {
 			return;
 		}
 		if (!evento.getParticipantes().contains(atleta)) {
-			evento.getParticipantes().remove(atleta.get());
+			evento.getParticipantes().remove(atleta);
 		}
 		this.dao.salvar(evento);
 	}

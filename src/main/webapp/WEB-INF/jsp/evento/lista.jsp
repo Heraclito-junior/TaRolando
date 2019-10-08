@@ -84,15 +84,15 @@
                                 <td>
                                     <a title="Detalhar" href="${linkTo[EventoController].detalhar}?id=${evento.id}">
                                         <i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
-                                    <c:if test="${atletaLogado.isAdmin() or atletaLogado.atleta.id == evento.organizador.id}">
+                                    <c:if test="${atletaLogado.isAdmin() or usuarioLogado.usuario.id == evento.organizador.id}">
                                         <a title="Remover" class="link-remover" href="#delete-modal"
                                            url-remover="${linkTo[EventoController].remover}?id=${evento.id}" data-toggle="modal">
                                             <i class="fa fa-trash fa-lg"></i></a>
                                     </c:if>
-                                    <c:if test="${atletaLogado.isAdmin() or atletaLogado.atleta.id == evento.organizador.id}">
+                                    <c:if test="${atletaLogado.isAdmin() or usuarioLogado.usuario.id == evento.organizador.id}">
                                         <a title="Remover" class="link-remover" href="#delete-modal"
                                            url-remover="${linkTo[EventoController].teste}" data-toggle="modal">
-                                            <i class="fa fa-trash fa-lg"></i></a>
+                                            <i class="fa fa-pencil-square-o fa-lg"></i></a>
                                     </c:if>
                                 </td>
                             </tr>

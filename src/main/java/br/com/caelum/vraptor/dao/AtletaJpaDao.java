@@ -18,9 +18,14 @@ public class AtletaJpaDao extends EntidadeJpaDao<Atleta> implements AtletaDAO {
     }
 
     @Override
-    public Optional<Atleta> buscarPorLogin(String login) {
+    public Atleta buscarPorLogin(String login) {
         Query query = this.manager.createQuery("SELECT p from Atleta p where p.login = :login");
         query.setParameter("login",login);
-        return query.setMaxResults(1).getResultList().stream().findFirst();
+        Optional<Atleta> atleta = query.setMaxResults(1).getResultList().stream().findFirst();
+        if (atleta.isPresent()) {
+            return atleta.get();
+        } else {
+            return null;
+        }
     }
 }

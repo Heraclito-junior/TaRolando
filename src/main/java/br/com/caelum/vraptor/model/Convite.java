@@ -10,21 +10,21 @@ public class Convite extends Entidade {
     private Long id;
 
     private boolean aceito;
-    private boolean pendente;
+    private boolean deletado;
 
-    @OneToOne
-    private Atleta atleta;
+    @ManyToOne
+    private Atleta convidado;
 
-    @OneToOne
+    @ManyToOne
     private Evento evento;
 
     @Deprecated
     public Convite() {
     }
 
-    public Convite(Evento evento, Atleta atleta){
+    public Convite(Evento evento, Atleta convidado){
         this.evento = evento;
-        this.atleta = atleta;
+        this.convidado = convidado;
     }
 
     @Override
@@ -45,20 +45,12 @@ public class Convite extends Entidade {
         this.aceito = aceito;
     }
 
-    public boolean isPendente() {
-        return pendente;
+    public Atleta getConvidado() {
+        return convidado;
     }
 
-    public void setPendente(boolean pendente) {
-        this.pendente = pendente;
-    }
-
-    public Atleta getAtleta() {
-        return atleta;
-    }
-
-    public void setAtleta(Atleta atleta) {
-        this.atleta = atleta;
+    public void setConvidado(Atleta convidado) {
+        this.convidado = convidado;
     }
 
     public Evento getEvento() {
@@ -67,5 +59,13 @@ public class Convite extends Entidade {
 
     public void setEvento(Evento evento) {
         this.evento = evento;
+    }
+
+    public boolean isDeletado() {
+        return deletado;
+    }
+
+    public void setDeletado(boolean deletado) {
+        this.deletado = deletado;
     }
 }

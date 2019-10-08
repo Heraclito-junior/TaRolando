@@ -7,9 +7,6 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.anotacoes.Transacional;
 import br.com.caelum.vraptor.dao.EventoDAO;
 import br.com.caelum.vraptor.model.Evento;
-import br.com.caelum.vraptor.model.TipoUsuario;
-import br.com.caelum.vraptor.model.UsuarioLogado;
-import br.com.caelum.vraptor.negocio.AtletaNegocio;
 import br.com.caelum.vraptor.negocio.EventoNegocio;
 import br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
 import br.com.caelum.vraptor.validator.Validator;
@@ -22,7 +19,6 @@ public class EventoController extends ControladorTaRolando<Evento> {
 
 	private EventoNegocio negocio;
 	private Validator validator;
-	
 
 	@Deprecated
 	public EventoController() {
@@ -34,7 +30,6 @@ public class EventoController extends ControladorTaRolando<Evento> {
 		super(resultado);
 		this.negocio = negocio;
 		this.validator = validator;
-
 	}
 
 	public void form() {
@@ -54,7 +49,6 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	}
 
 	public void lista() {
-
 		this.resultado.include("eventos", negocio.listar());
 	}
 
@@ -71,6 +65,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
 
 	@Transacional
 	public void convidarAtleta(Long id, String login) {
+		
 		try {
 			negocio.inserirAtleta(id, login);
 		} catch (AtletaInexistenteException e) {
@@ -99,32 +94,8 @@ public class EventoController extends ControladorTaRolando<Evento> {
 		negocio.criarAlerta(id,login);
 
 	}
-	
-    public void editar(Long id) {
-    	
-        Evento evento = this.negocio.detalhar(id);
-
-        this.resultado.include("evento", evento);
-        this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
-//        this.resultado.redirectTo(this).form();
-//        this.resultado.redirectTo(this).form();
-
-    }
-	
 	public void teste() {
 	}
-	
-	
-	@Transacional
-	@Post
-	public void modificar(Evento evento) {
-		evento.setOrganizador(this.negocio.detalhar(evento.getId()).getOrganizador());
-		this.validator.onErrorRedirectTo(this).form();
-		negocio.modificarEvento(evento);
-		this.resultado.redirectTo(this).lista();
-	}
-	
-	
 
 
 }

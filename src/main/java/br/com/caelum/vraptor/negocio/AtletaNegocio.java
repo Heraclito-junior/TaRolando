@@ -59,7 +59,7 @@ public class AtletaNegocio {
 	
 	
 	
-	private String criptografarSenha(String senha) {
+	public String criptografarSenha(String senha) {
         return Criptografia.criptografar(senha);
     }
 

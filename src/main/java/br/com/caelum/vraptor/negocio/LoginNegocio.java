@@ -7,6 +7,7 @@ import br.com.caelum.vraptor.model.*;
 import br.com.caelum.vraptor.util.Criptografia;
 import br.com.caelum.vraptor.util.OpcaoSelect;
 import br.com.caelum.vraptor.util.exception.ParceiroJaExistenteException;
+import br.com.caelum.vraptor.util.exception.SenhaVaziaException;
 import br.com.caelum.vraptor.util.exception.AtletaJaExistenteException;
 
 import javax.inject.Inject;
@@ -32,7 +33,10 @@ public class LoginNegocio {
 	public LoginNegocio() {
 	}
 
-	public Atleta validarAtleta(Atleta atleta) {
+	public Atleta validarAtleta(Atleta atleta) throws SenhaVaziaException {
+		if(atleta.getSenha()==null) {
+			throw new SenhaVaziaException("Senha Vazia");
+		}
 		if (atleta != null) {
 			Optional<Atleta> atletaBanco = this.atletaDao.buscarPorLogin(atleta.getLogin());
 			if (atletaBanco.isPresent()) {
@@ -44,7 +48,10 @@ public class LoginNegocio {
 		return null;
 	}
 
-    public Parceiro validarParceiro(Parceiro parceiro) {
+    public Parceiro validarParceiro(Parceiro parceiro) throws SenhaVaziaException {
+    	if(parceiro.getSenha()==null) {
+			throw new SenhaVaziaException("Senha Vazia");
+    	}
         if (parceiro != null) {
             Optional<Parceiro> parceiroBanco = this.parceiroDAO.buscarPorLogin(parceiro.getLogin());
             if (parceiroBanco.isPresent()) {

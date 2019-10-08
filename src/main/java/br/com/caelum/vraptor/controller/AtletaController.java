@@ -11,7 +11,9 @@ import br.com.caelum.vraptor.model.TipoAtleta;
 import br.com.caelum.vraptor.negocio.AtletaNegocio;
 import br.com.caelum.vraptor.util.Criptografia;
 import br.com.caelum.vraptor.util.OpcaoSelect;
+import br.com.caelum.vraptor.util.mensagemCustominizada;
 import br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
+import br.com.caelum.vraptor.validator.SimpleMessage;
 
 import javax.inject.Inject;
 
@@ -19,6 +21,10 @@ import javax.inject.Inject;
 public class AtletaController extends ControladorTaRolando<Atleta> {
 	@Inject
 	private AtletaNegocio negocio;
+	
+	
+	private String senha;
+	private String senhaNovamente;
 
 	@Deprecated
 	public AtletaController() {
@@ -74,23 +80,52 @@ public class AtletaController extends ControladorTaRolando<Atleta> {
 	
 	@Transacional
 	@Post
-	public void modificar(Atleta atleta) {
+	public void modificar(Atleta atleta,String codigo,String novoCodigo) {
 		
 		Atleta original=negocio.perfil(atleta.getId());
 		
-		System.out.println(atleta.getEsportePreferido().getNome());
-		System.out.println(atleta.getEsportePreferido().getDescricao());
-//		System.out.println(atleta.getEsportePreferido());
 
+		System.out.println("senha "+codigo);
+		System.out.println("Nova senha "+novoCodigo);
 		
-		if(atleta.getEsportePreferido().getNome()!=null) {
+		
+		if(codigo!=null && novoCodigo!=null && codigo.equals(novoCodigo)) {
+			original.setSenha(negocio.criptografarSenha(codigo));
+		}
+		
+		if(atleta.getLogin()!=null) {
+			original.setLogin(atleta.getLogin());
+		}
+		
+		
+		
+		
+		System.out.println("id favorito"+atleta.getEsportePreferido().getId());
+		
+		if(atleta.getEsportePreferido().getId()!=null) {
 			original.setEsportePreferido(atleta.getEsportePreferido());
+//			this.resultado.include("mensagem", new mensagemCustominizada("Login Já Existente", "error"));
+//			this.resultado.of(this).modificar(atleta);
+
+//			return;
+
 		}
 		System.out.println(original.getLogin());
 		System.out.println(original.getSenha());
 		
-		
+		if(atleta.getSobrenome()!=null) {
 		original.setSobrenome(atleta.getSobrenome());
+		}else {
+			System.out.println("Sobrenome null");
+		}
+		
+		if(atleta.getNome()!=null) {
+			original.setNome(atleta.getNome());
+			}else {
+				System.out.println("nome null");
+		}
+		
+		
 		original.setNome(atleta.getNome());
 //		original.setSenha(criptografarSenha(original.getSenha()));
 
@@ -107,6 +142,22 @@ public class AtletaController extends ControladorTaRolando<Atleta> {
 			this.resultado.redirectTo(LoginController.class).form();
 
 		}
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getSenhaNovamente() {
+		return senhaNovamente;
+	}
+
+	public void setSenhaNovamente(String senhaNovamente) {
+		this.senhaNovamente = senhaNovamente;
 	}
 
 }

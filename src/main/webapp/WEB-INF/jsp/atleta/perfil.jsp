@@ -17,6 +17,8 @@
     </jsp:attribute>
 
     <jsp:body>
+    <jsp:include page="/WEB-INF/jsp/errors/msgErrorCustominizada.jsp"/>
+    
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Editar Perfil</h1>
@@ -28,11 +30,33 @@
                 <form id="formAtividade" action="${linkTo[AtletaController].modificar}" method="post">
                     <input type="hidden" name="atleta.id" value="${atleta.id}">
                     <div class="row">
+                    <div class="form-group col-md-4">
+                            <label for="nome-atleta">Login </label>
+                            <input id="nome-atleta" class="form-control" minlength="5" name="atleta.login"
+                                   type="text" required value="${atleta.login}" >
+                    </div>
                         <div class="form-group col-md-4">
                             <label for="nome-atleta">Nome </label>
                             <input id="nome-atleta" class="form-control" minlength="5" name="atleta.nome"
                                    type="text" required value="${atleta.nome}" >
                         </div>
+                        <div class="form-group col-md-4">
+                            <label for="sobrenome-atleta">Senha </label>
+                            
+                            <input id="sobrenome-atleta" class="form-control" name="codigo"
+                                   type="text" >
+                        </div>
+                        
+                        <div class="form-group col-md-4">
+                            <label for="sobrenome-atleta">Nova Senha</label>
+                            
+                            <input id="sobrenome-atleta" class="form-control"  name="novoCodigo"
+                                   type="text" >
+                        </div>
+                        
+                        
+                        
+                        
                         <div class="form-group col-md-4">
                             <label for="sobrenome-atleta">Sobrenome </label>
                             <input id="sobrenome-atleta" class="form-control" minlength="5" name="atleta.sobrenome"

@@ -6,6 +6,7 @@ import br.com.caelum.vraptor.dao.AtletaDAO;
 import br.com.caelum.vraptor.model.*;
 import br.com.caelum.vraptor.negocio.LoginNegocio;
 import br.com.caelum.vraptor.util.exception.ParceiroJaExistenteException;
+import br.com.caelum.vraptor.util.exception.SenhaVaziaException;
 import br.com.caelum.vraptor.util.mensagemCustominizada;
 import br.com.caelum.vraptor.util.exception.AtletaJaExistenteException;
 import br.com.caelum.vraptor.validator.SimpleMessage;
@@ -38,7 +39,15 @@ public class LoginController extends Controlador {
 
 	@Post("/login")
 	public void login(Atleta atleta) {
-		Atleta atletaLogin = this.loginNegocio.validarAtleta(atleta);
+		Atleta atletaLogin = null;
+		try {
+			atletaLogin = this.loginNegocio.validarAtleta(atleta);
+		} catch (SenhaVaziaException e) {
+			// TODO Auto-generated catch block
+			this.resultado.include("mensagem", new SimpleMessage("error", "login.dadoIncorreto"));
+			this.resultado.of(this).form();
+			return;
+		}
 		if (atletaLogin != null) {
 			usuarioLogado.setUsuario(atletaLogin);
 			this.resultado.redirectTo(InicioController.class).index();
@@ -50,7 +59,15 @@ public class LoginController extends Controlador {
 
 	@Post("/loginParceiro")
 	public void loginParceiro(Parceiro parceiro) {
-		Parceiro parceiroLogin = this.loginNegocio.validarParceiro(parceiro);
+		Parceiro parceiroLogin = null;
+		try {
+		parceiroLogin = this.loginNegocio.validarParceiro(parceiro);
+		}catch(SenhaVaziaException e) {
+			this.resultado.include("mensagem", new SimpleMessage("error", "login.dadoIncorreto"));
+			this.resultado.of(this).formParceiro();
+			return;
+
+		}
 		if (parceiroLogin != null) {
 			usuarioLogado.setUsuario(parceiroLogin);
 			this.resultado.redirectTo(InicioController.class).indexParceiro();

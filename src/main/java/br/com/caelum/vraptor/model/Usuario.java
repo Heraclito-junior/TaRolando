@@ -11,28 +11,28 @@ public abstract class Usuario extends Entidade{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
     @NotNull
-    private String nome;
-    private String sobrenome;
+    protected String nome;
+    protected String sobrenome;
     @NotNull
-    private String email;
+    protected String email;
     @NotNull
-    private String telefone;
+    protected String telefone;
     @NotNull
-    private String login;
+    protected String login;
     @NotNull
-    private String senha;
+    protected String senha;
 
-    private boolean deletado;
-    private LocalDate dataNascimento;
-    private LocalDateTime dataCadastro;
+    protected boolean deletado;
+    protected LocalDate dataNascimento;
+    protected LocalDateTime dataCadastro;
 
-    private TipoUsuario tipoUsuario;
+    protected TipoUsuario tipoUsuario;
 
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private Endereco endereco;
+//    protected Endereco endereco;
 
     @Override
     public Long getId() {

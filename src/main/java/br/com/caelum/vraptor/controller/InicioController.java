@@ -34,6 +34,7 @@ public class InicioController extends Controlador {
 
     @Path("/")
     public void index(){
+        resultado.include("espacos", espacoNegocio.espacosMaisReservados());
     }
 
     @Path("/indexParceiro")

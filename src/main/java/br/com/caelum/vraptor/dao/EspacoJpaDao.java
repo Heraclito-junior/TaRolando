@@ -23,4 +23,10 @@ public class EspacoJpaDao extends EntidadeJpaDao<Espaco> implements EspacoDAO {
                 .setParameter("id", id);
         return query.getResultList();
     }
+
+    public List<Espaco> espacosMaisReservados() {
+        Query query = manager.createQuery("SELECT e FROM Espaco e WHERE e.deletado = false " +
+                                             "ORDER BY e.numReservas");
+        return query.setMaxResults(5).getResultList();
+    }
 }

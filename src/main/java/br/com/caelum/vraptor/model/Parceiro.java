@@ -12,6 +12,7 @@ public class Parceiro extends Usuario{
 //    private Endereco endereco;
 //    private List<Espaco> espacos;
 
+    @Deprecated
     public Parceiro() {
     }
 

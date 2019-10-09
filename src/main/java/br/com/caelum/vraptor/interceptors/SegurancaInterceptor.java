@@ -10,6 +10,7 @@ import br.com.caelum.vraptor.controller.LoginController;
 import br.com.caelum.vraptor.interceptor.SimpleInterceptorStack;
 import br.com.caelum.vraptor.model.AtletaLogado;
 import br.com.caelum.vraptor.model.TipoUsuario;
+import br.com.caelum.vraptor.model.UsuarioLogado;
 import br.com.caelum.vraptor.view.Results;
 
 import javax.inject.Inject;
@@ -19,11 +20,13 @@ public class SegurancaInterceptor {
 
     private Result resultado;
     private AtletaLogado atletaLogado;
+    private UsuarioLogado usuarioLogado;
 
     @Inject
-    public SegurancaInterceptor(Result resultado, AtletaLogado atletaLogado) {
+    public SegurancaInterceptor(Result resultado, AtletaLogado atletaLogado, UsuarioLogado usuarioLogado) {
         this.resultado = resultado;
         this.atletaLogado = atletaLogado;
+        this.usuarioLogado = usuarioLogado;
     }
 
     @Deprecated SegurancaInterceptor(){}
@@ -54,16 +57,16 @@ public class SegurancaInterceptor {
         Seguranca anotacaoClasse = method.getController().getType().getAnnotation(Seguranca.class);
         if(possuiAnotacao(anotacaoMethod, anotacaoClasse)) {
             if(anotacaoMethod != null) {
-                if(atletaLogado.getAtleta().getTipoUsuario().equals(anotacaoMethod.tipoUsuario())
-                        || atletaLogado.getAtleta().getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR)){
+                if(usuarioLogado.getUsuario().getTipoUsuario().equals(anotacaoMethod.tipoUsuario())
+                        || usuarioLogado.getUsuario().getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR)){
                     return true;
                 } else {
                     resultado.use(Results.http()).sendError(403, "Usuário não autorizado");
                 }
             } else {
                 if(anotacaoClasse != null) {
-                    if(atletaLogado.getAtleta().getTipoUsuario().equals(anotacaoClasse.tipoUsuario())
-                            || atletaLogado.getAtleta().getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR)){
+                    if(usuarioLogado.getUsuario().getTipoUsuario().equals(anotacaoClasse.tipoUsuario())
+                            || usuarioLogado.getUsuario().getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR)){
                         return true;
                     } else {
                         resultado.use(Results.http()).sendError(403, "Usuário não autorizado");
@@ -76,7 +79,7 @@ public class SegurancaInterceptor {
     }
 
     public boolean acessoMethod(Seguranca anotacao){
-        boolean permitido = anotacao.tipoUsuario().equals(atletaLogado.getAtleta().getTipoUsuario());
+        boolean permitido = anotacao.tipoUsuario().equals(usuarioLogado.getUsuario().getTipoUsuario());
         return permitido;
     }
 

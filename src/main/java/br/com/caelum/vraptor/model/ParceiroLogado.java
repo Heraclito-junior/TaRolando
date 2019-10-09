@@ -1,5 +1,8 @@
 package br.com.caelum.vraptor.model;
 
+import javax.enterprise.context.SessionScoped;
+
+@SessionScoped
 public class ParceiroLogado extends Sessao {
 
     private Parceiro parceiro;

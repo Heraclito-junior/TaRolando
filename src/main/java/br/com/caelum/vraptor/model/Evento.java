@@ -1,6 +1,7 @@
 package br.com.caelum.vraptor.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -37,6 +38,9 @@ public class Evento extends Entidade {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Chat chat;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Horario horario;
 
 //    @ManyToOne
 //    private Convite convite;
@@ -186,5 +190,13 @@ public class Evento extends Entidade {
 
     public void setChat(Chat chat) {
         this.chat = chat;
+    }
+
+    public Horario getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Horario horario) {
+        this.horario = horario;
     }
 }

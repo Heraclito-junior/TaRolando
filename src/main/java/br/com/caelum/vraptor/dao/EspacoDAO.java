@@ -7,4 +7,5 @@ import java.util.List;
 public interface EspacoDAO extends EntidadeDAO<Espaco> {
 
     List<Espaco> meusEspacos(Long id);
+    List<Espaco> espacosMaisReservados();
 }

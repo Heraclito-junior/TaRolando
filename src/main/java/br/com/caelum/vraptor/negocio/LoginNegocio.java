@@ -34,10 +34,10 @@ public class LoginNegocio {
 
 	public Atleta validarAtleta(Atleta atleta) {
 		if (atleta != null) {
-			Optional<Atleta> atletaBanco = this.atletaDao.buscarPorLogin(atleta.getLogin());
-			if (atletaBanco.isPresent()) {
-				if (compararSenha(atleta.getSenha(), atletaBanco.get().getSenha())) {
-					return atletaBanco.get();
+			Atleta atletaBanco = this.atletaDao.buscarPorLogin(atleta.getLogin());
+			if (atletaBanco != null) {
+				if (compararSenha(atleta.getSenha(), atletaBanco.getSenha())) {
+					return atletaBanco;
 				}
 			}
 		}
@@ -58,8 +58,8 @@ public class LoginNegocio {
 
 	public void validarUsuarioExistente(Atleta atleta) throws AtletaJaExistenteException {
 		if (atleta != null) {
-			Optional<Atleta> atletaBanco = this.atletaDao.buscarPorLogin(atleta.getLogin());
-			if (atletaBanco.isPresent()) {
+			Atleta atletaBanco = this.atletaDao.buscarPorLogin(atleta.getLogin());
+			if (atletaBanco != null) {
 				throw new AtletaJaExistenteException();
 
 			}

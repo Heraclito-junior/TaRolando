@@ -1,10 +1,6 @@
 package br.com.caelum.vraptor.dao;
 
-import br.com.caelum.vraptor.model.Alerta;
-import br.com.caelum.vraptor.model.AlertaTabela;
-import br.com.caelum.vraptor.model.Atleta;
-import br.com.caelum.vraptor.model.AtletaLogado;
-import br.com.caelum.vraptor.model.Evento;
+import br.com.caelum.vraptor.model.*;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -20,31 +16,33 @@ public class EventoJpaDao extends EntidadeJpaDao<Evento> implements EventoDAO {
     @Inject
     private AtletaLogado atletaLogado;
 
+    private UsuarioLogado usuarioLogado;
+
     @Deprecated
-    public EventoJpaDao() { this(null); }
+    public EventoJpaDao() { this(null, null); }
 
     @Inject
-    public EventoJpaDao(EntityManager entityManager) {
+    public EventoJpaDao(EntityManager entityManager, UsuarioLogado usuarioLogado) {
         super(entityManager, Evento.class);
+        this.usuarioLogado = usuarioLogado;
     }
 
 
     @Override
     public List<Evento> meusEventos() {
-        Query query = this.manager.createQuery("SELECT p FROM Evento p WHERE p.organizador.id = :atleta AND p.deletado = false");
-        query.setParameter("atleta", atletaLogado.getAtleta().getId());
+        Query query = this.manager.createQuery("SELECT e FROM Evento e WHERE (:atleta MEMBER OF e.participantes OR " +
+                                                  "e.organizador.id = :id) AND e.deletado = false")
+                .setParameter("atleta", usuarioLogado.getUsuario())
+                .setParameter("id", usuarioLogado.getUsuario().getId());
         List<Evento> tarefas = query.getResultList();
         return tarefas;
     }
     
-    
     @Override
     public List<AlertaTabela> meusAlertas() {
-
-        
         Query query = this.manager.createNativeQuery("SELECT a.nome, b.participantes_id,c.titulo FROM Alerta as a INNER JOIN evento_atleta as b on a.evento_id = b.evento_id and b.participantes_id=:atleta INNER JOIN evento as c on b.evento_id = c.id GROUP BY a.nome,b.participantes_id,c.titulo");
 
-        query.setParameter("atleta", atletaLogado.getAtleta().getId());
+        query.setParameter("atleta", usuarioLogado.getUsuario().getId());
 //        Object[] resultado = (Object[]) query.getResultList();
         List<Object[]> resultado = query.getResultList();
 
@@ -61,14 +59,7 @@ public class EventoJpaDao extends EntidadeJpaDao<Evento> implements EventoDAO {
         return tarefas;
 
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
     public void removerAtleta(Evento evento, Atleta atleta) {
         EntityTransaction txn = manager.getTransaction();
         txn.begin();
@@ -86,16 +77,13 @@ public class EventoJpaDao extends EntidadeJpaDao<Evento> implements EventoDAO {
         manager.joinTransaction();
         return;
     }
-    
-    
+
     
     public Optional<Alerta> buscarUltimoAlerta() {
         Query query = this.manager.createQuery("SELECT u from Alerta u order by id desc");
         return query.setMaxResults(1).getResultList().stream().findFirst();
     }
-    
-    
-    
+
     
     public void inserirAlerta(Long id, String mensagem, Long eventoId, Long atleta) {
     	EntityTransaction txn = manager.getTransaction();
@@ -113,7 +101,5 @@ public class EventoJpaDao extends EntidadeJpaDao<Evento> implements EventoDAO {
         manager.joinTransaction();
         return;
     }
-    
-    
     
 }

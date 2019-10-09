@@ -6,6 +6,7 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.anotacoes.Transacional;
 import br.com.caelum.vraptor.model.Espaco;
+import br.com.caelum.vraptor.negocio.AtividadeNegocio;
 import br.com.caelum.vraptor.negocio.EspacoNegocio;
 
 import javax.inject.Inject;
@@ -14,14 +15,16 @@ import javax.inject.Inject;
 public class EspacoController extends ControladorTaRolando<Espaco> {
 
     private EspacoNegocio espacoNegocio;
+    private AtividadeNegocio atividadeNegocio;
 
     @Deprecated
-    public EspacoController() { this(null, null); }
+    public EspacoController() { this(null, null, null); }
 
     @Inject
-    public EspacoController(Result resultado, EspacoNegocio espacoNegocio) {
+    public EspacoController(Result resultado, EspacoNegocio espacoNegocio, AtividadeNegocio atividadeNegocio) {
         super(resultado);
         this.espacoNegocio = espacoNegocio;
+        this.atividadeNegocio = atividadeNegocio;
     }
 
 
@@ -61,5 +64,12 @@ public class EspacoController extends ControladorTaRolando<Espaco> {
     @Get
     public void detalhar(Long id) {
         resultado.include("espaco", espacoNegocio.detalhar(id));
+        resultado.include("atividades", atividadeNegocio.minhasAtividades(id));
+    }
+
+    @Get
+    public void visualizar(Long id) {
+        resultado.include("espaco", espacoNegocio.detalhar(id));
+        resultado.include("atividades", atividadeNegocio.minhasAtividades(id));
     }
 }

@@ -1,29 +1,37 @@
 package br.com.caelum.vraptor.negocio;
 
 import br.com.caelum.vraptor.dao.EspacoDAO;
-import br.com.caelum.vraptor.model.Espaco;
-import br.com.caelum.vraptor.model.Parceiro;
-import br.com.caelum.vraptor.model.UsuarioLogado;
+import br.com.caelum.vraptor.dao.EsporteDAO;
+import br.com.caelum.vraptor.dao.ParceiroDAO;
+import br.com.caelum.vraptor.model.*;
+import br.com.caelum.vraptor.util.OpcaoSelect;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EspacoNegocio {
 
     private EspacoDAO espacoDAO;
+    private EsporteDAO esporteDAO;
     private UsuarioLogado usuarioLogado;
+    private ParceiroDAO parceiroDAO;
+
 
     @Deprecated
-    public EspacoNegocio() { this(null, null); }
+    public EspacoNegocio() { this(null, null, null, null); }
 
     @Inject
-    public EspacoNegocio(EspacoDAO espacoDAO, UsuarioLogado usuarioLogado) {
+    public EspacoNegocio(EspacoDAO espacoDAO, ParceiroDAO parceiroDAO, EsporteDAO esporteDAO, UsuarioLogado usuarioLogado) {
         this.espacoDAO = espacoDAO;
+        this.esporteDAO = esporteDAO;
+        this.parceiroDAO = parceiroDAO;
         this.usuarioLogado = usuarioLogado;
     }
 
     public void salvar(Espaco espaco) {
-        espaco.setProprietario((Parceiro) usuarioLogado.getUsuario());
+        Parceiro parceiro = parceiroDAO.buscarPorId(usuarioLogado.getUsuario().getId());
+        espaco.setProprietario(parceiro);
         espacoDAO.salvar(espaco);
     }
 
@@ -47,5 +55,15 @@ public class EspacoNegocio {
 
     public Espaco detalhar(Long id) {
         return espacoDAO.buscarPorId(id);
+    }
+
+    public List<OpcaoSelect> geraListaOpcoesEsportes() {
+        List<Esporte> todos = this.esporteDAO.listar().stream().collect(Collectors.toList());
+        return todos.stream().map(esportes -> new OpcaoSelect(esportes.getNome(), esportes.getId()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Espaco> espacosMaisReservados() {
+        return espacoDAO.espacosMaisReservados();
     }
 }

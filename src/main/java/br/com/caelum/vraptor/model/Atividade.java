@@ -1,9 +1,10 @@
 package br.com.caelum.vraptor.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-public class AtividadeEspaco extends Entidade {
+public class Atividade extends Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,6 +12,7 @@ public class AtividadeEspaco extends Entidade {
 
     private String nome;
     private String descricao;
+    private Long numReservas;
     private boolean deletado;
 
     @OneToOne
@@ -19,6 +21,13 @@ public class AtividadeEspaco extends Entidade {
     @ManyToOne
     private Espaco espaco;
 
+    @OneToMany
+    private List<Horario> horarios;
+
+
+    public Atividade() {
+        this.numReservas = Long.valueOf(0);
+    }
 
     @Override
     public Long getId() {
@@ -68,5 +77,21 @@ public class AtividadeEspaco extends Entidade {
 
     public void setEspaco(Espaco espaco) {
         this.espaco = espaco;
+    }
+
+    public Long getNumReservas() {
+        return numReservas;
+    }
+
+    public void setNumReservas(Long numReservas) {
+        this.numReservas = numReservas;
+    }
+
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
     }
 }

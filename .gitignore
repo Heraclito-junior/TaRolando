@@ -1,5 +1,4 @@
 .idea
-target
 classes/
 your-artifactid.iml
 src/main/resources/META-INF/

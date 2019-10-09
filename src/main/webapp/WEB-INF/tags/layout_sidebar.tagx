@@ -110,6 +110,9 @@
                             <li>
                                 <a href="${linkTo[ConviteController].meusConvites}"><i class="fa fa-th-list fa-fw"><c:out value=""/></i> Meus Convites</a>
                             </li>
+                            <li>
+                                <a href="${linkTo[AtletaController].minhasReservas}"><i class="fa fa-list-alt fa-fw"><c:out value=""/></i> Minhas Reservas</a>
+                            </li>
                             <c:if test="${usuarioLogado.isAdmin()}">
                                 <li>
                                     <a href="${linkTo[EsporteController].lista}"><i class="fa fa-futbol-o fa-fw"><c:out value=""/></i> Esportes</a>

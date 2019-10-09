@@ -1,7 +1,6 @@
 package br.com.caelum.vraptor.model;
 
 import javax.persistence.*;
-import javax.ws.rs.GET;
 import java.util.List;
 
 @Entity
@@ -14,6 +13,7 @@ public class Espaco extends Entidade {
 
     private String nome;
     private String descricao;
+    private Long numReservas;
     private boolean deletado;
 //    private Endereco endereco;
 
@@ -21,7 +21,12 @@ public class Espaco extends Entidade {
     private Parceiro proprietario;
 
     @OneToMany
-    private List<AtividadeEspaco> atividades;
+    private List<Atividade> atividades;
+
+
+    public Espaco() {
+        this.numReservas = Long.valueOf(0);
+    }
 
 
     @Override
@@ -58,11 +63,11 @@ public class Espaco extends Entidade {
         this.proprietario = proprietario;
     }
 
-    public List<AtividadeEspaco> getAtividades() {
+    public List<Atividade> getAtividades() {
         return atividades;
     }
 
-    public void setAtividades(List<AtividadeEspaco> atividades) {
+    public void setAtividades(List<Atividade> atividades) {
         this.atividades = atividades;
     }
 
@@ -72,5 +77,13 @@ public class Espaco extends Entidade {
 
     public void setDeletado(boolean deletado) {
         this.deletado = deletado;
+    }
+
+    public Long getNumReservas() {
+        return numReservas;
+    }
+
+    public void setNumReservas(Long numReservas) {
+        this.numReservas = numReservas;
     }
 }

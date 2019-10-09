@@ -1,6 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: pique
+  Date: 08/10/2019
+  Time: 03:38
+  To change this template use File | Settings | File Templates.
+--%>
+<%--
+  Created by IntelliJ IDEA.
+  User: pique
   Date: 03/10/2019
   Time: 04:55
   To change this template use File | Settings | File Templates.
@@ -42,18 +49,18 @@
                 <div class="row">
                     <div class="panel">
                         <div class="panel-body">
-                            <div class="col-md-12">
-                                <div class="form-group col-md-6">
-                                    <label for="nome-espaco">Nome </label>
-                                    <input id="nome-espaco"
-                                           class="form-control" minlength="5" name="espaco.nome"
-                                           type="text" required value="${espaco.nome}" disabled>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <a class="btn btn-primary" href="${linkTo[AtividadeController].form}?id=${espaco.id}">
-                                    Cadastrar Atividade</a>
-                            </div>
+<%--                            <div class="col-md-12">--%>
+<%--                                <div class="form-group col-md-6">--%>
+<%--                                    <label for="nome-espaco">Nome </label>--%>
+<%--                                    <input id="nome-espaco"--%>
+<%--                                           class="form-control" minlength="5" name="espaco.nome"--%>
+<%--                                           type="text" required value="${espaco.nome}" disabled>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="row">--%>
+<%--                                <a class="btn btn-primary" href="${linkTo[AtividadeController].form}?id=${espaco.id}">--%>
+<%--                                    Cadastrar Atividade</a>--%>
+<%--                            </div>--%>
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
@@ -61,7 +68,7 @@
                             </div>
                             <!-- /.col-lg-12 -->
                         </div>
-                                <%--                <a class="btn btn-info" style="margin-bottom: 16px;" href="${linkTo[EsporteController].form}">Cadastrar</a>--%>
+                            <%--                <a class="btn btn-info" style="margin-bottom: 16px;" href="${linkTo[EsporteController].form}">Cadastrar</a>--%>
                         <div class="tabela-servicos">
                             <table class="table table-bordered">
                                 <thead>
@@ -75,14 +82,8 @@
                                     <tr>
                                         <td>${atividade.nome}</td>
                                         <td>
-                                            <a title="Detalhar" href="${linkTo[AtividadeController].detalhar}?id=${atividade.id}">
+                                            <a title="Detalhar" href="${linkTo[AtividadeController].visualizar}?idAtividade=${atividade.id}">
                                                 <i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
-                                            <a title="Editar" class="link-aceitar" href="#accept-modal"
-                                               url-aceitar="${linkTo[AtividadeController].editar}?id=${atividade.id}" data-toggle="modal">
-                                                <i class="fa fa- fa-lg"></i></a>
-                                            <a title="Remover" class="link-remover" href="#delete-modal"
-                                               url-remover="${linkTo[AtividadeController].remover}?id=${atividade.id}" data-toggle="modal">
-                                                <i class="fa fa-trash fa-lg"></i></a>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -118,3 +119,4 @@
         </div>
     </jsp:body>
 </tags:layoutSidebar>
+

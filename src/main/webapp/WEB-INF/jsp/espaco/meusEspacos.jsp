@@ -70,7 +70,6 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Nome</th>
                             <th>Ações</th>
                         </tr>
@@ -78,9 +77,10 @@
                         <tbody>
                         <c:forEach items="${espacos}" var="espaco">
                             <tr>
-                                <td>${espaco.id}</td>
                                 <td>${espaco.nome}</td>
                                 <td>
+                                    <a title="Detalhar" href="${linkTo[EspacoController].detalhar}?id=${espaco.id}">
+                                        <i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
                                     <a title="Remover" class="link-remover" href="#delete-modal"
                                        url-remover="${linkTo[EspacoController].remover}?id=${espaco.id}" data-toggle="modal">
                                         <i class="fa fa-trash fa-lg"></i></a>

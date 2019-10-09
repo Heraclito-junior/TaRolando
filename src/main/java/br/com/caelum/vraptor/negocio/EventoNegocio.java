@@ -6,33 +6,27 @@ import br.com.caelum.vraptor.dao.EventoDAO;
 import br.com.caelum.vraptor.dao.EventoJpaDao;
 import br.com.caelum.vraptor.model.Alerta;
 import br.com.caelum.vraptor.model.Atleta;
-import br.com.caelum.vraptor.model.AtletaLogado;
-import br.com.caelum.vraptor.model.Evento;
 import br.com.caelum.vraptor.model.UsuarioLogado;
+import br.com.caelum.vraptor.model.Evento;
 import br.com.caelum.vraptor.model.Esporte;
 import br.com.caelum.vraptor.util.OpcaoSelect;
 import br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
-import br.com.caelum.vraptor.util.exception.VagasInvalidasException;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class EventoNegocio {
 
-	@Inject
 	private EsporteDAO esporteDAO;
 	@Inject
 	private EventoDAO dao;
 	@Inject
 	private EventoJpaDao daoJpa;
-
 	@Inject
 	private AtletaDAO atletaDAO;
-
-//	@Inject
-//	private AtletaLogado atletaLogado;
 
 	@Inject
 	private UsuarioLogado usuarioLogado;
@@ -42,6 +36,7 @@ public class EventoNegocio {
 		this(null);
 	}
 
+	@Inject
 	public EventoNegocio(EsporteDAO esporteDAO) {
 		this.esporteDAO = esporteDAO;
 	}
@@ -52,34 +47,21 @@ public class EventoNegocio {
 				.collect(Collectors.toList());
 	}
 
-	public void definirAdministradorESalvar(Evento evento) throws VagasInvalidasException {
-//		evento.setOrganizador(this.atletaLogado.getAtleta());
-		if(evento.getNumVagasMin()>evento.getNumVagasMax()) {
-			throw new VagasInvalidasException("Numero de vagas minimas nao pode ser superior as maximas");
+	public List<OpcaoSelect> geraListaOpcoesEventos() {
+		List<Evento> todos = this.dao.listar().stream().collect(Collectors.toList());
+		return todos.stream().map(evento -> new OpcaoSelect(evento.getTitulo(), evento.getId()))
+				.collect(Collectors.toList());
+	}
+
+	public void definirAdministradorESalvar(Evento evento) {
+		if (evento.getParticipantes() == null) {
+			evento.setParticipantes(new ArrayList<>());
 		}
-		evento.setOrganizador(this.usuarioLogado.getUsuario());
-
+		evento.setOrganizador((Atleta) this.usuarioLogado.getUsuario());
+//		evento.getParticipantes().add((Atleta) usuarioLogado.getUsuario());
 		this.dao.salvar(evento);
 		return;
 	}
-	
-	
-	public void modificarEvento(Evento evento) {
-////		evento.setOrganizador(this.atletaLogado.getAtleta());
-//		System.out.println("organizador "+evento.getOrganizador());
-//		System.out.println("evento "+evento.getTitulo());
-
-
-//		evento.setOrganizador(this.usuarioLogado.getUsuario());
-
-		this.dao.salvar(evento);
-//		this.dao.
-		return;
-	}
-	
-	
-	
-	
 
 	public void buscarEDeletar(Long id) throws AtletaInexistenteException {
 		Evento evento = this.dao.buscarPorId(id);
@@ -97,14 +79,12 @@ public class EventoNegocio {
 	public Evento detalhar(Long id) {
 		return this.dao.buscarPorId(id);
 	}
-	
-
 
 	public void inserirAtleta(Long id, String login) throws AtletaInexistenteException {
 		Evento evento = detalhar(id);
 
 		Atleta atleta = this.atletaDAO.buscarPorLogin(login);
-		if (atleta.getId()==null) {
+		if (atleta.getId() == null) {
 			throw new AtletaInexistenteException("Atleta Não Existe");
 		}
 		if (!evento.getParticipantes().contains(atleta)) {
@@ -119,10 +99,10 @@ public class EventoNegocio {
 		Evento evento = detalhar(id);
 
 		Atleta atleta = this.atletaDAO.buscarPorLogin(login);
-		if (atleta!=null) {
+		if (atleta.getId() == null) {
 			return;
 		}
-		if (!evento.getParticipantes().contains(atleta)) {
+		if (evento.getParticipantes().contains(atleta)) {
 			evento.getParticipantes().remove(atleta);
 		}
 		this.dao.salvar(evento);

@@ -7,7 +7,6 @@ import br.com.caelum.vraptor.model.*;
 import br.com.caelum.vraptor.util.Criptografia;
 import br.com.caelum.vraptor.util.OpcaoSelect;
 import br.com.caelum.vraptor.util.exception.ParceiroJaExistenteException;
-import br.com.caelum.vraptor.util.exception.SenhaVaziaException;
 import br.com.caelum.vraptor.util.exception.AtletaJaExistenteException;
 
 import javax.inject.Inject;
@@ -33,13 +32,10 @@ public class LoginNegocio {
 	public LoginNegocio() {
 	}
 
-	public Atleta validarAtleta(Atleta atleta) throws SenhaVaziaException {
-		if(atleta.getSenha()==null) {
-			throw new SenhaVaziaException("Senha Vazia");
-		}
+	public Atleta validarAtleta(Atleta atleta) {
 		if (atleta != null) {
 			Atleta atletaBanco = this.atletaDao.buscarPorLogin(atleta.getLogin());
-			if (atletaBanco!=null) {
+			if (atletaBanco != null) {
 				if (compararSenha(atleta.getSenha(), atletaBanco.getSenha())) {
 					return atletaBanco;
 				}
@@ -48,10 +44,7 @@ public class LoginNegocio {
 		return null;
 	}
 
-    public Parceiro validarParceiro(Parceiro parceiro) throws SenhaVaziaException {
-    	if(parceiro.getSenha()==null) {
-			throw new SenhaVaziaException("Senha Vazia");
-    	}
+    public Parceiro validarParceiro(Parceiro parceiro) {
         if (parceiro != null) {
             Optional<Parceiro> parceiroBanco = this.parceiroDAO.buscarPorLogin(parceiro.getLogin());
             if (parceiroBanco.isPresent()) {
@@ -66,7 +59,7 @@ public class LoginNegocio {
 	public void validarUsuarioExistente(Atleta atleta) throws AtletaJaExistenteException {
 		if (atleta != null) {
 			Atleta atletaBanco = this.atletaDao.buscarPorLogin(atleta.getLogin());
-			if (atletaBanco!=null) {
+			if (atletaBanco != null) {
 				throw new AtletaJaExistenteException();
 
 			}

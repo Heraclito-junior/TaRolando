@@ -11,6 +11,7 @@ import br.com.caelum.vraptor.model.Evento;
 import br.com.caelum.vraptor.model.Esporte;
 import br.com.caelum.vraptor.util.OpcaoSelect;
 import br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
+import br.com.caelum.vraptor.util.exception.VagasInvalidasException;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -53,15 +54,31 @@ public class EventoNegocio {
 				.collect(Collectors.toList());
 	}
 
-	public void definirAdministradorESalvar(Evento evento) {
+	public void definirAdministradorESalvar(Evento evento) throws VagasInvalidasException {
 		if (evento.getParticipantes() == null) {
 			evento.setParticipantes(new ArrayList<>());
+		}
+		if(evento.getNumVagasMin()>evento.getNumVagasMax()) {
+			throw new VagasInvalidasException("Numero de vagas minimas nao pode ser superior as maximas");
 		}
 		evento.setOrganizador((Atleta) this.usuarioLogado.getUsuario());
 //		evento.getParticipantes().add((Atleta) usuarioLogado.getUsuario());
 		this.dao.salvar(evento);
 		return;
 	}
+	
+	public void modificarEvento(Evento evento) {
+////	evento.setOrganizador(this.atletaLogado.getAtleta());
+//	System.out.println("organizador "+evento.getOrganizador());
+//	System.out.println("evento "+evento.getTitulo());
+
+
+//	evento.setOrganizador(this.usuarioLogado.getUsuario());
+
+	this.dao.salvar(evento);
+//	this.dao.
+	return;
+}
 
 	public void buscarEDeletar(Long id) throws AtletaInexistenteException {
 		Evento evento = this.dao.buscarPorId(id);

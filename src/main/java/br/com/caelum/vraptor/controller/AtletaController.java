@@ -91,11 +91,7 @@ public class AtletaController extends ControladorTaRolando<Atleta> {
 	public void modificar(Atleta atleta,String codigo,String novoCodigo) {
 		
 		Atleta original=negocio.perfil(atleta.getId());
-		
 
-		System.out.println("senha "+codigo);
-		System.out.println("Nova senha "+novoCodigo);
-		
 		
 		if(codigo!=null && novoCodigo!=null && codigo.equals(novoCodigo)) {
 			original.setSenha(negocio.criptografarSenha(codigo));
@@ -106,43 +102,27 @@ public class AtletaController extends ControladorTaRolando<Atleta> {
 		}
 		
 		
-		
-		
-		System.out.println("id favorito"+atleta.getEsportePreferido().getId());
-		
 		if(atleta.getEsportePreferido().getId()!=null) {
 			original.setEsportePreferido(atleta.getEsportePreferido());
-//			this.resultado.include("mensagem", new mensagemCustominizada("Login Já Existente", "error"));
-//			this.resultado.of(this).modificar(atleta);
-
-//			return;
 
 		}
-		System.out.println(original.getLogin());
-		System.out.println(original.getSenha());
-		
 		if(atleta.getSobrenome()!=null) {
 		original.setSobrenome(atleta.getSobrenome());
 		}else {
-			System.out.println("Sobrenome null");
+
 		}
 		
 		if(atleta.getNome()!=null) {
 			original.setNome(atleta.getNome());
-			}else {
-				System.out.println("nome null");
 		}
 		
 		
 		original.setNome(atleta.getNome());
-//		original.setSenha(criptografarSenha(original.getSenha()));
 
 		
 		try {
 			
 			negocio.alterar(original);
-
-//			atleta.setSenha(criptografarSenha(atleta.getSenha()));
 
 			this.resultado.redirectTo(InicioController.class).index();
 

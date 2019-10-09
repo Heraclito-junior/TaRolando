@@ -62,8 +62,8 @@
 
 
 <%--                <form id="formChat" action="${linkTo[ChatController].sendMessage}?idChat=${chat.id}" method="post">--%>
-                    <input id="atletaLogadoID" type="hidden" value="${atletaLogado.atleta.id}" />
-                    <input id="atletaLogadoNome" type="hidden" value="${atletaLogado.atleta.nome}" />
+                    <input id="atletaLogadoID" type="hidden" value="${usuarioLogado.usuario.id}" />
+                    <input id="atletaLogadoNome" type="hidden" value="${usuarioLogado.usuario.nome}" />
                     <input id="chatID" type="hidden" name="chat.id" value="${chat.id}" />
 <%--                    <input id="chatID" type="hidden" name="mensagem.chat" value="${chat}" />--%>
 <%--                    <input id="atletaLogado" type="hidden" name="chat.evento.id" value="${chat.evento.id}" />--%>

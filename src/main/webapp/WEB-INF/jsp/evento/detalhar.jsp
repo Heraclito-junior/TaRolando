@@ -103,6 +103,9 @@
 										class="form-control" name="evento.numVagasMax" min="0"
 										type="number" value="${evento.numVagasMax}" disabled>
                                 </div>
+                                <div class="form-group col-md-6">
+                                    <a href="#">Integrar uma Reserva ao Evento</a>
+                                </div>
                                 <div class="form-group col-md-12">
                                     <label for="localizacao">Localização </label>
                                     <input id="localizacao"
@@ -147,43 +150,44 @@
 												data-toggle="modal" data-target="#addParticipante">
                                             <i class="fa fa-plus"></i>
 											</button>
-											
+
 										</span>
                                     </c:if>
                                 </h4>
                                 <ul class="list-group mb-3">
                                     <c:forEach
 										items="${evento.participantes}" var="participante">
-                                        <c:if test="${participante.id != usuarioLogado.usuario.id}">
                                             <input type="hidden"
                                                    value="${participante.id}" name="atleta.id" />
-                                            <li
-                                                    class="list-group-item justify-content-between"
-                                                    style="padding-left: 0px;">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <img
-                                                                class="img-circle"
-                                                                src="${ctx}/resources/imagens/icons_map/futebol.png"
-                                                                width="60px" height="60px" />
-                                                    </div>
-                                                    <div class="col-md-7">
-                                                        <a href="${linkTo[AtletaController].perfil}?id=${participante.id}">
-                                                            <h4>${participante.nome}</h4>
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md-2"
-                                                         style="margin-left: 0px; padding-left: 0px">
+                                        <li
+                                                class="list-group-item justify-content-between"
+                                                style="padding-left: 0px;">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <img
+                                                            class="img-circle"
+                                                            src="${ctx}/resources/imagens/icons_map/futebol.png"
+                                                            width="60px" height="60px" />
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <a href="${linkTo[AtletaController].perfil}?id=${participante.id}">
+                                                        <h4>${participante.nome}</h4>
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-2"
+                                                     style="margin-left: 0px; padding-left: 0px">
+                                                    <c:if test="${usuarioLogado.usuario.id != participante.id}">
                                                         <button class="btn btn-link"><i class="fa fa-envelope"></i></button>
+                                                    </c:if>
+                                                    <c:if test="${usuarioLogado.usuario.id == evento.organizador.id}">
                                                         <form action="${ctx}/evento">
                                                             <a href="${linkTo[EventoController].deletarAtleta}?id=${evento.id}&login=${participante.login}" class="
-															btnbtn-primary">remover</a>
+                                                        btnbtn-primary">remover</a>
                                                         </form>
-
-                                                    </div>
+                                                    </c:if>
                                                 </div>
-                                            </li>
-                                        </c:if>
+                                            </div>
+                                        </li>
                                     </c:forEach>
                                 </ul>
                             </div>

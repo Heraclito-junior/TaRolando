@@ -31,21 +31,28 @@
             <div class="panel-body">
 
                 <div class="row">
-                    <c:forEach items="${espacos}" var="espaco">
-                        <div class="col-sm-6 col-md-4">
-                            <div class="thumbnail">
-                                <img src="${ctx}/resources/imagens/icons_map/surf.png" width="200px" alt="Estabelecimento">
-                                <div class="caption">
-                                    <h3>${espaco.nome}</h3>
-                                    <p>Rua das Dunas, Natal-RN, Nova Descoberta, 1550, 590100-100</p>
-                                    <p class="text-center btn-block">
-                                        <a href="${linkTo[EspacoController].detalhar}?id=${espaco.id}"
-                                           class="btn btn-primary btn-block" role="button">Entrar</a>
-                                    </p>
+                    <c:choose>
+                        <c:when test="${espacos.size() == 0}">
+                            <a class="btn btn-info" style="margin-bottom: 16px;" href="${linkTo[EspacoController].form}">Cadastrar</a>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach items="${espacos}" var="espaco">
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="thumbnail">
+                                        <img src="${ctx}/resources/imagens/icons_map/surf.png" width="200px" alt="Estabelecimento">
+                                        <div class="caption">
+                                            <h3>${espaco.nome}</h3>
+                                            <p>Rua das Dunas, Natal-RN, Nova Descoberta, 1550, 590100-100</p>
+                                            <p class="text-center btn-block">
+                                                <a href="${linkTo[EspacoController].detalhar}?id=${espaco.id}"
+                                                   class="btn btn-primary btn-block" role="button">Entrar</a>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </c:forEach>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>

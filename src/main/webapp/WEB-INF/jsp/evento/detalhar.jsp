@@ -24,7 +24,7 @@
     </jsp:attribute>
 
 	<jsp:body>
-        <jsp:include page="/WEB-INF/jsp/errors/msgError.jsp"/>
+        <jsp:include page="/WEB-INF/jsp/errors/msgError.jsp" />
     
         <input type="hidden" name="evento.id" value="${evento.id}">
         <div class="panel painel-sisint">
@@ -135,9 +135,10 @@
                             <div class="col-md-4 order-md-2 mb-4">
                                 <h4 class="text-center"
 									style="margin-top: 0px; padding-top: 0px;">
-                                    <a href="${linkTo[ChatController].chat}?id=${evento.id}">Chat do Grupo</a><br>
-									<button class="btn btn-link"
-												data-toggle="modal" data-target="#addParticipante">
+                                    <a
+										href="${linkTo[ChatController].chat}?id=${evento.id}">Chat do Grupo</a><br>
+									<button class="btn btn-link" data-toggle="modal"
+										data-target="#addParticipante">
 												Adicionar Atleta
 											</button>
                                     <span class="text-muted bold">Atletas Participantes</span>
@@ -158,30 +159,39 @@
                                     <c:forEach
 										items="${evento.participantes}" var="participante">
                                             <input type="hidden"
-                                                   value="${participante.id}" name="atleta.id" />
+											value="${participante.id}" name="atleta.id" />
                                         <li
-                                                class="list-group-item justify-content-between"
-                                                style="padding-left: 0px;">
+											class="list-group-item justify-content-between"
+											style="padding-left: 0px;">
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <img
-                                                            class="img-circle"
-                                                            src="${ctx}/resources/imagens/icons_map/futebol.png"
-                                                            width="60px" height="60px" />
+														class="img-circle"
+														src="${ctx}/resources/imagens/icons_map/futebol.png"
+														width="60px" height="60px" />
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <a href="${linkTo[AtletaController].perfil}?id=${participante.id}">
+                                                    <a
+														href="${linkTo[AtletaController].perfil}?id=${participante.id}">
                                                         <h4>${participante.nome}</h4>
                                                     </a>
                                                 </div>
                                                 <div class="col-md-2"
-                                                     style="margin-left: 0px; padding-left: 0px">
-                                                    <c:if test="${usuarioLogado.usuario.id != participante.id}">
-                                                        <button class="btn btn-link"><i class="fa fa-envelope"></i></button>
+													style="margin-left: 0px; padding-left: 0px">
+                                                    <c:if
+														test="${usuarioLogado.usuario.id != participante.id}">
+                                                        <button
+															class="btn btn-link">
+															<i class="fa fa-envelope"></i>
+														</button>
                                                     </c:if>
-                                                    <c:if test="${usuarioLogado.usuario.id == evento.organizador.id}">
-                                                        <form action="${ctx}/evento">
-                                                            <a href="${linkTo[EventoController].deletarAtleta}?id=${evento.id}&login=${participante.login}" class="
+                                                    <c:if
+														test="${usuarioLogado.usuario.id == evento.organizador.id}">
+                                                        <form
+															action="${ctx}/evento">
+                                                            <a
+																href="${linkTo[EventoController].deletarAtleta}?id=${evento.id}&login=${participante.login}"
+																class="
                                                         btnbtn-primary">remover</a>
                                                         </form>
                                                     </c:if>
@@ -197,13 +207,41 @@
 
                 <button href="" class="btn btn-default"
 					onclick="history.back(1)">Voltar</button>
+					
+				</div>
+				<div>
+				<c:if test="${usuarioLogado.retornarUsuario() == evento.organizador.id}">
+					<form id="formAtividade" action="${linkTo[EventoController].criarAlerta}" method="post">
+
+					
+					<input type="hidden" name="id" value="${evento.id}" />
+					
+					
+					<div class="form-group col-md-4">
+                            <label for="login_participante">Mensagem:</label>
+                                <input type="text" name="login"
+							class="form-control" required value=""
+							id="login_participanteAlerta"
+							placeholder="Digite o login do Atleta" />
+                        </div>
+                        <div class="form-group col-md-4">
+                        <label for="login_participante">  </label>
+                	<button class="btn btn-primary" type="submit">Mandar Alerta</button>
+                </div>
+                                   
+                                   
+                    
+                     
+					</form>
+					</c:if>
             </div>
 
             <!-- Large modal -->
             <div id="addParticipante" class="modal fade" role="dialog">
                 <div class="modal-dialog">
 <%--                    <form action="${linkTo[EventoController].convidarAtleta}?id=${evento.id}&login=${atleta.login}" method="post">--%>
-                        <input type="hidden" name="id" value="${evento.id}" />
+                        <input type="hidden" name="id"
+						value="${evento.id}" />
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close"
@@ -246,13 +284,14 @@
 								data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-                            <h4 class="modal-title">Adicionar Atleta</h4>
+                            <h4 class="modal-title">Adicionar Atleta2</h4>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="login_participante">Login do Atleta:</label>
+                                <label for="login_participanteAlerta">Login do Atletasss:</label>
                                 <input type="text" name="login"
-									class="form-control" required value="" id="login_participanteAlerta"
+									class="form-control" required value=""
+									id="login_participanteAlerta"
 									placeholder="Digite o login do Atleta" />
                             </div>
                         </div>
@@ -271,7 +310,6 @@
             </div>
             
             
-            </form>
         </div>
     </jsp:body>
 </tags:layoutSidebar>

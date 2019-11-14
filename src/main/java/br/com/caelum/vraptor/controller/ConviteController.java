@@ -47,7 +47,7 @@ public class ConviteController extends ControladorTaRolando<Convite> {
 
     @Transacional
     public void aceitar(Long id) {
-        conviteNegocio.aceitar(id);
+        conviteNegocio.aceitar(id);		
         resultado.redirectTo(this).meusConvites();
     }
 

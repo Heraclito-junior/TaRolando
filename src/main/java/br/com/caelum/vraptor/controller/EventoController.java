@@ -103,6 +103,8 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	
 	public void criarAlerta(Long id, String login) {
 		negocio.criarAlerta(id,login);
+		this.resultado.redirectTo(this).detalhar(id);
+
 
 	}
 	public void editar(Long id) {		

@@ -16,7 +16,7 @@ public abstract class Evento extends Entidade {
     protected String dataFim;
     protected String horaInicio;
     protected String horaFim;
-    protected String frequencia;
+//    protected String frequencia;
     protected String latitude;
     protected String longitude;
 //    protected int numVagasMin;
@@ -136,13 +136,13 @@ public abstract class Evento extends Entidade {
         return horaFim;
     }
 
-    public String getFrequencia() {
-        return frequencia;
-    }
-
-    public void setFrequencia(String frequencia) {
-        this.frequencia = frequencia;
-    }
+//    public String getFrequencia() {
+//        return frequencia;
+//    }
+//
+//    public void setFrequencia(String frequencia) {
+//        this.frequencia = frequencia;
+//    }
 
     public String getLatitude() {
         return latitude;

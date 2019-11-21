@@ -30,7 +30,7 @@ public class EventoAjudandoJpaDao extends EntidadeJpaDao<EventoAjudando> impleme
 
     @Override
     public List<EventoAjudando> meusEventos() {
-        Query query = this.manager.createQuery("SELECT e FROM Evento e WHERE (:atleta MEMBER OF e.participantes OR " +
+        Query query = this.manager.createQuery("SELECT e FROM EventoAjudando e WHERE (:atleta MEMBER OF e.participantes OR " +
                                                   "e.organizador.id = :id) AND e.deletado = false")
                 .setParameter("atleta", usuarioLogado.getUsuario())
                 .setParameter("id", usuarioLogado.getUsuario().getId());
@@ -40,7 +40,7 @@ public class EventoAjudandoJpaDao extends EntidadeJpaDao<EventoAjudando> impleme
     
     @Override
     public List<AlertaTabela> meusAlertas() {
-        Query query = this.manager.createNativeQuery("SELECT a.nome, b.participantes_id,c.titulo FROM Alerta as a INNER JOIN evento_atleta as b on a.evento_id = b.evento_id and b.participantes_id=:atleta INNER JOIN evento as c on b.evento_id = c.id GROUP BY a.nome,b.participantes_id,c.titulo");
+        Query query = this.manager.createNativeQuery("SELECT a.nome, b.participantes_id,c.titulo FROM Alerta as a INNER JOIN evento_atleta as b on a.evento_id = b.evento_id and b.participantes_id=:atleta INNER JOIN EventoAjudando as c on b.evento_id = c.id GROUP BY a.nome,b.participantes_id,c.titulo");
 
         query.setParameter("atleta", usuarioLogado.getUsuario().getId());
 //        Object[] resultado = (Object[]) query.getResultList();

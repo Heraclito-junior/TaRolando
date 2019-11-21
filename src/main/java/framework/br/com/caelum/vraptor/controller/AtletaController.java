@@ -10,7 +10,7 @@ import framework.br.com.caelum.vraptor.model.Atleta;
 import framework.br.com.caelum.vraptor.model.Evento;
 import framework.br.com.caelum.vraptor.model.TipoAtleta;
 import framework.br.com.caelum.vraptor.negocio.AtletaNegocio;
-import framework.br.com.caelum.vraptor.negocio.EventoNegocio;
+//import framework.br.com.caelum.vraptor.negocio.EventoNegocio;
 //import framework.br.com.caelum.vraptor.negocio.HorarioNegocio;
 import framework.br.com.caelum.vraptor.util.Criptografia;
 import framework.br.com.caelum.vraptor.util.OpcaoSelect;
@@ -18,6 +18,8 @@ import framework.br.com.caelum.vraptor.util.mensagemCustominizada;
 import framework.br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
 
 import javax.inject.Inject;
+
+import ajudando.negocio.EventoAjudandoNegocio;
 
 @Controller
 public class AtletaController extends ControladorTaRolando<Atleta> {
@@ -33,7 +35,7 @@ public class AtletaController extends ControladorTaRolando<Atleta> {
 //	private HorarioNegocio horarioNegocio;
 
 	@Inject
-	EventoNegocio eventoNegocio;
+	EventoAjudandoNegocio eventoNegocio;
 
 	@Deprecated
 	public AtletaController() {

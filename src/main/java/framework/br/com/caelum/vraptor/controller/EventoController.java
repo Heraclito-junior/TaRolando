@@ -9,17 +9,20 @@ import br.com.caelum.vraptor.validator.Validator;
 import framework.br.com.caelum.vraptor.anotacoes.Transacional;
 import framework.br.com.caelum.vraptor.dao.EventoDAO;
 import framework.br.com.caelum.vraptor.model.Evento;
-import framework.br.com.caelum.vraptor.negocio.EventoNegocio;
+import framework.br.com.caelum.vraptor.model.EventoAjudando;
+//import framework.br.com.caelum.vraptor.negocio.EventoNegocio;
 import framework.br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
 import framework.br.com.caelum.vraptor.util.exception.VagasInvalidasException;
 
 import javax.inject.Inject;
 
+import ajudando.negocio.EventoAjudandoNegocio;
+
 @Path("/evento")
 @Controller
 public class EventoController extends ControladorTaRolando<Evento> {
 
-	private EventoNegocio negocio;
+	private EventoAjudandoNegocio negocio;
 	private Validator validator;
 
 	@Deprecated
@@ -28,7 +31,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	}
 
 	@Inject
-	public EventoController(Result resultado, EventoNegocio negocio, Validator validator) {
+	public EventoController(Result resultado, EventoAjudandoNegocio negocio, Validator validator) {
 		super(resultado);
 		this.negocio = negocio;
 		this.validator = validator;
@@ -86,11 +89,10 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	}
 	@Transacional
 	@Post
-	public void salvar(Evento evento) {
+	public void salvar(EventoAjudando evento) {
 		try {
 		this.validator.onErrorRedirectTo(this).form();
 		negocio.definirAdministradorESalvar(evento);
-//		this.resultado.redirectTo(this).lista();
 		}catch(VagasInvalidasException e) {
             resultado.include("mensagem", new SimpleMessage("error", e.getMessage()));
 			this.resultado.redirectTo(this).form();
@@ -112,8 +114,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
         Evento evento = this.negocio.detalhar(id);		
         this.resultado.include("evento", evento);		
         this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());		
-//        this.resultado.redirectTo(this).form();		
-//        this.resultado.redirectTo(this).form();		
+	
     }
 	
 	
@@ -122,7 +123,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
 
 	@Transacional		
 	@Post		
-	public void modificar(Evento evento) {		
+	public void modificar(EventoAjudando evento) {		
 		evento.setOrganizador(this.negocio.detalhar(evento.getId()).getOrganizador());		
 		this.validator.onErrorRedirectTo(this).form();		
 		negocio.modificarEvento(evento);		

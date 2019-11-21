@@ -68,13 +68,13 @@ public abstract class ConviteNegocio {
         conviteDAO.salvar(convite);
     }
 
-    public List<Convite> meusConvites() {
-        return conviteDAO.meusConvites();
-    }
-
-    public List<Convite> meusConvitesEnviados() {
-        return conviteDAO.meusConvitesEnviados();
-    }
+//    public List<Convite> meusConvites() {
+//        return conviteDAO.meusConvites();
+//    }
+//
+//    public List<Convite> meusConvitesEnviados() {
+//        return conviteDAO.meusConvitesEnviados();
+//    }
 
 
 }

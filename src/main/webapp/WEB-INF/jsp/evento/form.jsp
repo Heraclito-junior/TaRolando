@@ -130,8 +130,16 @@
                         </div>
 
                         
-                        
-                        
+                        <div class="form-group col-md-2">
+                            <label for="num_vagas_min">Meta de Doações </label>
+                            <input id="num_vagas_min" class="form-control" name="evento.metaDoacoes" min="0"
+                                   type="number" value="${evento.metaDoacoes}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="num_vagas_max">Meta de Voluntários </label>
+                            <input id="num_vagas_max" class="form-control" name="evento.metaVoluntarios" min="0"
+                                   type="number" value="${evento.metaVoluntarios}">
+                        </div>
                         <div class="form-group col-md-2">
                             <label for="horario_inicio">Horário de Início </label>
                             <input id="horario_inicio" class="form-control timePickerInicio" name="evento.horaInicio"

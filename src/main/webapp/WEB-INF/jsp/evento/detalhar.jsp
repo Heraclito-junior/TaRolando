@@ -42,28 +42,7 @@
 										class="form-control" minlength="5" name="evento.titulo"
 										type="text" required value="${evento.titulo}" disabled>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="tipo_evento">Tipo de Atividade </label>
-                                    <input id="tipo_evento"
-										class="form-control" minlength="5" name="evento.titulo"
-										type="text" required value="${evento.tipoEsporte.nome}"
-										disabled>
-                                    <!--  
-                                    <select type="text" class="form-control" id="tipo_evento" placeholder="Tipo de Atividade"
-                                            required disabled
-                                            name="evento.tipoEsporte.id">
-                                        <option value=""></option>
-                                        <c:forEach items="${esportes}" var="e">
-                                            <c:if test="${e.valor == evento.tipoEsporte.id}">
-                                                <option value="${e.valor}" selected="true">${e.chave}</option>
-                                            </c:if>
-                                            <c:if test="${!(e.valor == evento.tipoEsporte.id)}">
-                                                <option value="${e.valor}">${e.chave}</option>
-                                            </c:if>
-                                        </c:forEach>
-                                    </select>
-                                    -->
-                                </div>
+                                
                                 <div class="form-group col-md-3">
                                     <label for="dataInicio_evento">Data de Início</label>
                                     <input type="text"
@@ -91,17 +70,17 @@
 										type="time" value="${evento.horaFim}" required disabled>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="num_vagas_min">Mín. de Vagas </label>
+                                    <label for="num_vagas_min">Meta de Doações </label>
                                     <input id="num_vagas_min"
 										class="form-control" name="evento.numVagasMin" min="0"
-										type="number" value="${evento.numVagasMin}" disabled>
+										type="number" value="${evento.metaDoacoes}" disabled>
                                 </div>
                                 <div
 									class="form-group col-md-2 col-md-offset-2">
-                                    <label for="num_vagas_max">Máx. de Vagas </label>
+                                    <label for="num_vagas_max">Meta de Voluntários </label>
                                     <input id="num_vagas_max"
 										class="form-control" name="evento.numVagasMax" min="0"
-										type="number" value="${evento.numVagasMax}" disabled>
+										type="number" value="${evento.metaVoluntarios}" disabled>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <a href="#">Integrar uma Reserva ao Evento</a>

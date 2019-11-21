@@ -2,8 +2,6 @@ package ajudando.negocio;
 
 import framework.br.com.caelum.vraptor.dao.AtletaDAO;
 import framework.br.com.caelum.vraptor.dao.EsporteDAO;
-import framework.br.com.caelum.vraptor.dao.EventoAjudandoDAO;
-import framework.br.com.caelum.vraptor.dao.EventoAjudandoJpaDao;
 import framework.br.com.caelum.vraptor.dao.EventoDAO;
 import framework.br.com.caelum.vraptor.dao.EventoJpaDao;
 import framework.br.com.caelum.vraptor.model.Alerta;
@@ -17,6 +15,10 @@ import framework.br.com.caelum.vraptor.util.exception.AtletaInexistenteException
 import framework.br.com.caelum.vraptor.util.exception.VagasInvalidasException;
 
 import javax.inject.Inject;
+
+import ajudando.dao.EventoAjudandoDAO;
+import ajudando.dao.EventoAjudandoJpaDao;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

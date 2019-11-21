@@ -4,11 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
-@MappedSuperclass
-public class Alerta extends Entidade{
+@Entity
+public class AlertaAjudando extends Alerta{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,14 +15,15 @@ public class Alerta extends Entidade{
 
     private String nome;
     
-    
+    @OneToOne
+    private EventoAjudando eventoAjudando;
     
     @OneToOne
     private Atleta atleta;
     
 
     @Deprecated
-    public Alerta() {
+    public AlertaAjudando() {
     }
     
     @Override
@@ -36,7 +36,7 @@ public class Alerta extends Entidade{
         this.id = id;
     }
 
-    public Alerta(String nome) {
+    public AlertaAjudando(String nome) {
         this.nome = nome;
     }
 

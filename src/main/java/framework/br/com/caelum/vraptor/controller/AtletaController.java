@@ -11,7 +11,7 @@ import framework.br.com.caelum.vraptor.model.Evento;
 import framework.br.com.caelum.vraptor.model.TipoAtleta;
 import framework.br.com.caelum.vraptor.negocio.AtletaNegocio;
 import framework.br.com.caelum.vraptor.negocio.EventoNegocio;
-import framework.br.com.caelum.vraptor.negocio.HorarioNegocio;
+//import framework.br.com.caelum.vraptor.negocio.HorarioNegocio;
 import framework.br.com.caelum.vraptor.util.Criptografia;
 import framework.br.com.caelum.vraptor.util.OpcaoSelect;
 import framework.br.com.caelum.vraptor.util.mensagemCustominizada;
@@ -29,8 +29,8 @@ public class AtletaController extends ControladorTaRolando<Atleta> {
 	private String senha;
 	private String senhaNovamente;
 
-	@Inject
-	private HorarioNegocio horarioNegocio;
+//	@Inject
+//	private HorarioNegocio horarioNegocio;
 
 	@Inject
 	EventoNegocio eventoNegocio;
@@ -91,8 +91,8 @@ public class AtletaController extends ControladorTaRolando<Atleta> {
 	}
 
 	public void minhasReservas() {
-		resultado.include("horarios", horarioNegocio.minhasReservas());
-		resultado.include("eventos", eventoNegocio.geraListaOpcoesEventos());
+//		resultado.include("horarios", horarioNegocio.minhasReservas());
+//		resultado.include("eventos", eventoNegocio.geraListaOpcoesEventos());
 	}
 
 	private String criptografarSenha(String senha) {

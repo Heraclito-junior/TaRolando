@@ -4,43 +4,43 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class Evento extends Entidade {
+@MappedSuperclass
+public abstract class Evento extends Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
-    private String titulo;
-    private String dataInicio;
-    private String dataFim;
-    private String horaInicio;
-    private String horaFim;
-    private String frequencia;
-    private String latitude;
-    private String longitude;
-    private int numVagasMin;
-    private int numVagasMax;
-    private String descricao;
-    private boolean deletado;
+    protected String titulo;
+    protected String dataInicio;
+    protected String dataFim;
+    protected String horaInicio;
+    protected String horaFim;
+    protected String frequencia;
+    protected String latitude;
+    protected String longitude;
+//    protected int numVagasMin;
+//    protected int numVagasMax;
+    protected String descricao;
+    protected boolean deletado;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Esporte tipoEsporte;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    protected Esporte tipoEsporte;
 
     @OneToOne
-    private Atleta organizador;
+    protected Atleta organizador;
 
     @ManyToMany(cascade = CascadeType.ALL )
-    private List<Atleta> participantes;
+    protected List<Atleta> participantes;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Endereco localizacao;
+    protected Endereco localizacao;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Chat chat;
+    protected Chat chat;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Horario horario;
+    protected Horario horario;
 
 //    @ManyToOne
 //    private Convite convite;
@@ -88,13 +88,13 @@ public class Evento extends Entidade {
         this.participantes = participantes;
     }
 
-    public Esporte getTipoEsporte() {
-        return tipoEsporte;
-    }
-
-    public void setTipoEsporte(Esporte tipoEsporte) {
-        this.tipoEsporte = tipoEsporte;
-    }
+//    public Esporte getTipoEsporte() {
+//        return tipoEsporte;
+//    }
+//
+//    public void setTipoEsporte(Esporte tipoEsporte) {
+//        this.tipoEsporte = tipoEsporte;
+//    }
 
     public Endereco getLocalizacao() {
         return localizacao;
@@ -160,21 +160,21 @@ public class Evento extends Entidade {
         this.longitude = longitude;
     }
 
-    public int getNumVagasMin() {
-        return numVagasMin;
-    }
-
-    public void setNumVagasMin(int numVagasMin) {
-        this.numVagasMin = numVagasMin;
-    }
-
-    public int getNumVagasMax() {
-        return numVagasMax;
-    }
-
-    public void setNumVagasMax(int numVagasMax) {
-        this.numVagasMax = numVagasMax;
-    }
+//    public int getNumVagasMin() {
+//        return numVagasMin;
+//    }
+//
+//    public void setNumVagasMin(int numVagasMin) {
+//        this.numVagasMin = numVagasMin;
+//    }
+//
+//    public int getNumVagasMax() {
+//        return numVagasMax;
+//    }
+//
+//    public void setNumVagasMax(int numVagasMax) {
+//        this.numVagasMax = numVagasMax;
+//    }
 
     public String getDescricao() {
         return descricao;

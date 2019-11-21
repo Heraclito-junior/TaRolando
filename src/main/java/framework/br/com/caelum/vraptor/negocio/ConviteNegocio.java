@@ -12,11 +12,11 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
-public class ConviteNegocio {
+public abstract class ConviteNegocio {
 
-    private ConviteDAO conviteDAO;
-    private AtletaDAO atletaDAO;
-    private EventoDAO eventoDAO;
+    protected ConviteDAO conviteDAO;
+    protected AtletaDAO atletaDAO;
+    protected EventoDAO eventoDAO;
 
     @Deprecated
     public ConviteNegocio() { this(null, null, null); }
@@ -31,27 +31,28 @@ public class ConviteNegocio {
 
     public void convidar(Long id, String login) throws AtletaInexistenteException {
 
-        Evento evento = eventoDAO.buscarPorId(id);
-        Atleta convidado = atletaDAO.buscarPorLogin(login);
-
-        if (convidado == null) {
-            throw new AtletaInexistenteException("Atleta não existe");
-        }
-        if (!evento.getParticipantes().contains(convidado)) {
-            Convite convite = new Convite(evento, convidado);
-//            convite.getEvento().getParticipantes().add(convidado.get());
-            conviteDAO.salvar(convite);
-        } else {
-
-        }
+//        Evento evento = eventoDAO.buscarPorId(id);
+//        Atleta convidado = atletaDAO.buscarPorLogin(login);
+//
+//        if (convidado == null) {
+//            throw new AtletaInexistenteException("Atleta não existe");
+//        }
+//        if (!evento.getParticipantes().contains(convidado)) {
+//            Convite convite = new Convite(evento, convidado);
+//            
+//            
+//            conviteDAO.salvar(convite);
+//        } else {
+//
+//        }
     }
 
     public void aceitar(Long id) {
-        Convite convite = conviteDAO.buscarPorId(id);
-        convite.getEvento().getParticipantes().add(convite.getConvidado());
-        convite.getConvidado().getEventos().add(convite.getEvento());
-        convite.setAceito(true);
-        eventoDAO.salvar(convite.getEvento());
+//        Convite convite = conviteDAO.buscarPorId(id);
+//        convite.getEvento().getParticipantes().add(convite.getConvidado());
+//        convite.getConvidado().getEventos().add(convite.getEvento());
+//        convite.setAceito(true);
+//        eventoDAO.salvar(convite.getEvento());
     }
 
     public void rejeitar(Long id) {

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class EventoJpaDao extends EntidadeJpaDao<Evento> implements EventoDAO {
+public class EventoAjudandoJpaDao extends EntidadeJpaDao<EventoAjudando> implements EventoAjudandoDAO {
 
     @Inject
     private AtletaLogado atletaLogado;
@@ -19,23 +19,22 @@ public class EventoJpaDao extends EntidadeJpaDao<Evento> implements EventoDAO {
     private UsuarioLogado usuarioLogado;
 
     @Deprecated
-    public EventoJpaDao() { this(null, null); }
+    public EventoAjudandoJpaDao() { this(null, null); }
 
     @Inject
-    public EventoJpaDao(EntityManager entityManager, UsuarioLogado usuarioLogado) {
-        super(entityManager, Evento.class);
+    public EventoAjudandoJpaDao(EntityManager entityManager, UsuarioLogado usuarioLogado) {
+        super(entityManager, EventoAjudando.class);
         this.usuarioLogado = usuarioLogado;
     }
 
 
-
-	@Override
-    public List<Evento> meusEventos() {
+    @Override
+    public List<EventoAjudando> meusEventos() {
         Query query = this.manager.createQuery("SELECT e FROM Evento e WHERE (:atleta MEMBER OF e.participantes OR " +
                                                   "e.organizador.id = :id) AND e.deletado = false")
                 .setParameter("atleta", usuarioLogado.getUsuario())
                 .setParameter("id", usuarioLogado.getUsuario().getId());
-        List<Evento> tarefas = query.getResultList();
+        List<EventoAjudando> tarefas = query.getResultList();
         return tarefas;
     }
     
@@ -60,6 +59,22 @@ public class EventoJpaDao extends EntidadeJpaDao<Evento> implements EventoDAO {
         return tarefas;
 
     }
+    
+    public Optional<EventoAjudando> buscarId(Long id) {
+        EntityTransaction txn = manager.getTransaction();
+        txn.begin();
+
+        
+        Query query = this.manager.createNativeQuery("select FROM EventoAjudando WHERE id=(:evento)");
+
+//        Query query = this.manager.createNativeQuery("INSERT INTO evento_atleta (evento_id, participantes_id) VALUES (:evento, :atleta)");
+        query.setParameter("id", id);
+
+        return query.setMaxResults(1).getResultList().stream().findFirst();
+
+    }
+    
+    
 
     public void removerAtleta(Evento evento, Atleta atleta) {
         EntityTransaction txn = manager.getTransaction();

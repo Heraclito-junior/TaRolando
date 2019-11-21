@@ -7,7 +7,7 @@ import framework.br.com.caelum.vraptor.model.StatusPagamento;
 import framework.br.com.caelum.vraptor.negocio.AtividadeNegocio;
 import framework.br.com.caelum.vraptor.negocio.EspacoNegocio;
 import framework.br.com.caelum.vraptor.negocio.EsporteNegocio;
-import framework.br.com.caelum.vraptor.negocio.HorarioNegocio;
+//import framework.br.com.caelum.vraptor.negocio.HorarioNegocio;
 import framework.br.com.caelum.vraptor.util.OpcaoSelect;
 
 import javax.inject.Inject;
@@ -17,17 +17,21 @@ public class AtividadeController extends ControladorTaRolando<Atividade> {
 
     private AtividadeNegocio atividadeNegocio;
     private EspacoNegocio espacoNegocio;
-    private HorarioNegocio horarioNegocio;
+//    private HorarioNegocio horarioNegocio;
 
+//    @Deprecated
+//    public AtividadeController() { this(null, null, null, null); }
     @Deprecated
-    public AtividadeController() { this(null, null, null, null); }
+    public AtividadeController() { this(null, null, null); }
 
+    
+//    public AtividadeController(Result resultado, AtividadeNegocio atividadeNegocio, EspacoNegocio espacoNegocio, HorarioNegocio horarioNegocio) {
     @Inject
-    public AtividadeController(Result resultado, AtividadeNegocio atividadeNegocio, EspacoNegocio espacoNegocio, HorarioNegocio horarioNegocio) {
+    public AtividadeController(Result resultado, AtividadeNegocio atividadeNegocio, EspacoNegocio espacoNegocio) {
         super(resultado);
         this.atividadeNegocio = atividadeNegocio;
         this.espacoNegocio = espacoNegocio;
-        this.horarioNegocio = horarioNegocio;
+//        this.horarioNegocio = horarioNegocio;
     }
 
     @Path("/form")
@@ -57,8 +61,8 @@ public class AtividadeController extends ControladorTaRolando<Atividade> {
 
     @Get
     public void detalhar(Long id) {
-        resultado.include("atividade", atividadeNegocio.detalhar(id));
-        resultado.include("horarios", horarioNegocio.meusHorarios(id));
+//        resultado.include("atividade", atividadeNegocio.detalhar(id));
+//        resultado.include("horarios", horarioNegocio.meusHorarios(id));
     }
 
     @Get
@@ -73,8 +77,8 @@ public class AtividadeController extends ControladorTaRolando<Atividade> {
 
     @Get
     public void visualizar(Long idAtividade) {
-        resultado.include("atividade", atividadeNegocio.detalhar(idAtividade));
-        resultado.include("horarios", horarioNegocio.meusHorariosLivres(idAtividade));
+//        resultado.include("atividade", atividadeNegocio.detalhar(idAtividade));
+//        resultado.include("horarios", horarioNegocio.meusHorariosLivres(idAtividade));
     }
 }
 

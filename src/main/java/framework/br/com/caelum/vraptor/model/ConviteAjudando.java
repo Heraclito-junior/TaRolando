@@ -3,25 +3,27 @@ package framework.br.com.caelum.vraptor.model;
 import javax.persistence.*;
 
 @MappedSuperclass
-public abstract class Convite extends Entidade {
+public class ConviteAjudando extends Convite {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    protected boolean aceito;
-    protected boolean deletado;
+    private boolean aceito;
+    private boolean deletado;
 
     @ManyToOne
-    protected Atleta convidado;
+    private Atleta convidado;
 
-    
+    @ManyToOne
+    private EventoAjudando eventoAjudando;
 
     @Deprecated
-    public Convite() {
+    public ConviteAjudando() {
     }
 
-    public Convite( Atleta convidado){
+    public ConviteAjudando(EventoAjudando evento, Atleta convidado){
+        this.eventoAjudando = evento;
         this.convidado = convidado;
     }
 
@@ -51,6 +53,13 @@ public abstract class Convite extends Entidade {
         this.convidado = convidado;
     }
 
+    public EventoAjudando getEvento() {
+        return eventoAjudando;
+    }
+
+    public void setEvento(EventoAjudando evento) {
+        this.eventoAjudando = evento;
+    }
 
     public boolean isDeletado() {
         return deletado;

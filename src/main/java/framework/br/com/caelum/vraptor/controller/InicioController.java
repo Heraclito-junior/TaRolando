@@ -59,11 +59,11 @@ public class InicioController extends Controlador {
                 jsonObject.addProperty("horaFim", evento.getHoraFim());
                 jsonObject.addProperty("latitude", evento.getLatitude());
                 jsonObject.addProperty("longitude", evento.getLongitude());
-                jsonObject.addProperty("numVagasMax", evento.getNumVagasMax());
-                jsonObject.addProperty("numVagasMin", evento.getNumVagasMin());
+//                jsonObject.addProperty("numVagasMax", evento.getNumVagasMax());
+//                jsonObject.addProperty("numVagasMin", evento.getNumVagasMin());
                 jsonObject.addProperty("dataFim", evento.getDataFim());
                 jsonObject.addProperty("descricao", evento.getDescricao());
-                jsonObject.addProperty("tipoEsporte", evento.getTipoEsporte().getIcone());
+//                jsonObject.addProperty("tipoEsporte", evento.getTipoEsporte().getIcone());
                 listaEventos.add(jsonObject);
             }
             this.resultado.use(Results.json()).withoutRoot().from(listaEventos).recursive().serialize();

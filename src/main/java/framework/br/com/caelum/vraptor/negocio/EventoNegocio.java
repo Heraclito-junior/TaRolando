@@ -2,6 +2,7 @@ package framework.br.com.caelum.vraptor.negocio;
 
 import framework.br.com.caelum.vraptor.dao.AtletaDAO;
 import framework.br.com.caelum.vraptor.dao.EsporteDAO;
+import framework.br.com.caelum.vraptor.dao.EventoAjudandoJpaDao;
 import framework.br.com.caelum.vraptor.dao.EventoDAO;
 import framework.br.com.caelum.vraptor.dao.EventoJpaDao;
 import framework.br.com.caelum.vraptor.model.Alerta;
@@ -26,6 +27,10 @@ public class EventoNegocio {
 	private EventoDAO dao;
 	@Inject
 	private EventoJpaDao daoJpa;
+	
+	@Inject
+	private EventoAjudandoJpaDao daoJpa2;
+	
 	@Inject
 	private AtletaDAO atletaDAO;
 
@@ -58,9 +63,9 @@ public class EventoNegocio {
 		if (evento.getParticipantes() == null) {
 			evento.setParticipantes(new ArrayList<>());
 		}
-		if(evento.getNumVagasMin()>evento.getNumVagasMax()) {
-			throw new VagasInvalidasException("Numero de vagas minimas nao pode ser superior as maximas");
-		}
+//		if(evento.getNumVagasMin()>evento.getNumVagasMax()) {
+//			throw new VagasInvalidasException("Numero de vagas minimas nao pode ser superior as maximas");
+//		}
 		evento.setOrganizador((Atleta) this.usuarioLogado.getUsuario());
 //		evento.getParticipantes().add((Atleta) usuarioLogado.getUsuario());
 		this.dao.salvar(evento);

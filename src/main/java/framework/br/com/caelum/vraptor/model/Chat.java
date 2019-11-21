@@ -18,7 +18,7 @@ public class Chat extends Entidade {
     private Atleta administrador;
 
     @OneToOne
-    private Evento evento;
+    private EventoAjudando evento;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Mensagem> mensagens;
@@ -61,7 +61,7 @@ public class Chat extends Entidade {
         return evento;
     }
 
-    public void setEvento(Evento evento) {
+    public void setEvento(EventoAjudando evento) {
         this.evento = evento;
     }
 

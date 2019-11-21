@@ -12,8 +12,7 @@ public class EventoAjudando extends Evento {
 
     
 	private Double metaDoacoes;
-    private Double metaVoluntarios;
-    private Double doacoesEfetivadas;
+    private int metaVoluntarios;
 
     public EventoAjudando() {
 		super();
@@ -27,21 +26,14 @@ public class EventoAjudando extends Evento {
 		this.metaDoacoes = metaDoacoes;
 	}
 
-	public Double getMetaVoluntarios() {
+	public int getMetaVoluntarios() {
 		return metaVoluntarios;
 	}
 
-	public void setMetaVoluntarios(Double metaVoluntarios) {
+	public void setMetaVoluntarios(int metaVoluntarios) {
 		this.metaVoluntarios = metaVoluntarios;
 	}
 
-	public Double getDoacoesEfetivadas() {
-		return doacoesEfetivadas;
-	}
-
-	public void setDoacoesEfetivadas(Double doacoesEfetivadas) {
-		this.doacoesEfetivadas = doacoesEfetivadas;
-	}
     
 	
 	

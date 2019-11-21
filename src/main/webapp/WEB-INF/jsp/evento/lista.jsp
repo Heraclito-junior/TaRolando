@@ -62,11 +62,9 @@
                         <thead>
                         <tr>
                             <th>Título</th>
-                            <th>Tipo de <br>Atividade</th>
                             <th>Data do Evento</th>
                             <th>Horário <br> Inicial</th>
                             <th>Horário <br> Final</th>
-                            <th>Num de<br>Vagas</th>
                             <th>Organizador</th>
                             <th>Ações</th>
                         </tr>
@@ -75,11 +73,9 @@
                         <c:forEach items="${eventos}" var="evento">
                             <tr>
                                 <td>${evento.titulo}</td>
-                                <td>${evento.tipoEsporte.nome}</td>
                                 <td>${evento.dataInicio}</td>
                                 <td>${evento.horaInicio}</td>
                                 <td>${evento.horaFim}</td>
-                                <td>${evento.numVagasMax}</td>
                                 <td>${evento.organizador.nome}</td>
                                 <td>
                                     <a title="Detalhar" href="${linkTo[EventoController].detalhar}?id=${evento.id}">

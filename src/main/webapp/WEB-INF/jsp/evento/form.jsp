@@ -129,32 +129,9 @@
                                    type="text" required value="${evento.titulo}">
                         </div>
 
-                        <div class="form-group col-md-4">
-                            <label for="tipo_evento">Tipo de Atividade </label>
-                            <select type="text" class="form-control" id="tipo_evento" placeholder="Tipo de Atividade"
-                                    required
-                                    name="evento.tipoEsporte.id">
-                                <option value=""></option>
-                                <c:forEach items="${esportes}" var="e">
-                                    <c:if test="${e.valor == evento.tipoEsporte.id}">
-                                        <option value="${e.valor}" selected="true">${e.chave}</option>
-                                    </c:if>
-                                    <c:if test="${!(e.valor == evento.tipoEsporte.id)}">
-                                        <option value="${e.valor}">${e.chave}</option>
-                                    </c:if>
-                                </c:forEach>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="num_vagas_min">Mín. de Vagas </label>
-                            <input id="num_vagas_min" class="form-control" name="evento.numVagasMin" min="0"
-                                   type="number" value="${evento.numVagasMin}">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="num_vagas_max">Máx. de Vagas </label>
-                            <input id="num_vagas_max" class="form-control" name="evento.numVagasMax" min="0"
-                                   type="number" value="${evento.numVagasMax}">
-                        </div>
+                        
+                        
+                        
                         <div class="form-group col-md-2">
                             <label for="horario_inicio">Horário de Início </label>
                             <input id="horario_inicio" class="form-control timePickerInicio" name="evento.horaInicio"

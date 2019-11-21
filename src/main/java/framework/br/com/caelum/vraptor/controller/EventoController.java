@@ -62,7 +62,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	}
 
 	public void detalhar(Long id) {
-		Evento evento = negocio.detalhar(id);
+		EventoAjudando evento = negocio.detalhar(id);
 		this.resultado.include("numParticipantes", evento.getParticipantes().size());
 		this.resultado.include("evento", evento);
 		this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());

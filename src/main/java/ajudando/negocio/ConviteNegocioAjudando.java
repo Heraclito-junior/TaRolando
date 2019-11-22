@@ -62,11 +62,11 @@ public class ConviteNegocioAjudando extends ConviteNegocio{
     }
 
     public void aceitar(Long id) {
-        ConviteAjudando convite = conviteDAO.buscarPorId(id);
-        convite.getEvento().getParticipantes().add(convite.getConvidado());
-        convite.getConvidado().getEventos().add(convite.getEvento());
-        convite.setAceito(true);
-        eventoDAO.salvar(convite.getEvento());
+//        ConviteAjudando convite = conviteDAO.buscarPorId(id);
+//        convite.getEvento().getParticipantes().add(convite.getConvidado());
+//        convite.getConvidado().getEventos().add(convite.getEvento());
+//        convite.setAceito(true);
+//        eventoDAO.salvar(convite.getEvento());
     }
 
     public void rejeitar(Long id) {

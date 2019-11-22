@@ -29,16 +29,20 @@ public class ConviteAjudandoJpaDao extends EntidadeJpaDao<ConviteAjudando> imple
 
 
     public List<ConviteAjudando> meusConvites() {
-        Query query = manager.createQuery("SELECT c FROM Convite c WHERE c.convidado.id = :id AND c.aceito = false AND" +
+        Query query = manager.createQuery("SELECT c FROM ConviteAjudando c WHERE c.convidado.id = :id AND c.aceito = false AND" +
                 " c.deletado = false")
                 .setParameter("id", usuarioLogado.getUsuario().getId());
         return query.getResultList();
     }
 
+    
+    
     public List<ConviteAjudando> meusConvitesEnviados() {
-        Query query = manager.createQuery("SELECT c FROM Convite c WHERE c.evento.organizador.id = :id AND c.aceito = false AND" +
+        Query query = manager.createQuery("SELECT c FROM ConviteAjudando c WHERE c.eventoAjudando.organizador.id = :id AND c.aceito = false AND" +
                 " c.deletado = false")
                 .setParameter("id", usuarioLogado.getUsuario().getId());
         return query.getResultList();
     }
+    
+    
 }

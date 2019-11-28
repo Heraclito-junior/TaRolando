@@ -1,25 +1,25 @@
 package br.com.caelum.vraptor.negocio;
 
-import br.com.caelum.vraptor.dao.AtletaDAO;
-import br.com.caelum.vraptor.dao.EsporteDAO;
-import br.com.caelum.vraptor.dao.EventoDAO;
-import br.com.caelum.vraptor.dao.EventoJpaDao;
-import br.com.caelum.vraptor.model.Alerta;
-import br.com.caelum.vraptor.model.Atleta;
-import br.com.caelum.vraptor.model.UsuarioLogado;
-import br.com.caelum.vraptor.model.Evento;
-import br.com.caelum.vraptor.model.Esporte;
+import br.com.caelum.vraptor.dao.*;
+import br.com.caelum.vraptor.model.*;
 import br.com.caelum.vraptor.util.OpcaoSelect;
 import br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
+import br.com.caelum.vraptor.util.exception.UsuarioInexistenteException;
 import br.com.caelum.vraptor.util.exception.VagasInvalidasException;
+import framework.negocio.EntidadeNegocio;
+import framework.negocio.IEntidadeNegocio;
+import framework.negocio.IEventoNegocio;
+import framework.negocio.IRelatorioNegocio;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class EventoNegocio {
+@Named(value = "tarolandoevento")
+public class EventoNegocio extends EntidadeNegocio implements IEventoNegocio, IRelatorioNegocio {
 
 	private EsporteDAO esporteDAO;
 	@Inject
@@ -28,6 +28,8 @@ public class EventoNegocio {
 	private EventoJpaDao daoJpa;
 	@Inject
 	private AtletaDAO atletaDAO;
+	@Inject
+	private AtletaEventoDAO atletaEventoDAO;
 
 	@Inject
 	private UsuarioLogado usuarioLogado;
@@ -42,17 +44,6 @@ public class EventoNegocio {
 		this.esporteDAO = esporteDAO;
 	}
 
-	public List<OpcaoSelect> geraListaOpcoesEsportes() {
-		List<Esporte> todos = this.esporteDAO.listar().stream().collect(Collectors.toList());
-		return todos.stream().map(esporte -> new OpcaoSelect(esporte.getNome(), esporte.getId()))
-				.collect(Collectors.toList());
-	}
-
-	public List<OpcaoSelect> geraListaOpcoesEventos() {
-		List<Evento> todos = this.dao.listar().stream().collect(Collectors.toList());
-		return todos.stream().map(evento -> new OpcaoSelect(evento.getTitulo(), evento.getId()))
-				.collect(Collectors.toList());
-	}
 
 	public void definirAdministradorESalvar(Evento evento) throws VagasInvalidasException {
 		if (evento.getParticipantes() == null) {
@@ -80,10 +71,10 @@ public class EventoNegocio {
 	return;
 }
 
-	public void buscarEDeletar(Long id) throws AtletaInexistenteException {
+	public void buscarEDeletar(Long id) throws UsuarioInexistenteException {
 		Evento evento = this.dao.buscarPorId(id);
 		if (evento == null) {
-			throw new AtletaInexistenteException("Atleta Não Existe");
+			throw new UsuarioInexistenteException("Usuário Não Encontrado");
 		}
 		evento.setDeletado(true);
 		this.dao.salvar(evento);
@@ -97,12 +88,12 @@ public class EventoNegocio {
 		return this.dao.buscarPorId(id);
 	}
 
-	public void inserirAtleta(Long id, String login) throws AtletaInexistenteException {
+	public void inserirUsuario(Long id, String login) throws UsuarioInexistenteException {
 		Evento evento = detalhar(id);
 
-		Atleta atleta = this.atletaDAO.buscarPorLogin(login);
+		AtletaEvento atleta = this.atletaEventoDAO.buscarPorLogin(login);
 		if (atleta.getId() == null) {
-			throw new AtletaInexistenteException("Atleta Não Existe");
+			throw new UsuarioInexistenteException("Usuário Não Existe");
 		}
 		if (!evento.getParticipantes().contains(atleta)) {
 			evento.getParticipantes().add(atleta);
@@ -112,7 +103,7 @@ public class EventoNegocio {
 
 	}
 
-	public void removerAtleta(Long id, String login) {
+	public void removerUsuario(Long id, String login) {
 		Evento evento = detalhar(id);
 
 		Atleta atleta = this.atletaDAO.buscarPorLogin(login);
@@ -137,7 +128,7 @@ public class EventoNegocio {
 
 		Evento evento = detalhar(id);
 		Long ultimoNumero = (long) 0;
-		for (Atleta i : evento.getParticipantes()) {
+		for (AtletaEvento i : evento.getParticipantes()) {
 			Optional<Alerta> teste = daoJpa.buscarUltimoAlerta();
 			if (teste.isPresent()) {
 				ultimoNumero = teste.get().getId();
@@ -155,4 +146,7 @@ public class EventoNegocio {
 
 	}
 
+	public Relatorio gerarRelatorio(Long id) {
+		return null;
+	}
 }

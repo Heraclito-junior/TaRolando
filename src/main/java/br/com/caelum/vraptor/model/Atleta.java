@@ -5,19 +5,20 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Atleta extends Usuario {
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Esporte esportePreferido;
+    protected Esporte esportePreferido;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Endereco endereco;
+    protected Endereco endereco;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Evento> eventos;
+    protected List<Evento> eventos;
     
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Atleta> amigos;
+    protected List<Atleta> amigos;
     
 
 //    @ManyToOne(cascade = CascadeType.ALL    )

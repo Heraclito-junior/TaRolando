@@ -1,22 +1,26 @@
 package br.com.caelum.vraptor.negocio;
 
 import br.com.caelum.vraptor.dao.AtletaDAO;
+import br.com.caelum.vraptor.dao.AtletaEventoDAO;
 import br.com.caelum.vraptor.dao.ConviteDAO;
 import br.com.caelum.vraptor.dao.EventoDAO;
 import br.com.caelum.vraptor.model.Atleta;
+import br.com.caelum.vraptor.model.AtletaEvento;
 import br.com.caelum.vraptor.model.Convite;
 import br.com.caelum.vraptor.model.Evento;
 import br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
+import framework.negocio.IConviteNegocio;
 
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
-public class ConviteNegocio {
+public class ConviteNegocio implements IConviteNegocio {
 
     private ConviteDAO conviteDAO;
     private AtletaDAO atletaDAO;
     private EventoDAO eventoDAO;
+    private AtletaEventoDAO atletaEventoDAO;
 
     @Deprecated
     public ConviteNegocio() { this(null, null, null); }
@@ -39,6 +43,7 @@ public class ConviteNegocio {
         }
         if (!evento.getParticipantes().contains(convidado)) {
             Convite convite = new Convite(evento, convidado);
+            AtletaEvento atletaEvento = new AtletaEvento(convidado, evento);
 //            convite.getEvento().getParticipantes().add(convidado.get());
             conviteDAO.salvar(convite);
         } else {
@@ -48,7 +53,10 @@ public class ConviteNegocio {
 
     public void aceitar(Long id) {
         Convite convite = conviteDAO.buscarPorId(id);
-        convite.getEvento().getParticipantes().add(convite.getConvidado());
+        AtletaEvento atletaEvento = new AtletaEvento(convite.getConvidado(), convite.getEvento());
+        atletaEvento.setConfirmado(false);
+
+
         convite.getConvidado().getEventos().add(convite.getEvento());
         convite.setAceito(true);
         eventoDAO.salvar(convite.getEvento());

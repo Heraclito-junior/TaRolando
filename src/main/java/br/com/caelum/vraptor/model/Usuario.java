@@ -31,6 +31,8 @@ public abstract class Usuario extends Entidade{
 
     protected TipoUsuario tipoUsuario;
 
+
+
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    protected Endereco endereco;
 

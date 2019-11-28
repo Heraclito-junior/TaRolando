@@ -31,7 +31,7 @@ public class Evento extends Entidade {
     private Atleta organizador;
 
     @ManyToMany(cascade = CascadeType.ALL )
-    private List<Atleta> participantes;
+    private List<AtletaEvento> participantes;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Endereco localizacao;
@@ -80,11 +80,12 @@ public class Evento extends Entidade {
 
 //    public void setOrganizador(Atleta organizador) { this.organizador = organizador; }
     public void setOrganizador(Usuario organizador) { this.organizador = (Atleta) organizador; }
-    public List<Atleta> getParticipantes() {
+
+    public List<AtletaEvento> getParticipantes() {
         return participantes;
     }
 
-    public void setParticipantes(List<Atleta> participantes) {
+    public void setParticipantes(List<AtletaEvento> participantes) {
         this.participantes = participantes;
     }
 

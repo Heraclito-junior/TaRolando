@@ -20,11 +20,15 @@ import ajudando.dao.*;
 import java.util.List;
 import java.util.Optional;
 
-public class ConviteNegocioAjudando extends ConviteNegocio{
+public class ConviteNegocioAjudando {
 
-    
+    protected AtletaDAO atletaDAO;
+
     protected EventoAjudandoDAO eventoDAO;
+    
+    @Inject
     protected EventoAjudandoJpaDao eventoJpaDAO;
+	
     protected ConviteAjudandoDAO conviteDAO;
 
 

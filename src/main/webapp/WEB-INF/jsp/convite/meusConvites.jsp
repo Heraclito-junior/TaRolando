@@ -61,7 +61,7 @@
         <div class="panel painel-sisint">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Convites Recebidos</h1>
+                    <h1 class="page-header">Participação em Evento</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -74,7 +74,7 @@
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Organizador do Evento</th>
-                            <th>Ações</th>
+                            <th>Detalhar</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -90,95 +90,20 @@
                                 <td>
                                     <a title="Detalhar" href="${linkTo[EventoController].detalhar}?id=${convite.eventoAjudando.id}">
                                         <i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
-                                    <a title="Aceitar" class="link-aceitar" href="#accept-modal"
-                                       url-aceitar="${linkTo[ConviteController].aceitar}?id=${convite.id}" data-toggle="modal">
-                                        <i class="fa fa-check fa-lg"></i></a>
-                                    <a title="Rejeitar" class="link-remover" href="#delete-modal"
-                                       url-remover="${linkTo[ConviteController].rejeitar}?id=${convite.id}" data-toggle="modal">
-                                        <i class="fa fa-close fa-lg"></i></a>
+                                   
                                 </td>
                             </tr>
                         </c:forEach>
 
-                        <!-- Modal ACEITAR -->
-                        <div class="modal fade" id="accept-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="modalLabelAccept">Aceitar Convite</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        Você quer realmente aceitar o convite?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a  href="" class="btn btn-primary btn-aceitar">Sim</a>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
 
-                        <!-- Modal REMOVER -->
-                        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="modalLabel">Excluir Item</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        Deseja realmente excluir este item?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a  href="" class="btn btn-primary btn-remover">Sim</a>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Convites Enviados</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-        <div class="tabela-servicos">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Convidado </th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${convitesEnviados}" var="convite">
-                        <tr>
-                            <td>${convite.id}</td>
-                            <td>${convite.eventoAjudando.titulo}</td>
-                            <td>
-                                <a href="${linkTo[AtletaController].perfilBloqueado}?id=${convite.convidado.id}">
-                                        ${convite.convidado.nome}
-                                </a>
-                            </td>
-                            <td>
-                                <a title="Detalhar" href="${linkTo[EventoController].detalhar}?id=${convite.eventoAjudando.id}">
-                                    <i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
-                                <a title="Remover" class="link-remover" href="#delete-modal"
-                                   url-remover="${linkTo[ConviteController].remover}?id=${convite.id}" data-toggle="modal">
-                                    <i class="fa fa-trash fa-lg"></i></a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </div>
+
+
     </jsp:body>
 </tags:layoutSidebar>

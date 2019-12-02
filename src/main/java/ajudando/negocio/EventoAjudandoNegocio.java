@@ -10,6 +10,8 @@ import framework.br.com.caelum.vraptor.model.Esporte;
 import framework.br.com.caelum.vraptor.model.Evento;
 import framework.br.com.caelum.vraptor.model.EventoAjudando;
 import framework.br.com.caelum.vraptor.model.UsuarioLogado;
+import framework.br.com.caelum.vraptor.negocio.EventoNegocio;
+import framework.br.com.caelum.vraptor.strategy.GeradorRelatorio;
 import framework.br.com.caelum.vraptor.util.OpcaoSelect;
 import framework.br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
 import framework.br.com.caelum.vraptor.util.exception.VagasInvalidasException;
@@ -18,13 +20,14 @@ import javax.inject.Inject;
 
 import ajudando.dao.EventoAjudandoDAO;
 import ajudando.dao.EventoAjudandoJpaDao;
+import ajudando.negocio.strategy.GeradorRelatorioAjudando;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class EventoAjudandoNegocio {
+public class EventoAjudandoNegocio extends EventoNegocio {
 
 	private EsporteDAO esporteDAO;
 	@Inject
@@ -33,8 +36,7 @@ public class EventoAjudandoNegocio {
 	
 	
 	
-//	@Inject
-//	private EventoJpaDao daoJpa;
+	private GeradorRelatorio relat;
 	
 	@Inject
 	private EventoAjudandoJpaDao daoJpa;
@@ -47,12 +49,13 @@ public class EventoAjudandoNegocio {
 
 	@Deprecated
 	public EventoAjudandoNegocio() {
-		this(null);
+		this(null,null);
 	}
 
 	@Inject
-	public EventoAjudandoNegocio(EsporteDAO esporteDAO) {
+	public EventoAjudandoNegocio(EsporteDAO esporteDAO, GeradorRelatorioAjudando relat2) {
 		this.esporteDAO = esporteDAO;
+		this.relat=relat2;
 	}
 
 	public List<OpcaoSelect> geraListaOpcoesEsportes() {
@@ -107,6 +110,7 @@ public class EventoAjudandoNegocio {
 	}
 
 	public EventoAjudando detalhar(Long id) {
+		relat.GerarRelatorio((long) 1);
 		return this.dao.buscarPorId(id);
 	}
 

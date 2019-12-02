@@ -10,9 +10,6 @@ import framework.br.com.caelum.vraptor.model.EventoAjudando;
 
 public interface EventoAjudandoDAO extends EntidadeDAO<EventoAjudando> {
 
-	
-	
-	
     List<EventoAjudando> meusEventos();
 
 	List<AlertaTabela> meusAlertas();

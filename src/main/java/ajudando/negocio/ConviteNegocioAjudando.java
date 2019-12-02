@@ -45,34 +45,7 @@ public class ConviteNegocioAjudando {
 
 
     public void convidar(Long id, String login, Double val, String participacao) throws AtletaInexistenteException {
-//    	System.out.println("convidando");
-//        EventoAjudando evento = eventoJpaDAO.buscarPorId(id);
-//    	System.out.println("convidando2");
-//
-//        Optional<EventoAjudando> evento3;
-//        evento3 = eventoJpaDAO.buscarId(id);
-//    	System.out.println("convidando3");
-//
-//        Evento teste=evento3.get();
-//        Atleta convidado = atletaDAO.buscarPorLogin(login);
-//    	System.out.println("convidando4");
-//
-//
-//        if (convidado == null) {
-//            throw new AtletaInexistenteException("Atleta não existe");
-//        }
-//        if (!teste.getParticipantes().contains(convidado)) {
-////////            Convite convite = new ConviteAjudando();
-//        	System.out.println("convidando7");
-//
-//        	ConviteAjudando convite = new ConviteAjudando(evento, convidado,val,participacao);
-//        	System.out.println("convidando6");
-//
-////////            convite.getEvento().getParticipantes().add(convidado.get());
-//            conviteDAO.salvar(convite);
-//        } else {
-//
-//        }
+
     	System.out.println("convite 1");
     	EventoAjudando evento = eventoDAO.buscarPorId(id);
     	System.out.println("convite 2");

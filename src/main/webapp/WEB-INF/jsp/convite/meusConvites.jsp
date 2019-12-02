@@ -81,14 +81,14 @@
                         <c:forEach items="${convitesRecebidos}" var="convite">
                             <tr>
                                 <td>${convite.id}</td>
-                                <td>${convite.evento.titulo}</td>
+                                <td>${convite.eventoAjudando.titulo}</td>
                                 <td>
-                                    <a href="${linkTo[AtletaController].perfil}?id=${convite.evento.organizador.id}">
-                                            ${convite.evento.organizador.nome}
+                                    <a href="${linkTo[AtletaController].perfil}?id=${convite.eventoAjudando.organizador.id}">
+                                            ${convite.eventoAjudando.organizador.nome}
                                     </a>
                                 </td>
                                 <td>
-                                    <a title="Detalhar" href="${linkTo[EventoController].detalhar}?id=${convite.evento.id}">
+                                    <a title="Detalhar" href="${linkTo[EventoController].detalhar}?id=${convite.eventoAjudando.id}">
                                         <i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
                                     <a title="Aceitar" class="link-aceitar" href="#accept-modal"
                                        url-aceitar="${linkTo[ConviteController].aceitar}?id=${convite.id}" data-toggle="modal">
@@ -162,14 +162,14 @@
                     <c:forEach items="${convitesEnviados}" var="convite">
                         <tr>
                             <td>${convite.id}</td>
-                            <td>${convite.evento.titulo}</td>
+                            <td>${convite.eventoAjudando.titulo}</td>
                             <td>
                                 <a href="${linkTo[AtletaController].perfilBloqueado}?id=${convite.convidado.id}">
                                         ${convite.convidado.nome}
                                 </a>
                             </td>
                             <td>
-                                <a title="Detalhar" href="${linkTo[EventoController].detalhar}?id=${convite.evento.id}">
+                                <a title="Detalhar" href="${linkTo[EventoController].detalhar}?id=${convite.eventoAjudando.id}">
                                     <i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
                                 <a title="Remover" class="link-remover" href="#delete-modal"
                                    url-remover="${linkTo[ConviteController].remover}?id=${convite.id}" data-toggle="modal">

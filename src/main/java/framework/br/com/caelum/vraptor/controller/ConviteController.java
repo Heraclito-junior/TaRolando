@@ -19,8 +19,6 @@ public class ConviteController extends ControladorTaRolando<Convite> {
 
     private ConviteNegocioAjudando conviteNegocio;
     
-//    private ConviteNegocioAjudando conviteNegocio2;
-
     @Deprecated
     public ConviteController() { this(null, null); }
 
@@ -29,11 +27,10 @@ public class ConviteController extends ControladorTaRolando<Convite> {
         super(resultado);
         this.conviteNegocio = conviteNegocio;
     }
-
     @Transacional
-    public void convidar(Long id, String login) {
+    public void convidar(Long id, String login, Double val, String participacao) {
         try {
-            conviteNegocio.convidar(id, login);
+            conviteNegocio.convidar(id, login, val, participacao);
             resultado.include("mensagem", new SimpleMessage("success", "mensagem.convite.convidar.sucesso"));
         } catch (AtletaInexistenteException at) {
             resultado.include("mensagem", new SimpleMessage("error", "mensagem.atleta.inexistente"));

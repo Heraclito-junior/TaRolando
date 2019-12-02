@@ -44,25 +44,61 @@ public class ConviteNegocioAjudando {
     }
 
 
-    public void convidar(Long id, String login) throws AtletaInexistenteException {
+    public void convidar(Long id, String login, Double val, String participacao) throws AtletaInexistenteException {
+//    	System.out.println("convidando");
+//        EventoAjudando evento = eventoJpaDAO.buscarPorId(id);
+//    	System.out.println("convidando2");
+//
+//        Optional<EventoAjudando> evento3;
+//        evento3 = eventoJpaDAO.buscarId(id);
+//    	System.out.println("convidando3");
+//
+//        Evento teste=evento3.get();
+//        Atleta convidado = atletaDAO.buscarPorLogin(login);
+//    	System.out.println("convidando4");
+//
+//
+//        if (convidado == null) {
+//            throw new AtletaInexistenteException("Atleta não existe");
+//        }
+//        if (!teste.getParticipantes().contains(convidado)) {
+////////            Convite convite = new ConviteAjudando();
+//        	System.out.println("convidando7");
+//
+//        	ConviteAjudando convite = new ConviteAjudando(evento, convidado,val,participacao);
+//        	System.out.println("convidando6");
+//
+////////            convite.getEvento().getParticipantes().add(convidado.get());
+//            conviteDAO.salvar(convite);
+//        } else {
+//
+//        }
+    	System.out.println("convite 1");
+    	EventoAjudando evento = eventoDAO.buscarPorId(id);
+    	System.out.println("convite 2");
 
-        EventoAjudando evento = eventoJpaDAO.buscarPorId(id);
-        Optional<EventoAjudando> evento3;
-        evento3 = eventoJpaDAO.buscarId(id);
-        Evento teste=evento3.get();
         Atleta convidado = atletaDAO.buscarPorLogin(login);
+    	System.out.println("convite 3");
+
 
         if (convidado == null) {
+        	System.out.println("não valeu");
             throw new AtletaInexistenteException("Atleta não existe");
         }
-        if (!teste.getParticipantes().contains(convidado)) {
-//////            Convite convite = new ConviteAjudando();
-        	ConviteAjudando convite = new ConviteAjudando(evento, convidado);
-//////            convite.getEvento().getParticipantes().add(convidado.get());
+        if (!evento.getParticipantes().contains(convidado)) {
+        	System.out.println("convite 4");
+
+        	ConviteAjudando convite = new ConviteAjudando(evento, convidado, val, participacao);
+//            convite.getEvento().getParticipantes().add(convidado.get());
             conviteDAO.salvar(convite);
+        	System.out.println("convite 5");
+
         } else {
+        	System.out.println("convite 6");
 
         }
+    	
+    	
     }
 
     public void aceitar(Long id) {

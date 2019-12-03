@@ -10,6 +10,7 @@ import framework.br.com.caelum.vraptor.anotacoes.Transacional;
 import framework.br.com.caelum.vraptor.dao.EventoDAO;
 import framework.br.com.caelum.vraptor.model.Evento;
 import framework.br.com.caelum.vraptor.model.EventoAjudando;
+import framework.br.com.caelum.vraptor.model.Relatorio;
 //import framework.br.com.caelum.vraptor.negocio.EventoNegocio;
 import framework.br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
 import framework.br.com.caelum.vraptor.util.exception.VagasInvalidasException;
@@ -52,6 +53,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
 
 		}
 	}
+
 
 	public void lista() {
 		this.resultado.include("eventos", negocio.listar());
@@ -128,6 +130,12 @@ public class EventoController extends ControladorTaRolando<Evento> {
 		this.validator.onErrorRedirectTo(this).form();		
 		negocio.modificarEvento(evento);		
 		this.resultado.redirectTo(this).lista();		
+	}
+	
+	public void relatorio(Long idEvento) {
+		negocio.relatorio(idEvento);
+//		Relatorio relatorio = negocio.relatorio(idEvento);
+//		resultado.include()
 	}
 
 }

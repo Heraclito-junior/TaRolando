@@ -104,5 +104,35 @@ public class ConviteNegocioAjudando {
         return conviteDAO.meusConvitesEnviados();
     }
 
+	public void participar(Long id, String login, double valor, String participacao) throws AtletaInexistenteException {
+		
+		System.out.println("convite 1");
+    	EventoAjudando evento = eventoDAO.buscarPorId(id);
+    	System.out.println("convite 2");
+
+        Atleta convidado = atletaDAO.buscarPorLogin(login);
+    	System.out.println("convite 3");
+    	
+    	
+
+
+        if (convidado == null) {
+        	System.out.println("não valeu");
+            throw new AtletaInexistenteException("Atleta não existe");
+        }
+        if (!evento.getParticipantes().contains(convidado)) {
+        	System.out.println("convite 4");
+
+        	ConviteAjudando convite = new ConviteAjudando(evento, convidado, valor, participacao);
+            convite.getEventoAjudando().getParticipantes().add(convidado);
+            conviteDAO.salvar(convite);
+        	System.out.println("convite 5");
+
+        } else {
+        	System.out.println("convite 6");
+
+        }
+	}
+
 
 }

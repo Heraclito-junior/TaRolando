@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="panel">
                         <div class="panel-body">
-                            <div class="col-md-8">
+                            <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="titulo-evento">Título </label>
                                     <input id="titulo-evento"
@@ -82,102 +82,12 @@
 										class="form-control" name="evento.numVagasMax" min="0"
 										type="number" value="${evento.metaVoluntarios}" disabled>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <a href="#">Integrar uma Reserva ao Evento</a>
-                                </div>
                                 <div class="form-group col-md-12">
                                     <label for="localizacao">Localização </label>
                                     <input id="localizacao"
 										class="form-control" name="evento.localizacao" disabled
 										type="text"
 										value="${evento.localizacao.rua}, ${evento.localizacao.numero},  ${evento.localizacao.cep}">
-                                </div>
-                                    <%--<div class="form-group col-md-4">--%>
-                                    <%--<label for="latitude">Latitude: </label>--%>
-                                    <%--<input id="latitude" class="form-control" name="evento.latitude" disabled--%>
-                                    <%--type="text" value="${evento.latitude}">--%>
-                                    <%--</div>--%>
-                                    <%--<div class="form-group col-md-4">--%>
-                                    <%--<label for="longitude">Longitude: </label>--%>
-                                    <%--<input id="longitude" class="form-control" name="evento.longitude" disabled--%>
-                                    <%--type="text" value="">--%>
-                                    <%--</div>--%>
-                                <div
-									class="form-group col-md-12 text-center">
-                                    <label for="descricao-evento">Descrição do Evento </label>
-                                    <textarea id="descricao-evento"
-										class="form-control" minlength="5" name="evento.descricao"
-										rows="5" disabled required="true">${evento.descricao}</textarea>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 order-md-2 mb-4">
-                                <h4 class="text-center"
-									style="margin-top: 0px; padding-top: 0px;">
-                                    <a
-										href="${linkTo[ChatController].chat}?id=${evento.id}">Chat do Grupo</a><br>
-									<button class="btn btn-link" data-toggle="modal"
-										data-target="#addParticipante">
-												Adicionar Atleta
-											</button>
-                                    <span class="text-muted bold">Atletas Participantes</span>
-                                    <span
-										class="badge badge-secondary badge-pill">${numParticipantes}</span>
-                                    <c:if
-										test="${usuarioLogado.usuario.id == evento.organizador.id}">
-                                        <span class="icon text-right">
-                                            <button class="btn btn-link"
-												data-toggle="modal" data-target="#addParticipante">
-                                            <i class="fa fa-plus"></i>
-											</button>
-
-										</span>
-                                    </c:if>
-                                </h4>
-                                <ul class="list-group mb-3">
-                                    <c:forEach
-										items="${evento.participantes}" var="participante">
-                                            <input type="hidden"
-											value="${participante.id}" name="atleta.id" />
-                                        <li
-											class="list-group-item justify-content-between"
-											style="padding-left: 0px;">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <img
-														class="img-circle"
-														src="${ctx}/resources/imagens/icons_map/futebol.png"
-														width="60px" height="60px" />
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <a
-														href="${linkTo[AtletaController].perfil}?id=${participante.id}">
-                                                        <h4>${participante.nome}</h4>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-2"
-													style="margin-left: 0px; padding-left: 0px">
-													<c:if
-														test="${usuarioLogado.usuario.id == evento.organizador.id}">
-                                                        <a
-                                                        	href="${linkTo[ConviteController].confirmarPresenca}?id=${convite.id}&login=${participante.login}"
-															class="btn btn-link">
-															<i class="fa fa-check"></i>
-														</a>
-                                                   
-                                                        <form
-															action="${ctx}/evento">
-                                                            <a
-																href="${linkTo[EventoController].deletarAtleta}?id=${evento.id}&login=${participante.login}"
-																class="
-                                                        btnbtn-primary">remover</a>
-                                                        </form>
-                                                    </c:if>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </c:forEach>
-                                </ul>
                             </div>
                         </div>
                     </div>

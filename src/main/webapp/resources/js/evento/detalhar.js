@@ -3,6 +3,9 @@ $(document).ready( function () {
     var valueLogin;
     var urlAlerta=$('#btnAlerta').attr('url-alerta');
     var valueAlerta;
+    var urlParticipar=$('#btnParticipar').attr('url-participar');
+    var valorDoacao;
+    var contribuicaoLaboral;
 
     $('#btnConvidar').click( function () {
         valueLogin = $('#login_participante').val();
@@ -17,6 +20,14 @@ $(document).ready( function () {
         var urlNovo = urlAlerta + valueAlerta;
         console.log(urlNovo);
         $('#btnAlerta').attr('href', urlNovo);
+    });
+    
+    $('#btnParticipar').click( function () {
+    	valorDoacao = $('#valor_doacao').val();
+    	contribuicaoLaboral = $('#contribuicao_laboral').val();
+        var urlNovo = urlParticipar + valorDoacao + "&contribuicaoLaboral=" + contribuicaoLaboral;
+        console.log(urlNovo);
+        $('#btnParticipar').attr('href', urlNovo);
     });
     
     

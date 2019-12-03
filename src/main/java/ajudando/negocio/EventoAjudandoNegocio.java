@@ -110,7 +110,6 @@ public class EventoAjudandoNegocio extends EventoNegocio {
 	}
 
 	public EventoAjudando detalhar(Long id) {
-		relat.GerarRelatorio((long) 1);
 		return this.dao.buscarPorId(id);
 	}
 
@@ -170,6 +169,11 @@ public class EventoAjudandoNegocio extends EventoNegocio {
 
 		}
 
+	}
+	
+	public String relatorio(Long id) {
+		return relat.GerarRelatorio((long) 1);
+		
 	}
 
 }

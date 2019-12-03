@@ -39,6 +39,17 @@ public class ConviteController extends ControladorTaRolando<Convite> {
         }
 //        resultado.include(new SimpleMessage("error", "mensagem.atleta.inexistente"));
     }
+    
+    @Transacional
+    public void participar(Long id, String login, double valor, String contribuicaoLaboral) {
+    	try {
+			conviteNegocio.participar(id, login, valor, contribuicaoLaboral);
+		} catch (AtletaInexistenteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        resultado.redirectTo(EventoController.class).detalhar(id);
+    }
 
     @Transacional
     public void remover(Long id) {

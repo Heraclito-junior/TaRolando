@@ -8,7 +8,7 @@ import framework.br.com.caelum.vraptor.model.Alerta;
 import framework.br.com.caelum.vraptor.model.Atleta;
 import framework.br.com.caelum.vraptor.model.Esporte;
 import framework.br.com.caelum.vraptor.model.Evento;
-import framework.br.com.caelum.vraptor.model.EventoAjudando;
+import framework.br.com.caelum.vraptor.model.EventoCasamento;
 import framework.br.com.caelum.vraptor.model.UsuarioLogado;
 import framework.br.com.caelum.vraptor.negocio.EventoNegocio;
 import framework.br.com.caelum.vraptor.strategy.GeradorRelatorio;
@@ -65,12 +65,12 @@ public class EventoAjudandoNegocio extends EventoNegocio {
 	}
 
 	public List<OpcaoSelect> geraListaOpcoesEventos() {
-		List<EventoAjudando> todos = this.dao.listar().stream().collect(Collectors.toList());
+		List<EventoCasamento> todos = this.dao.listar().stream().collect(Collectors.toList());
 		return todos.stream().map(evento -> new OpcaoSelect(evento.getTitulo(), evento.getId()))
 				.collect(Collectors.toList());
 	}
 
-	public void definirAdministradorESalvar(EventoAjudando evento) throws VagasInvalidasException {
+	public void definirAdministradorESalvar(EventoCasamento evento) throws VagasInvalidasException {
 		if (evento.getParticipantes() == null) {
 			evento.setParticipantes(new ArrayList<>());
 		}
@@ -83,7 +83,7 @@ public class EventoAjudandoNegocio extends EventoNegocio {
 		return;
 	}
 	
-	public void modificarEvento(EventoAjudando evento) {
+	public void modificarEvento(EventoCasamento evento) {
 ////	evento.setOrganizador(this.atletaLogado.getAtleta());
 //	System.out.println("organizador "+evento.getOrganizador());
 //	System.out.println("evento "+evento.getTitulo());
@@ -97,7 +97,7 @@ public class EventoAjudandoNegocio extends EventoNegocio {
 }
 
 	public void buscarEDeletar(Long id) throws AtletaInexistenteException {
-		EventoAjudando evento = this.dao.buscarPorId(id);
+		EventoCasamento evento = this.dao.buscarPorId(id);
 		if (evento == null) {
 			throw new AtletaInexistenteException("Atleta Não Existe");
 		}
@@ -109,12 +109,12 @@ public class EventoAjudandoNegocio extends EventoNegocio {
 		return this.dao.listar();
 	}
 
-	public EventoAjudando detalhar(Long id) {
+	public EventoCasamento detalhar(Long id) {
 		return this.dao.buscarPorId(id);
 	}
 
 	public void inserirAtleta(Long id, String login) throws AtletaInexistenteException {
-		EventoAjudando evento = detalhar(id);
+		EventoCasamento evento = detalhar(id);
 
 		Atleta atleta = this.atletaDAO.buscarPorLogin(login);
 		if (atleta.getId() == null) {
@@ -129,7 +129,7 @@ public class EventoAjudandoNegocio extends EventoNegocio {
 	}
 
 	public void removerAtleta(Long id, String login) {
-		EventoAjudando evento = detalhar(id);
+		EventoCasamento evento = detalhar(id);
 
 		Atleta atleta = this.atletaDAO.buscarPorLogin(login);
 		if (atleta.getId() == null) {

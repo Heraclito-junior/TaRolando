@@ -14,7 +14,7 @@ public class Atleta extends Usuario {
     private Endereco endereco;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<EventoAjudando> eventos;
+    private List<EventoCasamento> eventos;
     
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Atleta> amigos;
@@ -43,11 +43,11 @@ public class Atleta extends Usuario {
         this.esportePreferido = esportePreferido;
     }
 
-    public List<EventoAjudando> getEventos() {
+    public List<EventoCasamento> getEventos() {
         return eventos;
     }
 
-    public void setEventos(List<EventoAjudando> eventos) {
+    public void setEventos(List<EventoCasamento> eventos) {
         this.eventos = eventos;
     }
 

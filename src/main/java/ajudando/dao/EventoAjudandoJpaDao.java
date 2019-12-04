@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class EventoAjudandoJpaDao extends EntidadeJpaDao<EventoAjudando> implements EventoAjudandoDAO {
+public class EventoAjudandoJpaDao extends EntidadeJpaDao<EventoCasamento> implements EventoAjudandoDAO {
 
     @Inject
     private AtletaLogado atletaLogado;
@@ -25,18 +25,18 @@ public class EventoAjudandoJpaDao extends EntidadeJpaDao<EventoAjudando> impleme
 
     @Inject
     public EventoAjudandoJpaDao(EntityManager entityManager, UsuarioLogado usuarioLogado) {
-        super(entityManager, EventoAjudando.class);
+        super(entityManager, EventoCasamento.class);
         this.usuarioLogado = usuarioLogado;
     }
 
 
     @Override
-    public List<EventoAjudando> meusEventos() {
+    public List<EventoCasamento> meusEventos() {
         Query query = this.manager.createQuery("SELECT e FROM EventoAjudando e WHERE (:atleta MEMBER OF e.participantes OR " +
                                                   "e.organizador.id = :id) AND e.deletado = false")
                 .setParameter("atleta", usuarioLogado.getUsuario())
                 .setParameter("id", usuarioLogado.getUsuario().getId());
-        List<EventoAjudando> tarefas = query.getResultList();
+        List<EventoCasamento> tarefas = query.getResultList();
         return tarefas;
     }
     
@@ -62,7 +62,7 @@ public class EventoAjudandoJpaDao extends EntidadeJpaDao<EventoAjudando> impleme
 
     }
     
-    public Optional<EventoAjudando> buscarId(Long id) {
+    public Optional<EventoCasamento> buscarId(Long id) {
         EntityTransaction txn = manager.getTransaction();
         txn.begin();
 

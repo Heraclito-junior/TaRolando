@@ -9,7 +9,7 @@ import br.com.caelum.vraptor.validator.Validator;
 import framework.br.com.caelum.vraptor.anotacoes.Transacional;
 import framework.br.com.caelum.vraptor.dao.EventoDAO;
 import framework.br.com.caelum.vraptor.model.Evento;
-import framework.br.com.caelum.vraptor.model.EventoAjudando;
+import framework.br.com.caelum.vraptor.model.EventoCasamento;
 import framework.br.com.caelum.vraptor.model.Relatorio;
 //import framework.br.com.caelum.vraptor.negocio.EventoNegocio;
 import framework.br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
@@ -64,7 +64,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	}
 
 	public void detalhar(Long id) {
-		EventoAjudando evento = negocio.detalhar(id);
+		EventoCasamento evento = negocio.detalhar(id);
 		this.resultado.include("numParticipantes", evento.getParticipantes().size());
 		this.resultado.include("evento", evento);
 		this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
@@ -91,7 +91,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	}
 	@Transacional
 	@Post
-	public void salvar(EventoAjudando evento) {
+	public void salvar(EventoCasamento evento) {
 		try {
 		this.validator.onErrorRedirectTo(this).form();
 		negocio.definirAdministradorESalvar(evento);
@@ -125,7 +125,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
 
 	@Transacional		
 	@Post		
-	public void modificar(EventoAjudando evento) {		
+	public void modificar(EventoCasamento evento) {		
 		evento.setOrganizador(this.negocio.detalhar(evento.getId()).getOrganizador());		
 		this.validator.onErrorRedirectTo(this).form();		
 		negocio.modificarEvento(evento);		

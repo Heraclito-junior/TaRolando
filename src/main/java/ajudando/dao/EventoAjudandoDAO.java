@@ -6,11 +6,11 @@ import framework.br.com.caelum.vraptor.dao.EntidadeDAO;
 import framework.br.com.caelum.vraptor.model.Alerta;
 import framework.br.com.caelum.vraptor.model.AlertaTabela;
 import framework.br.com.caelum.vraptor.model.Evento;
-import framework.br.com.caelum.vraptor.model.EventoAjudando;
+import framework.br.com.caelum.vraptor.model.EventoCasamento;
 
-public interface EventoAjudandoDAO extends EntidadeDAO<EventoAjudando> {
+public interface EventoAjudandoDAO extends EntidadeDAO<EventoCasamento> {
 
-    List<EventoAjudando> meusEventos();
+    List<EventoCasamento> meusEventos();
 
 	List<AlertaTabela> meusAlertas();
 	

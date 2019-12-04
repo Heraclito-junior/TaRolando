@@ -16,7 +16,7 @@ public class AlertaAjudando extends Alerta{
     private String nome;
     
     @OneToOne
-    private EventoAjudando eventoAjudando;
+    private EventoCasamento eventoAjudando;
     
     @OneToOne
     private Atleta atleta;

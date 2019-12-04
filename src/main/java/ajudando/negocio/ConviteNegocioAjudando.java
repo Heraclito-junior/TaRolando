@@ -7,9 +7,9 @@ import framework.br.com.caelum.vraptor.dao.ConviteDAO;
 import framework.br.com.caelum.vraptor.dao.EventoDAO;
 import framework.br.com.caelum.vraptor.model.Atleta;
 import framework.br.com.caelum.vraptor.model.Convite;
-import framework.br.com.caelum.vraptor.model.ConviteAjudando;
+import framework.br.com.caelum.vraptor.model.ConviteCasamento;
 import framework.br.com.caelum.vraptor.model.Evento;
-import framework.br.com.caelum.vraptor.model.EventoAjudando;
+import framework.br.com.caelum.vraptor.model.EventoCasamento;
 import framework.br.com.caelum.vraptor.negocio.*;
 import framework.br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
 
@@ -47,7 +47,7 @@ public class ConviteNegocioAjudando {
     public void convidar(Long id, String login, Double val, String participacao) throws AtletaInexistenteException {
 
     	System.out.println("convite 1");
-    	EventoAjudando evento = eventoDAO.buscarPorId(id);
+    	EventoCasamento evento = eventoDAO.buscarPorId(id);
     	System.out.println("convite 2");
 
         Atleta convidado = atletaDAO.buscarPorLogin(login);
@@ -61,7 +61,7 @@ public class ConviteNegocioAjudando {
         if (!evento.getParticipantes().contains(convidado)) {
         	System.out.println("convite 4");
 
-        	ConviteAjudando convite = new ConviteAjudando(evento, convidado, val, participacao);
+        	ConviteCasamento convite = new ConviteCasamento(evento, convidado, val, participacao);
 //            convite.getEvento().getParticipantes().add(convidado.get());
             conviteDAO.salvar(convite);
         	System.out.println("convite 5");
@@ -83,31 +83,31 @@ public class ConviteNegocioAjudando {
     }
 
     public void rejeitar(Long id) {
-    	ConviteAjudando convite = conviteDAO.buscarPorId(id);
+    	ConviteCasamento convite = conviteDAO.buscarPorId(id);
         convite.setAceito(false);
         convite.setDeletado(true);
         conviteDAO.salvar(convite);
     }
 
     public void remover(Long id) {
-    	ConviteAjudando convite = conviteDAO.buscarPorId(id);
+    	ConviteCasamento convite = conviteDAO.buscarPorId(id);
         convite.setDeletado(true);
         conviteDAO.salvar(convite);
     }
     
     
-    public List<ConviteAjudando> meusConvites() {
+    public List<ConviteCasamento> meusConvites() {
         return conviteDAO.meusConvites();
     }
 
-    public List<ConviteAjudando> meusConvitesEnviados() {
+    public List<ConviteCasamento> meusConvitesEnviados() {
         return conviteDAO.meusConvitesEnviados();
     }
 
 	public void participar(Long id, String login, double valor, String participacao) throws AtletaInexistenteException {
 		
 		System.out.println("convite 1");
-    	EventoAjudando evento = eventoDAO.buscarPorId(id);
+    	EventoCasamento evento = eventoDAO.buscarPorId(id);
     	System.out.println("convite 2");
 
         Atleta convidado = atletaDAO.buscarPorLogin(login);
@@ -123,7 +123,7 @@ public class ConviteNegocioAjudando {
         if (!evento.getParticipantes().contains(convidado)) {
         	System.out.println("convite 4");
 
-        	ConviteAjudando convite = new ConviteAjudando(evento, convidado, valor, participacao);
+        	ConviteCasamento convite = new ConviteCasamento(evento, convidado, valor, participacao);
             convite.getEventoAjudando().getParticipantes().add(convidado);
             conviteDAO.salvar(convite);
         	System.out.println("convite 5");

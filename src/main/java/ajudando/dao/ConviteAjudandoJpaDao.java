@@ -9,12 +9,12 @@ import javax.persistence.Query;
 import framework.br.com.caelum.vraptor.dao.EntidadeJpaDao;
 import framework.br.com.caelum.vraptor.model.Atleta;
 import framework.br.com.caelum.vraptor.model.Convite;
-import framework.br.com.caelum.vraptor.model.ConviteAjudando;
+import framework.br.com.caelum.vraptor.model.ConviteCasamento;
 import framework.br.com.caelum.vraptor.model.UsuarioLogado;
 
 import java.util.List;
 
-public class ConviteAjudandoJpaDao extends EntidadeJpaDao<ConviteAjudando> implements ConviteAjudandoDAO {
+public class ConviteAjudandoJpaDao extends EntidadeJpaDao<ConviteCasamento> implements ConviteAjudandoDAO {
 
     private UsuarioLogado usuarioLogado;
 
@@ -23,12 +23,12 @@ public class ConviteAjudandoJpaDao extends EntidadeJpaDao<ConviteAjudando> imple
 
     @Inject
     public ConviteAjudandoJpaDao(EntityManager entityManager, UsuarioLogado usuarioLogado) {
-        super(entityManager, ConviteAjudando.class);
+        super(entityManager, ConviteCasamento.class);
         this.usuarioLogado = usuarioLogado;
     }
 
 
-    public List<ConviteAjudando> meusConvites() {
+    public List<ConviteCasamento> meusConvites() {
         Query query = manager.createQuery("SELECT c FROM ConviteAjudando c WHERE c.convidado.id = :id AND c.aceito = false AND" +
                 " c.deletado = false")
                 .setParameter("id", usuarioLogado.getUsuario().getId());
@@ -37,7 +37,7 @@ public class ConviteAjudandoJpaDao extends EntidadeJpaDao<ConviteAjudando> imple
 
     
     
-    public List<ConviteAjudando> meusConvitesEnviados() {
+    public List<ConviteCasamento> meusConvitesEnviados() {
         Query query = manager.createQuery("SELECT c FROM ConviteAjudando c WHERE c.eventoAjudando.organizador.id = :id AND c.aceito = false AND" +
                 " c.deletado = false")
                 .setParameter("id", usuarioLogado.getUsuario().getId());

@@ -25,7 +25,7 @@
 
 	<jsp:body>
         <jsp:include page="/WEB-INF/jsp/errors/msgError.jsp" />
-    
+
         <input type="hidden" name="evento.id" value="${evento.id}">
         <div class="panel painel-sisint">
             <div class="panel-heading">
@@ -42,7 +42,7 @@
 										class="form-control" minlength="5" name="evento.titulo"
 										type="text" required value="${evento.titulo}" disabled>
                                 </div>
-                                
+
                                 <div class="form-group col-md-3">
                                     <label for="dataInicio_evento">Data de Início</label>
                                     <input type="text"
@@ -159,12 +159,12 @@
 													style="margin-left: 0px; padding-left: 0px">
 													<c:if
 														test="${usuarioLogado.usuario.id == evento.organizador.id}">
-                                                        <a
-                                                        	href="${linkTo[ConviteController].confirmarPresenca}?id=${convite.id}&login=${participante.login}"
-															class="btn btn-link">
-															<i class="fa fa-check"></i>
-														</a>
-                                                   
+<%--                                                        <a--%>
+<%--                                                        	href="${linkTo[ConviteController].confirmarPresenca}?id=${convite.id}&login=${participante.login}"--%>
+<%--															class="btn btn-link">--%>
+<%--															<i class="fa fa-check"></i>--%>
+<%--														</a>--%>
+
                                                         <form
 															action="${ctx}/evento">
                                                             <a
@@ -185,33 +185,13 @@
 
                 <button href="" class="btn btn-default"
 					onclick="history.back(1)">Voltar</button>
-					
-				</div>
-				<div>
-				<c:if test="${usuarioLogado.retornarUsuario() == evento.organizador.id}">
-					<form id="formAtividade" action="${linkTo[EventoController].criarAlerta}" method="post">
+                <form action="${linkTo[EventoController].gerarRelatorio}?idEvento=${evento.id}" method="post">
+                    <input hidden id="idEvento" value="${evento.id}"/>
 
-					
-					<input type="hidden" name="id" value="${evento.id}" />
-					
-					
-					<div class="form-group col-md-4">
-                            <label for="login_participante">Mensagem:</label>
-                                <input type="text" name="login"
-							class="form-control" required value=""
-							id="login_participanteAlerta"
-							placeholder="Digite o login do Atleta" />
-                        </div>
-                        <div class="form-group col-md-4">
-                        <label for="login_participante">  </label>
-                	<button class="btn btn-primary" type="submit">Mandar Alerta</button>
-                </div>
-                                   
-                                   
-                    
-                     
-					</form>
-					</c:if>
+                    <button type="submit" class="btn btn-success">Gerar Relatório</button>
+                </form>
+
+				</div>
             </div>
 
             <!-- Large modal -->
@@ -255,7 +235,37 @@
                 </div>
 				<!-- /.modal-dialog -->
             </div>
-            
+
+            <!-- Large modal -->
+            <div id="modalRelatorio" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+<%--                    <input type="hidden" name="id"--%>
+<%--                           value="${evento.id}" />--%>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close"
+                                    data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title">Gerar Relatório</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Deseja gerar o relatório?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"
+                                    class="btn btn-default" data-dismiss="modal">Cancelar</button>
+<%--                            <a id="btnGerarRelatorio" href="#"--%>
+<%--                               url-gerar="${linkTo[ConviteController].gerarRelatorio}?idEvento=${evento.id}"--%>
+<%--                               class="btn btn-primary">Gerar</a>--%>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                        <%--                    </form>--%>
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+
              <!-- Large modal -->
             <div id="addAlerta" class="modal fade" role="dialog">
                 <div class="modal-dialog">
@@ -292,8 +302,8 @@
                 </div>
 				<!-- /.modal-dialog -->
             </div>
-            
-            
+
+
         </div>
     </jsp:body>
 </tags:layoutSidebar>

@@ -43,6 +43,14 @@ public class ConviteAjudandoJpaDao extends EntidadeJpaDao<ConviteAjudando> imple
                 .setParameter("id", usuarioLogado.getUsuario().getId());
         return query.getResultList();
     }
-    
-    
+
+
+    @Override
+    public List<ConviteAjudando> convitesPorEvento(Long idEvento) {
+        Query query = manager.createQuery("SELECT c FROM ConviteAjudando c WHERE c.deletado = false AND " +
+                "c.eventoAjudando.id = :idEvento")
+                .setParameter("idEvento", idEvento);
+        List<ConviteAjudando> convites = query.getResultList();
+        return convites;
+    }
 }

@@ -10,4 +10,5 @@ public interface ConviteAjudandoDAO extends EntidadeDAO<ConviteAjudando> {
 
     List<ConviteAjudando> meusConvites();
     List<ConviteAjudando> meusConvitesEnviados();
+    List<ConviteAjudando> convitesPorEvento(Long idEvento);
 }

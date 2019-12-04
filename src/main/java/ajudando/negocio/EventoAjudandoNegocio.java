@@ -1,5 +1,6 @@
 package ajudando.negocio;
 
+import br.com.caelum.vraptor.observer.download.Download;
 import framework.br.com.caelum.vraptor.dao.AtletaDAO;
 import framework.br.com.caelum.vraptor.dao.EsporteDAO;
 import framework.br.com.caelum.vraptor.dao.EventoDAO;
@@ -32,10 +33,7 @@ public class EventoAjudandoNegocio extends EventoNegocio {
 	private EsporteDAO esporteDAO;
 	@Inject
 	private EventoAjudandoDAO dao;
-	
-	
-	
-	
+
 	private GeradorRelatorio relat;
 	
 	@Inject
@@ -171,9 +169,10 @@ public class EventoAjudandoNegocio extends EventoNegocio {
 
 	}
 	
-	public String relatorio(Long id) {
-		return relat.GerarRelatorio((long) 1);
-		
+	public Download relatorio(Long id) {
+		EventoAjudando eventoAjudando = dao.buscarPorId(id);
+
+		return relat.GerarRelatorio(eventoAjudando);
 	}
 
 }

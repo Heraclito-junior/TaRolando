@@ -12,8 +12,10 @@ public class Relatorio {
     private double valorEsperado;
     private int numTotalVolutarios;
     private int numParticipantesConfirmados;
+    private int numParticipantesNaoConfirmados;
     private int numParticipantesPresentes;
-    
+    private int numParticipantesAusentes;
+
     
     public Relatorio() {}
     
@@ -85,4 +87,19 @@ public class Relatorio {
 		this.numParticipantesPresentes = numParticipantesPresentes;
 	}
 
+	public int getNumParticipantesNaoConfirmados() {
+		return numParticipantesNaoConfirmados;
+	}
+
+	public void setNumParticipantesNaoConfirmados(int numParticipantesNaoConfirmados) {
+		this.numParticipantesNaoConfirmados = numParticipantesNaoConfirmados;
+	}
+
+	public int getNumParticipantesAusentes() {
+		return numParticipantesAusentes;
+	}
+
+	public void setNumParticipantesAusentes(int numParticipantesAusentes) {
+		this.numParticipantesAusentes = numParticipantesAusentes;
+	}
 }

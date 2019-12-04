@@ -17,6 +17,7 @@ public class ConviteAjudando extends Convite {
 
     @Deprecated
     public ConviteAjudando() {
+
     }
 
     public ConviteAjudando(EventoAjudando evento, Atleta convidado, Double val, String ajudas){
@@ -24,6 +25,7 @@ public class ConviteAjudando extends Convite {
         this.convidado = convidado;
         this.setValor(val);
         this.setAjuda(ajudas);
+        this.participou = false;
     }
 
 	public EventoAjudando getEventoAjudando() {

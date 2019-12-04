@@ -4,6 +4,7 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.observer.download.Download;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import framework.br.com.caelum.vraptor.anotacoes.Transacional;
@@ -132,10 +133,16 @@ public class EventoController extends ControladorTaRolando<Evento> {
 		this.resultado.redirectTo(this).lista();		
 	}
 	
-	public void relatorio(Long idEvento) {
-		negocio.relatorio(idEvento);
-//		Relatorio relatorio = negocio.relatorio(idEvento);
-//		resultado.include()
+	public Download gerarRelatorio(Long idEvento) {
+		Download download = null;
+
+		try {
+			download = negocio.relatorio(idEvento);
+		} catch (Exception e) {
+			resultado.include("mensagem", new SimpleMessage("error", "DEU BUG NO RELATORIO"));
+			resultado.redirectTo(this).detalhar(idEvento);
+		}
+		return download;
 	}
 
 }

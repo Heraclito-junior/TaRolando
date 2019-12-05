@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface  EventoNegocio<T>{
 
-	public List<OpcaoSelect> geraListaOpcoesEventos();
+
 
 	public void definirAdministradorESalvar(T evento) throws VagasInvalidasException;
 	
@@ -21,14 +21,6 @@ public interface  EventoNegocio<T>{
 
 	public Evento detalhar(Long id);
 
-	public void inserirAtleta(Long id, String login) throws AtletaInexistenteException;
-
-	public void removerAtleta(Long id, String login);
-
 	public Object meusEventos();
-
-	public Object meusAlertas();
-
-	public void criarAlerta(Long id, String login);
 
 }

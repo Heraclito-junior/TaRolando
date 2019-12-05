@@ -27,18 +27,6 @@ public class ConviteController extends ControladorTaRolando<Convite> {
         super(resultado);
         this.conviteNegocio = conviteNegocio;
     }
-    @Transacional
-    public void convidar(Long id, String login, Double val, String participacao) {
-        try {
-            conviteNegocio.convidar(id, login, val, participacao);
-            resultado.include("mensagem", new SimpleMessage("success", "mensagem.convite.convidar.sucesso"));
-        } catch (AtletaInexistenteException at) {
-            resultado.include("mensagem", new SimpleMessage("error", "mensagem.atleta.inexistente"));
-        }  finally {
-            resultado.redirectTo(EventoController.class).detalhar(id);
-        }
-//        resultado.include(new SimpleMessage("error", "mensagem.atleta.inexistente"));
-    }
     
     @Transacional
     public void participar(Long id, String login, double valor, String contribuicaoLaboral) {

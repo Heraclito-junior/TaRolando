@@ -31,8 +31,6 @@ public class ConviteNegocioAjudando implements ConviteNegocio<ConviteAjudando>{
 	
     protected ConviteAjudandoDAO conviteDAO;
 
-
-
     @Deprecated
     public ConviteNegocioAjudando() { this(null, null, null); }
 
@@ -43,25 +41,6 @@ public class ConviteNegocioAjudando implements ConviteNegocio<ConviteAjudando>{
         this.eventoDAO = eventoDAO;
     }
 
-
-    public void convidar(Long id, String login, Double val, String participacao) throws AtletaInexistenteException {
-    	EventoAjudando evento = eventoDAO.buscarPorId(id);
-        Atleta convidado = atletaDAO.buscarPorLogin(login);
-
-        if (convidado == null) {
-            throw new AtletaInexistenteException("Atleta não existe");
-        }
-        if (!evento.getParticipantes().contains(convidado)) {
-
-        	ConviteAjudando convite = new ConviteAjudando(evento, convidado, val, participacao);
-            conviteDAO.salvar(convite);
-        } else {
-
-        }
-    	
-    	
-    }
-    
     
     public List<ConviteAjudando> meusConvites() {
         return conviteDAO.meusConvites();

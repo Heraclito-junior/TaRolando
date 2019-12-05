@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class EventoAjudandoNegocio extends EventoNegocio {
+public class EventoAjudandoNegocio implements EventoNegocio<EventoAjudando> {
 
 	private EsporteDAO esporteDAO;
 	@Inject
@@ -174,5 +174,7 @@ public class EventoAjudandoNegocio extends EventoNegocio {
 
 		return relat.GerarRelatorio(eventoAjudando);
 	}
+
+
 
 }

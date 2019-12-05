@@ -20,7 +20,7 @@ import ajudando.dao.*;
 import java.util.List;
 import java.util.Optional;
 
-public class ConviteNegocioAjudando {
+public class ConviteNegocioAjudando extends ConviteNegocio{
 
     protected AtletaDAO atletaDAO;
 

@@ -7,6 +7,8 @@ import framework.br.com.caelum.vraptor.util.exception.VagasInvalidasException;
 
 import java.util.List;
 
+import br.com.caelum.vraptor.observer.download.Download;
+
 public interface  EventoNegocio<T>{
 
 
@@ -22,5 +24,8 @@ public interface  EventoNegocio<T>{
 	public Evento detalhar(Long id);
 
 	public Object meusEventos();
+	
+	public Download relatorio(Long id);
+
 
 }

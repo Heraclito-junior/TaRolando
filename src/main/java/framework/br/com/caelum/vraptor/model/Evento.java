@@ -30,8 +30,8 @@ public abstract class Evento extends Entidade {
     @OneToOne
     protected Atleta organizador;
 
-//    @ManyToMany(cascade = CascadeType.ALL )
-//    protected List<Atleta> participantes;
+    @ManyToMany(cascade = CascadeType.ALL )
+    protected List<Atleta> participantes;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     protected Endereco localizacao;
@@ -80,13 +80,13 @@ public abstract class Evento extends Entidade {
 
 //    public void setOrganizador(Atleta organizador) { this.organizador = organizador; }
     public void setOrganizador(Usuario organizador) { this.organizador = (Atleta) organizador; }
-//    public List<Atleta> getParticipantes() {
-//        return participantes;
-//    }
-//
-//    public void setParticipantes(List<Atleta> participantes) {
-//        this.participantes = participantes;
-//    }
+    public List<Atleta> getParticipantes() {
+        return participantes;
+    }
+
+    public void setParticipantes(List<Atleta> participantes) {
+        this.participantes = participantes;
+    }
 
 //    public Esporte getTipoEsporte() {
 //        return tipoEsporte;

@@ -36,24 +36,10 @@ public class ConviteController extends ControladorTaRolando<Convite> {
         }  finally {
             resultado.redirectTo(EventoController.class).detalhar(id);
         }
-//        resultado.include(new SimpleMessage("error", "mensagem.atleta.inexistente"));
     }
-    
-    @Transacional
-    public void participar(Long id, String login, double valor, String contribuicaoLaboral) {
-    	try {
-			conviteNegocio.participar(id, login, valor, contribuicaoLaboral);
-		} catch (AtletaInexistenteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        resultado.redirectTo(EventoController.class).detalhar(id);
-    }
-
 
     @Get
     public void meusConvites() {
-        resultado.include("convitesRecebidos", conviteNegocio.meusConvites());
-        resultado.include("convitesEnviados", conviteNegocio.meusConvitesEnviados());
+        resultado.include("convites", conviteNegocio.meusConvites());
     }
 }

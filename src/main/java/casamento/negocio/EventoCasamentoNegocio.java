@@ -46,36 +46,17 @@ public class EventoCasamentoNegocio implements EventoNegocio<EventoCasamento> {
 		this.relat=relat2;
 	}
 
-	public List<OpcaoSelect> geraListaOpcoesEventos() {
-		List<EventoCasamento> todos = this.dao.listar().stream().collect(Collectors.toList());
-		return todos.stream().map(evento -> new OpcaoSelect(evento.getTitulo(), evento.getId()))
-				.collect(Collectors.toList());
-	}
+
 
 	public void definirAdministradorESalvar(EventoCasamento evento) throws VagasInvalidasException {
-//		if (evento.getParticipantes() == null) {
-//			evento.setParticipantes(new ArrayList<>());
-//		}
-//		if(evento.getNumVagasMin()>evento.getNumVagasMax()) {
-//			throw new VagasInvalidasException("Numero de vagas minimas nao pode ser superior as maximas");
-//		}
 		UsuarioCasamento usuarioCasamento = this.usuarioCasamentoDAO.buscarPorLogin(usuarioLogado.getUsuario().getLogin());
 		evento.setOrganizador(this.usuarioLogado.getUsuario());
-//		evento.getParticipantes().add((Atleta) usuarioLogado.getUsuario());
 		this.dao.salvar(evento);
 		return;
 	}
 	
 	public void modificarEvento(EventoCasamento evento) {
-////	evento.setOrganizador(this.usuarioLogado.getAtleta());
-//	System.out.println("organizador "+evento.getOrganizador());
-//	System.out.println("evento "+evento.getTitulo());
-
-
-//	evento.setOrganizador(this.usuarioLogado.getUsuario());
-
 	this.dao.salvar(evento);
-//	this.dao.
 	return;
 }
 
@@ -96,21 +77,8 @@ public class EventoCasamentoNegocio implements EventoNegocio<EventoCasamento> {
 		return this.dao.buscarPorId(id);
 	}
 
-//	public void inserirUsuarioCasamento(Long id, String login) throws AtletaInexistenteException {
-//		EventoCasamento evento = detalhar(id);
-//
-////		Atleta usuario = this.usuarioDAO.buscarPorLogin(login);
-//		UsuarioCasamento usuario = this.usuarioCasamentoDAO.buscarPorLogin(login);
-//		if (usuario.getId() == null) {
-//			throw new AtletaInexistenteException("Atleta Não Existe");
-//		}
-//		if (!evento.getParticipantes().contains(usuario)) {
-//			evento.getParticipantes().add(usuario);
-//
-//		}
-//		this.dao.salvar(evento);
-//
-//	}
+
+
 
 	public void removerAtleta(Long id, String login) {
 		EventoCasamento evento = detalhar(id);
@@ -119,19 +87,19 @@ public class EventoCasamentoNegocio implements EventoNegocio<EventoCasamento> {
 		if (usuario.getId() == null) {
 			return;
 		}
-//		if (evento.getParticipantes().contains(usuario)) {
-//			evento.getParticipantes().remove(usuario);
-//		}
+
 		this.dao.salvar(evento);
 	}
 
 	public Object meusEventos() {
 		return this.dao.meusEventos();
 	}
-
-	public Object meusAlertas() {
-		return this.dao.meusAlertas();
+	public List<OpcaoSelect> geraListaOpcoesEventos() {
+		List<EventoCasamento> todos = this.dao.listar().stream().collect(Collectors.toList());
+		return todos.stream().map(evento -> new OpcaoSelect(evento.getTitulo(), evento.getId()))
+				.collect(Collectors.toList());
 	}
+
 
 	
 	public Download relatorio(Long id) {

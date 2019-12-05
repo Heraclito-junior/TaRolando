@@ -44,28 +44,9 @@ public class ConviteCasamentoNegocio implements ConviteNegocio<ConviteCasamento>
 
     public void convidar(Long id, String nome, String email, String grupo) throws AtletaInexistenteException {
 
-    	System.out.println("convite 1");
-    	EventoCasamento evento = eventoDAO.buscarPorId(id);
-    	System.out.println("convite 2");
-
-//        UsuarioCasamento convidado = usuarioDAO.buscarPorLogin(login);
-    	System.out.println("convite 3");
-
-
-//        if (convidado == null) {
-//        	System.out.println("não valeu");
-//            throw new AtletaInexistenteException("Usuario não existe");
-//        }
-
-        	System.out.println("convite 4");
-
+    		EventoCasamento evento = eventoDAO.buscarPorId(id);
         	ConviteCasamento convite = new ConviteCasamento(evento, nome, email, grupo);
-//            convite.getEvento().getParticipantes().add(convidado.get());
-            conviteDAO.salvar(convite);
-        	System.out.println("convite 5");
-
-
-    	
+            conviteDAO.salvar(convite);    	
     	
     }
 
@@ -80,39 +61,17 @@ public class ConviteCasamentoNegocio implements ConviteNegocio<ConviteCasamento>
         return conviteDAO.meusConvitesEnviados();
     }
 
-	public void participar(Long id, String login, double valor, String participacao) throws AtletaInexistenteException {
-		
-		System.out.println("convite 1");
-    	EventoCasamento evento = eventoDAO.buscarPorId(id);
-    	System.out.println("convite 2");
 
-        UsuarioCasamento convidado = usuarioDAO.buscarPorLogin(login);
-    	System.out.println("convite 3");
-    	
-    	
-
-
-        if (convidado == null) {
-        	System.out.println("não valeu");
-            throw new AtletaInexistenteException("Usuário não existe");
-        }
-//        if (!evento.getParticipantes().contains(convidado)) {
-//        	System.out.println("convite 4");
-//
-//        	ConviteCasamento convite = new ConviteCasamento(evento, convidado, valor, participacao);
-//            convite.getEventoCasamento().getParticipantes().add(convidado);
-//            conviteDAO.salvar(convite);
-//        	System.out.println("convite 5");
-//
-//        } else {
-//        	System.out.println("convite 6");
-//
-//        }
-	}
 
 
     public List<ConviteCasamento> convitesPorEvento(Long id) {
         List<ConviteCasamento> convites = conviteDAO.convitesPorEvento(id);
         return convites;
+    }
+    
+    public void remover(String nome) {
+
+		//TODO   	
+	
     }
 }

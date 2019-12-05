@@ -3,14 +3,7 @@ package ajudando.negocio;
 import br.com.caelum.vraptor.observer.download.Download;
 import framework.br.com.caelum.vraptor.dao.AtletaDAO;
 import framework.br.com.caelum.vraptor.dao.EsporteDAO;
-import framework.br.com.caelum.vraptor.dao.EventoDAO;
-import framework.br.com.caelum.vraptor.dao.EventoJpaDao;
-import framework.br.com.caelum.vraptor.model.Alerta;
-import framework.br.com.caelum.vraptor.model.Atleta;
-import framework.br.com.caelum.vraptor.model.Esporte;
-import framework.br.com.caelum.vraptor.model.Evento;
-import framework.br.com.caelum.vraptor.model.EventoAjudando;
-import framework.br.com.caelum.vraptor.model.UsuarioLogado;
+import framework.br.com.caelum.vraptor.model.*;
 import framework.br.com.caelum.vraptor.negocio.EventoNegocio;
 import framework.br.com.caelum.vraptor.strategy.GeradorRelatorio;
 import framework.br.com.caelum.vraptor.util.OpcaoSelect;
@@ -19,8 +12,8 @@ import framework.br.com.caelum.vraptor.util.exception.VagasInvalidasException;
 
 import javax.inject.Inject;
 
-import ajudando.dao.EventoAjudandoDAO;
-import ajudando.dao.EventoAjudandoJpaDao;
+//import ajudando.dao.EventoCasamentoDAO;
+//import ajudando.dao.EventoCasamentoJpaDao;
 import ajudando.negocio.strategy.GeradorRelatorioAjudando;
 
 import java.util.ArrayList;
@@ -31,18 +24,18 @@ import java.util.stream.Collectors;
 public class EventoAjudandoNegocio extends EventoNegocio {
 
 	private EsporteDAO esporteDAO;
-	@Inject
-	private EventoAjudandoDAO dao;
+//	@Inject
+//	private EventoCasamentoDAO dao;
 
 	private GeradorRelatorio relat;
 	
-	@Inject
-	private EventoAjudandoJpaDao daoJpa;
+//	@Inject
+//	private EventoCasamentoJpaDao daoJpa;
 	
-	@Inject
+//	@Inject
 	private AtletaDAO atletaDAO;
 
-	@Inject
+//	@Inject
 	private UsuarioLogado usuarioLogado;
 
 	@Deprecated
@@ -50,7 +43,7 @@ public class EventoAjudandoNegocio extends EventoNegocio {
 		this(null,null);
 	}
 
-	@Inject
+//	@Inject
 	public EventoAjudandoNegocio(EsporteDAO esporteDAO, GeradorRelatorioAjudando relat2) {
 		this.esporteDAO = esporteDAO;
 		this.relat=relat2;
@@ -63,25 +56,27 @@ public class EventoAjudandoNegocio extends EventoNegocio {
 	}
 
 	public List<OpcaoSelect> geraListaOpcoesEventos() {
-		List<EventoAjudando> todos = this.dao.listar().stream().collect(Collectors.toList());
-		return todos.stream().map(evento -> new OpcaoSelect(evento.getTitulo(), evento.getId()))
-				.collect(Collectors.toList());
+//		List<EventoCasamento> todos = this.dao.listar().stream().collect(Collectors.toList());
+//		return todos.stream().map(evento -> new OpcaoSelect(evento.getTitulo(), evento.getId()))
+//				.collect(Collectors.toList());
+		return null;
 	}
 
-	public void definirAdministradorESalvar(EventoAjudando evento) throws VagasInvalidasException {
-		if (evento.getParticipantes() == null) {
-			evento.setParticipantes(new ArrayList<>());
-		}
+
+	public void definirAdministradorESalvar(EventoCasamento evento) throws VagasInvalidasException {
+//		if (evento.getParticipantes() == null) {
+//			evento.setParticipantes(new ArrayList<>());
+//		}
 //		if(evento.getNumVagasMin()>evento.getNumVagasMax()) {
 //			throw new VagasInvalidasException("Numero de vagas minimas nao pode ser superior as maximas");
 //		}
 		evento.setOrganizador((Atleta) this.usuarioLogado.getUsuario());
 //		evento.getParticipantes().add((Atleta) usuarioLogado.getUsuario());
-		this.dao.salvar(evento);
+//		this.dao.salvar(evento);
 		return;
 	}
 	
-	public void modificarEvento(EventoAjudando evento) {
+	public void modificarEvento(EventoCasamento evento) {
 ////	evento.setOrganizador(this.atletaLogado.getAtleta());
 //	System.out.println("organizador "+evento.getOrganizador());
 //	System.out.println("evento "+evento.getTitulo());
@@ -89,90 +84,96 @@ public class EventoAjudandoNegocio extends EventoNegocio {
 
 //	evento.setOrganizador(this.usuarioLogado.getUsuario());
 
-	this.dao.salvar(evento);
+//	this.dao.salvar(evento);
 //	this.dao.
 	return;
 }
 
 	public void buscarEDeletar(Long id) throws AtletaInexistenteException {
-		EventoAjudando evento = this.dao.buscarPorId(id);
-		if (evento == null) {
-			throw new AtletaInexistenteException("Atleta Não Existe");
-		}
-		evento.setDeletado(true);
-		this.dao.salvar(evento);
+//		EventoCasamento evento = this.dao.buscarPorId(id);
+//		if (evento == null) {
+//			throw new AtletaInexistenteException("Atleta Não Existe");
+//		}
+//		evento.setDeletado(true);
+//		this.dao.salvar(evento);
 	}
 
 	public Object listar() {
-		return this.dao.listar();
+//		return this.dao.listar();
+		return null;
 	}
 
-	public EventoAjudando detalhar(Long id) {
-		return this.dao.buscarPorId(id);
+	public EventoCasamento detalhar(Long id) {
+//		return this.dao.buscarPorId(id);
+		return null;
 	}
 
 	public void inserirAtleta(Long id, String login) throws AtletaInexistenteException {
-		EventoAjudando evento = detalhar(id);
+		EventoCasamento evento = detalhar(id);
 
 		Atleta atleta = this.atletaDAO.buscarPorLogin(login);
 		if (atleta.getId() == null) {
 			throw new AtletaInexistenteException("Atleta Não Existe");
 		}
-		if (!evento.getParticipantes().contains(atleta)) {
-			evento.getParticipantes().add(atleta);
-
-		}
-		this.dao.salvar(evento);
+//		if (!evento.getParticipantes().contains(atleta)) {
+//			evento.getParticipantes().add(atleta);
+//
+//		}
+//		this.dao.salvar(evento);
 
 	}
 
 	public void removerAtleta(Long id, String login) {
-		EventoAjudando evento = detalhar(id);
+		EventoCasamento evento = detalhar(id);
 
 		Atleta atleta = this.atletaDAO.buscarPorLogin(login);
 		if (atleta.getId() == null) {
 			return;
 		}
-		if (evento.getParticipantes().contains(atleta)) {
-			evento.getParticipantes().remove(atleta);
-		}
-		this.dao.salvar(evento);
+//		if (evento.getParticipantes().contains(atleta)) {
+//			evento.getParticipantes().remove(atleta);
+//		}
+//		this.dao.salvar(evento);
 	}
 
 	public Object meusEventos() {
-		return this.dao.meusEventos();
+//		return this.dao.meusEventos();
+		return null;
 	}
 
+
 	public Object meusAlertas() {
-		return this.dao.meusAlertas();
+//		return this.dao.meusAlertas();
+		return null;
 	}
 
 	public void criarAlerta(Long id, String login) {
 
-		Evento evento = detalhar(id);
-		Long ultimoNumero = (long) 0;
-		for (Atleta i : evento.getParticipantes()) {
-			Optional<Alerta> teste = daoJpa.buscarUltimoAlerta();
-			if (teste.isPresent()) {
-				ultimoNumero = teste.get().getId();
-				ultimoNumero = ultimoNumero + 1;
-
-			}
-
-			daoJpa.inserirAlerta(ultimoNumero, login, id, i.getId());
-			if (!teste.isPresent()) {
-				ultimoNumero = (long) 1;
-
-			}
-
-		}
+//		Evento evento = detalhar(id);
+//		Long ultimoNumero = (long) 0;
+//		for (Atleta i : evento.getParticipantes()) {
+//			Optional<Alerta> teste = daoJpa.buscarUltimoAlerta();
+//			if (teste.isPresent()) {
+//				ultimoNumero = teste.get().getId();
+//				ultimoNumero = ultimoNumero + 1;
+//
+//			}
+//
+//			daoJpa.inserirAlerta(ultimoNumero, login, id, i.getId());
+//			if (!teste.isPresent()) {
+//				ultimoNumero = (long) 1;
+//
+//			}
+//
+//		}
 
 	}
 	
 	public Download relatorio(Long id) {
-		EventoAjudando eventoAjudando = dao.buscarPorId(id);
+//		EventoCasamento eventoAjudando = dao.buscarPorId(id);
 
-		return relat.GerarRelatorio(eventoAjudando);
+//		return relat.GerarRelatorio(eventoAjudando);
+		return null;
 	}
 
 }

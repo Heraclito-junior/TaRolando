@@ -129,16 +129,10 @@
                                    type="text" required value="${evento.titulo}">
                         </div>
 
-                        
                         <div class="form-group col-md-2">
-                            <label for="num_vagas_min">Meta de Doações </label>
-                            <input id="num_vagas_min" class="form-control" name="evento.metaDoacoes" min="0"
-                                   type="number" value="${evento.metaDoacoes}">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="num_vagas_max">Meta de Voluntários </label>
-                            <input id="num_vagas_max" class="form-control" name="evento.metaVoluntarios" min="0"
-                                   type="number" value="${evento.metaVoluntarios}">
+                            <label for="custo_pessoa">Custo Por Pessoa </label>
+                            <input id="custo_pessoa" class="form-control" name="evento.custoPorPessoa" min="0"
+                                   type="number" value="${evento.custoPorPessoa}">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="horario_inicio">Horário de Início </label>
@@ -151,22 +145,13 @@
                                    type="time" value="${evento.horaFim}" required>
                         </div>
                         <div class="form-group col-md-2">
-                            <label for="dataInicio_evento">Data de Início</label>
+                            <label for="dataInicio_evento">Data:</label>
                             <button type="button" data-dismiss="modal" class="close">
                                 <span onclick="limparDataInicio()">&times;</span>
                             </button>
                             <input type="text" class="form-control datePicker" id="dataInicio_evento"
                                    value="${evento.dataInicio}"
                                    placeholder="(Opcional)" readonly="readonly" name="evento.dataInicio"/>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="dataFinal_evento">Data Final</label>
-                            <button type="button" data-dismiss="modal" class="close">
-                                <span onclick="limparDataFinal()">&times;</span>
-                            </button>
-                            <input type="text" class="form-control datePicker" id="dataFinal_evento"
-                                   value="${evento.dataFim}"
-                                   placeholder="(Opcional)" readonly="readonly" name="evento.dataFim"/>
                         </div>
                         <div class="form-group col-md-8">
                             <label for="localizacao">Localização </label>

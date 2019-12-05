@@ -7,24 +7,22 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.observer.download.Download;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import casamento.negocio.EventoCasamentoNegocio;
 import framework.br.com.caelum.vraptor.anotacoes.Transacional;
-import framework.br.com.caelum.vraptor.dao.EventoDAO;
 import framework.br.com.caelum.vraptor.model.Evento;
-import framework.br.com.caelum.vraptor.model.EventoAjudando;
-import framework.br.com.caelum.vraptor.model.Relatorio;
 //import framework.br.com.caelum.vraptor.negocio.EventoNegocio;
+import framework.br.com.caelum.vraptor.model.EventoCasamento;
 import framework.br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
 import framework.br.com.caelum.vraptor.util.exception.VagasInvalidasException;
 
 import javax.inject.Inject;
 
-import ajudando.negocio.EventoAjudandoNegocio;
 
 @Path("/evento")
 @Controller
 public class EventoController extends ControladorTaRolando<Evento> {
 
-	private EventoAjudandoNegocio negocio;
+	private EventoCasamentoNegocio negocio;
 	private Validator validator;
 
 	@Deprecated
@@ -33,14 +31,14 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	}
 
 	@Inject
-	public EventoController(Result resultado, EventoAjudandoNegocio negocio, Validator validator) {
+	public EventoController(Result resultado, EventoCasamentoNegocio negocio, Validator validator) {
 		super(resultado);
 		this.negocio = negocio;
 		this.validator = validator;
 	}
 
 	public void form() {
-		resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
+//		resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
 	}
 
 	
@@ -65,10 +63,10 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	}
 
 	public void detalhar(Long id) {
-		EventoAjudando evento = negocio.detalhar(id);
-		this.resultado.include("numParticipantes", evento.getParticipantes().size());
+		EventoCasamento evento = negocio.detalhar(id);
+//		this.resultado.include("numParticipantes", evento.getParticipantes().size());
 		this.resultado.include("evento", evento);
-		this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
+//		this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
 	}
 
 	@Transacional
@@ -92,7 +90,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	}
 	@Transacional
 	@Post
-	public void salvar(EventoAjudando evento) {
+	public void salvar(EventoCasamento evento) {
 		try {
 		this.validator.onErrorRedirectTo(this).form();
 		negocio.definirAdministradorESalvar(evento);
@@ -116,7 +114,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
 		
         Evento evento = this.negocio.detalhar(id);		
         this.resultado.include("evento", evento);		
-        this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());		
+//        this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
 	
     }
 	
@@ -126,7 +124,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
 
 	@Transacional		
 	@Post		
-	public void modificar(EventoAjudando evento) {		
+	public void modificar(EventoCasamento evento) {
 		evento.setOrganizador(this.negocio.detalhar(evento.getId()).getOrganizador());		
 		this.validator.onErrorRedirectTo(this).form();		
 		negocio.modificarEvento(evento);		

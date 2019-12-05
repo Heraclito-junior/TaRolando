@@ -25,7 +25,7 @@ public class Horario extends Entidade {
     private Atleta atleta;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private EventoAjudando evento;
+    private EventoCasamento evento;
 
     public Horario() {
         this.disponivel = true;
@@ -119,7 +119,7 @@ public class Horario extends Entidade {
         return evento;
     }
 
-    public void setEvento(EventoAjudando evento) {
+    public void setEvento(EventoCasamento evento) {
         this.evento = evento;
     }
 }

@@ -1,15 +1,15 @@
-package framework.br.com.caelum.vraptor.negocio;
+package casamento.negocio;
 
+import br.com.caelum.vraptor.observer.download.Download;
+import casamento.dao.EventoCasamentoDAO;
+import casamento.dao.EventoCasamentoJpaDao;
+import casamento.negocio.strategy.GeradorRelatorioCasamento;
 import framework.br.com.caelum.vraptor.dao.AtletaDAO;
 import framework.br.com.caelum.vraptor.dao.EsporteDAO;
-//import framework.br.com.caelum.vraptor.dao.EventoCasamentoJpaDao;
-import framework.br.com.caelum.vraptor.dao.EventoDAO;
-import framework.br.com.caelum.vraptor.dao.EventoJpaDao;
-import framework.br.com.caelum.vraptor.model.Alerta;
-import framework.br.com.caelum.vraptor.model.Atleta;
-import framework.br.com.caelum.vraptor.model.Esporte;
-import framework.br.com.caelum.vraptor.model.Evento;
-import framework.br.com.caelum.vraptor.model.UsuarioLogado;
+import framework.br.com.caelum.vraptor.dao.UsuarioCasamentoDAO;
+import framework.br.com.caelum.vraptor.model.*;
+import framework.br.com.caelum.vraptor.negocio.EventoNegocio;
+import framework.br.com.caelum.vraptor.strategy.GeradorRelatorio;
 import framework.br.com.caelum.vraptor.util.OpcaoSelect;
 import framework.br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
 import framework.br.com.caelum.vraptor.util.exception.VagasInvalidasException;
@@ -20,60 +20,54 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public abstract class EventoNegocio {
+public class EventoCasamentoNegocio extends EventoNegocio {
 
-	private EsporteDAO esporteDAO;
 	@Inject
-	private EventoDAO dao;
-	@Inject
-	private EventoJpaDao daoJpa;
-	
-//	@Inject
-//	private EventoCasamentoJpaDao daoJpa2;
+	private EventoCasamentoDAO dao;
+
+	private GeradorRelatorio relat;
 	
 	@Inject
-	private AtletaDAO atletaDAO;
+	private EventoCasamentoJpaDao daoJpa;
+	
+	@Inject
+	private UsuarioCasamentoDAO usuarioCasamentoDAO;
 
 	@Inject
 	private UsuarioLogado usuarioLogado;
 
 	@Deprecated
-	public EventoNegocio() {
+	public EventoCasamentoNegocio() {
 		this(null);
 	}
 
 	@Inject
-	public EventoNegocio(EsporteDAO esporteDAO) {
-		this.esporteDAO = esporteDAO;
+	public EventoCasamentoNegocio(GeradorRelatorioCasamento relat2) {
+		this.relat=relat2;
 	}
 
-//	public List<OpcaoSelect> geraListaOpcoesEsportes() {
-//		List<Esporte> todos = this.esporteDAO.listar().stream().collect(Collectors.toList());
-//		return todos.stream().map(esporte -> new OpcaoSelect(esporte.getNome(), esporte.getId()))
-//				.collect(Collectors.toList());
-//	}
-
 	public List<OpcaoSelect> geraListaOpcoesEventos() {
-		List<Evento> todos = this.dao.listar().stream().collect(Collectors.toList());
+		List<EventoCasamento> todos = this.dao.listar().stream().collect(Collectors.toList());
 		return todos.stream().map(evento -> new OpcaoSelect(evento.getTitulo(), evento.getId()))
 				.collect(Collectors.toList());
 	}
 
-	public void definirAdministradorESalvar(Evento evento) throws VagasInvalidasException {
+	public void definirAdministradorESalvar(EventoCasamento evento) throws VagasInvalidasException {
 //		if (evento.getParticipantes() == null) {
 //			evento.setParticipantes(new ArrayList<>());
 //		}
 //		if(evento.getNumVagasMin()>evento.getNumVagasMax()) {
 //			throw new VagasInvalidasException("Numero de vagas minimas nao pode ser superior as maximas");
 //		}
-		evento.setOrganizador((Atleta) this.usuarioLogado.getUsuario());
+		UsuarioCasamento usuarioCasamento = this.usuarioCasamentoDAO.buscarPorLogin(usuarioLogado.getUsuario().getLogin());
+		evento.setOrganizador(this.usuarioLogado.getUsuario());
 //		evento.getParticipantes().add((Atleta) usuarioLogado.getUsuario());
 		this.dao.salvar(evento);
 		return;
 	}
 	
-	public void modificarEvento(Evento evento) {
-////	evento.setOrganizador(this.atletaLogado.getAtleta());
+	public void modificarEvento(EventoCasamento evento) {
+////	evento.setOrganizador(this.usuarioLogado.getAtleta());
 //	System.out.println("organizador "+evento.getOrganizador());
 //	System.out.println("evento "+evento.getTitulo());
 
@@ -86,9 +80,9 @@ public abstract class EventoNegocio {
 }
 
 	public void buscarEDeletar(Long id) throws AtletaInexistenteException {
-		Evento evento = this.dao.buscarPorId(id);
+		EventoCasamento evento = this.dao.buscarPorId(id);
 		if (evento == null) {
-			throw new AtletaInexistenteException("Atleta Não Existe");
+			throw new AtletaInexistenteException("Usuario Não Existe");
 		}
 		evento.setDeletado(true);
 		this.dao.salvar(evento);
@@ -98,34 +92,35 @@ public abstract class EventoNegocio {
 		return this.dao.listar();
 	}
 
-	public Evento detalhar(Long id) {
+	public EventoCasamento detalhar(Long id) {
 		return this.dao.buscarPorId(id);
 	}
 
-	public void inserirAtleta(Long id, String login) throws AtletaInexistenteException {
-		Evento evento = detalhar(id);
-
-		Atleta atleta = this.atletaDAO.buscarPorLogin(login);
-		if (atleta.getId() == null) {
-			throw new AtletaInexistenteException("Atleta Não Existe");
-		}
-//		if (!evento.getParticipantes().contains(atleta)) {
-//			evento.getParticipantes().add(atleta);
-
+//	public void inserirUsuarioCasamento(Long id, String login) throws AtletaInexistenteException {
+//		EventoCasamento evento = detalhar(id);
+//
+////		Atleta usuario = this.usuarioDAO.buscarPorLogin(login);
+//		UsuarioCasamento usuario = this.usuarioCasamentoDAO.buscarPorLogin(login);
+//		if (usuario.getId() == null) {
+//			throw new AtletaInexistenteException("Atleta Não Existe");
 //		}
-		this.dao.salvar(evento);
-
-	}
+//		if (!evento.getParticipantes().contains(usuario)) {
+//			evento.getParticipantes().add(usuario);
+//
+//		}
+//		this.dao.salvar(evento);
+//
+//	}
 
 	public void removerAtleta(Long id, String login) {
-		Evento evento = detalhar(id);
+		EventoCasamento evento = detalhar(id);
 
-		Atleta atleta = this.atletaDAO.buscarPorLogin(login);
-		if (atleta.getId() == null) {
+		UsuarioCasamento usuario = this.usuarioCasamentoDAO.buscarPorLogin(login);
+		if (usuario.getId() == null) {
 			return;
 		}
-//		if (evento.getParticipantes().contains(atleta)) {
-//			evento.getParticipantes().remove(atleta);
+//		if (evento.getParticipantes().contains(usuario)) {
+//			evento.getParticipantes().remove(usuario);
 //		}
 		this.dao.salvar(evento);
 	}
@@ -158,6 +153,10 @@ public abstract class EventoNegocio {
 //
 //		}
 
+	}
+	
+	public Download relatorio(Long id) {
+		return relat.gerarRelatorio(id);
 	}
 
 }

@@ -44,7 +44,7 @@
                                 </div>
 
                                 <div class="form-group col-md-3">
-                                    <label for="dataInicio_evento">Data de Início</label>
+                                    <label for="dataInicio_evento">Data:</label>
                                     <input type="text"
 										class="form-control datePicker" id="dataInicio_evento"
 										value="${evento.dataInicio}" disabled placeholder="(Opcional)"

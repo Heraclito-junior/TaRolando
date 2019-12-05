@@ -1,30 +1,26 @@
 package framework.br.com.caelum.vraptor.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-public class Atleta extends Usuario {
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Esporte esportePreferido;
+public class UsuarioCasamento extends Usuario {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Endereco endereco;
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<EventoCasamento> eventos;
-    
+
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Atleta> amigos;
-    
+    private List<UsuarioCasamento> amigos;
+
 
 //    @ManyToOne(cascade = CascadeType.ALL    )
 //    private Convite convite;
 
     @Deprecated
-    public Atleta() {
+    public UsuarioCasamento() {
     }
 
     public Endereco getEndereco() {
@@ -35,14 +31,6 @@ public class Atleta extends Usuario {
         this.endereco = endereco;
     }
 
-    public Esporte getEsportePreferido() {
-        return esportePreferido;
-    }
-
-    public void setEsportePreferido(Esporte esportePreferido) {
-        this.esportePreferido = esportePreferido;
-    }
-
     public List<EventoCasamento> getEventos() {
         return eventos;
     }
@@ -51,11 +39,11 @@ public class Atleta extends Usuario {
         this.eventos = eventos;
     }
 
-	public List<Atleta> getAmigos() {
-		return amigos;
-	}
+    public List<UsuarioCasamento> getAmigos() {
+        return amigos;
+    }
 
-	public void setAmigos(List<Atleta> amigos) {
-		this.amigos = amigos;
-	}
+    public void setAmigos(List<UsuarioCasamento> amigos) {
+        this.amigos = amigos;
+    }
 }

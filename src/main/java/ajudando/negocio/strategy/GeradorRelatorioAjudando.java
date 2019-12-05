@@ -19,11 +19,11 @@ import java.util.List;
 
 public class GeradorRelatorioAjudando  implements GeradorRelatorio{
 	
-	@Inject
-	private EventoAjudandoDAO dao;
-
-	@Inject
-	ConviteAjudandoDAO conviteDao;
+//	@Inject
+//	private EventoAjudandoDAO dao;
+//
+//	@Inject
+//	ConviteAjudandoDAO conviteDao;
 
 	private ServletContext context;
 
@@ -33,7 +33,7 @@ public class GeradorRelatorioAjudando  implements GeradorRelatorio{
 
 	}
 
-	public Download GerarRelatorio(EventoAjudando evento) {
+	public Download gerarRelatorio(Long id) {
 		System.out.println("2");
 //		System.out.println(dao.buscarPorId((long) 1).getTitulo());
 
@@ -44,31 +44,32 @@ public class GeradorRelatorioAjudando  implements GeradorRelatorio{
 		int totalVoluntariosConfirmados = 0;
 		int totalVoluntariosNaoConfirmados = 0;
 
+
 		Relatorio relatorio = new Relatorio();
-		List<ConviteAjudando> convites = conviteDao.convitesPorEvento(evento.getId());
+//		List<ConviteAjudando> convites = conviteDao.convitesPorEvento(evento.getId());
 
-		for (ConviteAjudando c : convites) {
-			if (c.getParticipou()) {
-				totalDoacoesEfetivadas += c.getValor();
-				totalVoluntariosPresentes++;
-			} else {
-				totalDoacoesNaoEfetivadas += c.getValor();
-				totalVoluntariosAusentes++;
-			}
+//		for (ConviteAjudando c : convites) {
+//			if (c.getParticipou()) {
+//				totalDoacoesEfetivadas += c.getValor();
+//				totalVoluntariosPresentes++;
+//			} else {
+//				totalDoacoesNaoEfetivadas += c.getValor();
+//				totalVoluntariosAusentes++;
+//			}
+//
+//			if (c.isAceito()) {
+//				totalVoluntariosConfirmados++;
+//			} else {
+//				totalVoluntariosNaoConfirmados++;
+//			}
+//		}
 
-			if (c.isAceito()) {
-				totalVoluntariosConfirmados++;
-			} else {
-				totalVoluntariosNaoConfirmados++;
-			}
-		}
-
-		relatorio.setTitulo(evento.getTitulo());
-		relatorio.setDataFim(evento.getDataFim());
-		relatorio.setDataInicio(evento.getDataInicio());
-		relatorio.setDescricao(evento.getDescricao());
-		relatorio.setHoraFim(evento.getHoraFim());
-		relatorio.setHoraInicio(evento.getHoraInicio());
+//		relatorio.setTitulo(evento.getTitulo());
+//		relatorio.setDataFim(evento.getDataFim());
+//		relatorio.setDataInicio(evento.getDataInicio());
+//		relatorio.setDescricao(evento.getDescricao());
+//		relatorio.setHoraFim(evento.getHoraFim());
+//		relatorio.setHoraInicio(evento.getHoraInicio());
 		relatorio.setValorEsperado(totalDoacoesEfetivadas + totalDoacoesNaoEfetivadas);
 		relatorio.setValorArrecadado(totalDoacoesEfetivadas);
 		relatorio.setNumParticipantesPresentes(totalVoluntariosPresentes);

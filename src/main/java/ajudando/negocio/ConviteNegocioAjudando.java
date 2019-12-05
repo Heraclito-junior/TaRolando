@@ -1,16 +1,11 @@
 package ajudando.negocio;
 
 import framework.br.com.caelum.vraptor.dao.AtletaDAO;
-import framework.br.com.caelum.vraptor.dao.ConviteDAO;
-//import framework.br.com.caelum.vraptor.dao.EventoAjudandoDAO;
-//import framework.br.com.caelum.vraptor.dao.EventoAjudandoJpaDao;
-import framework.br.com.caelum.vraptor.dao.EventoDAO;
+//import framework.br.com.caelum.vraptor.dao.EventoCasamentoDAO;
+//import framework.br.com.caelum.vraptor.dao.EventoCasamentoJpaDao;
 import framework.br.com.caelum.vraptor.model.Atleta;
-import framework.br.com.caelum.vraptor.model.Convite;
-import framework.br.com.caelum.vraptor.model.ConviteAjudando;
-import framework.br.com.caelum.vraptor.model.Evento;
-import framework.br.com.caelum.vraptor.model.EventoAjudando;
-import framework.br.com.caelum.vraptor.negocio.*;
+//import framework.br.com.caelum.vraptor.model.ConviteAjudando;
+import framework.br.com.caelum.vraptor.model.ConviteCasamento;
 import framework.br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
 
 import javax.inject.Inject;
@@ -18,7 +13,6 @@ import javax.inject.Inject;
 import ajudando.dao.*;
 
 import java.util.List;
-import java.util.Optional;
 
 public class ConviteNegocioAjudando {
 
@@ -26,8 +20,8 @@ public class ConviteNegocioAjudando {
 
     protected EventoAjudandoDAO eventoDAO;
     
-    @Inject
-    protected EventoAjudandoJpaDao eventoJpaDAO;
+//    @Inject
+//    protected EventoAjudandoJpaDao eventoJpaDAO;
 	
     protected ConviteAjudandoDAO conviteDAO;
 
@@ -36,7 +30,7 @@ public class ConviteNegocioAjudando {
     @Deprecated
     public ConviteNegocioAjudando() { this(null, null, null); }
 
-    @Inject
+//    @Inject
     public ConviteNegocioAjudando(ConviteAjudandoDAO conviteDAO, AtletaDAO atletaDAO, EventoAjudandoDAO eventoDAO) {
         this.conviteDAO = conviteDAO;
         this.atletaDAO = atletaDAO;
@@ -46,30 +40,30 @@ public class ConviteNegocioAjudando {
 
     public void convidar(Long id, String login, Double val, String participacao) throws AtletaInexistenteException {
 
-    	System.out.println("convite 1");
-    	EventoAjudando evento = eventoDAO.buscarPorId(id);
-    	System.out.println("convite 2");
+//    	System.out.println("convite 1");
+//    	Evento evento = eventoDAO.buscarPorId(id);
+//    	System.out.println("convite 2");
+//
+//        Atleta convidado = atletaDAO.buscarPorLogin(login);
+//    	System.out.println("convite 3");
+//
+//
+//        if (convidado == null) {
+//        	System.out.println("não valeu");
+//            throw new AtletaInexistenteException("Atleta não existe");
+//        }
+//        if (!evento.getParticipantes().contains(convidado)) {
+//        	System.out.println("convite 4");
+//
+//        	ConviteAjudando convite = new ConviteAjudando(evento, convidado, val, participacao);
+////            convite.getEvento().getParticipantes().add(convidado.get());
+//            conviteDAO.salvar(convite);
+//        	System.out.println("convite 5");
 
-        Atleta convidado = atletaDAO.buscarPorLogin(login);
-    	System.out.println("convite 3");
+//        } else {
+//        	System.out.println("convite 6");
 
-
-        if (convidado == null) {
-        	System.out.println("não valeu");
-            throw new AtletaInexistenteException("Atleta não existe");
-        }
-        if (!evento.getParticipantes().contains(convidado)) {
-        	System.out.println("convite 4");
-
-        	ConviteAjudando convite = new ConviteAjudando(evento, convidado, val, participacao);
-//            convite.getEvento().getParticipantes().add(convidado.get());
-            conviteDAO.salvar(convite);
-        	System.out.println("convite 5");
-
-        } else {
-        	System.out.println("convite 6");
-
-        }
+//        }
     	
     	
     }
@@ -83,31 +77,33 @@ public class ConviteNegocioAjudando {
     }
 
     public void rejeitar(Long id) {
-    	ConviteAjudando convite = conviteDAO.buscarPorId(id);
-        convite.setAceito(false);
-        convite.setDeletado(true);
-        conviteDAO.salvar(convite);
+//    	ConviteAjudando convite = conviteDAO.buscarPorId(id);
+//        convite.setAceito(false);
+//        convite.setDeletado(true);
+//        conviteDAO.salvar(convite);
     }
 
     public void remover(Long id) {
-    	ConviteAjudando convite = conviteDAO.buscarPorId(id);
-        convite.setDeletado(true);
-        conviteDAO.salvar(convite);
+//    	ConviteAjudando convite = conviteDAO.buscarPorId(id);
+//        convite.setDeletado(true);
+//        conviteDAO.salvar(convite);
     }
     
     
-    public List<ConviteAjudando> meusConvites() {
-        return conviteDAO.meusConvites();
+    public List<ConviteCasamento> meusConvites() {
+//        return conviteDAO.meusConvites();
+        return null;
     }
 
-    public List<ConviteAjudando> meusConvitesEnviados() {
-        return conviteDAO.meusConvitesEnviados();
+    public List<ConviteCasamento> meusConvitesEnviados() {
+//        return conviteDAO.meusConvitesEnviados();
+        return null;
     }
 
 	public void participar(Long id, String login, double valor, String participacao) throws AtletaInexistenteException {
 		
 		System.out.println("convite 1");
-    	EventoAjudando evento = eventoDAO.buscarPorId(id);
+//    	EventoAjudando evento = eventoDAO.buscarPorId(id);
     	System.out.println("convite 2");
 
         Atleta convidado = atletaDAO.buscarPorLogin(login);
@@ -120,18 +116,18 @@ public class ConviteNegocioAjudando {
         	System.out.println("não valeu");
             throw new AtletaInexistenteException("Atleta não existe");
         }
-        if (!evento.getParticipantes().contains(convidado)) {
-        	System.out.println("convite 4");
-
-        	ConviteAjudando convite = new ConviteAjudando(evento, convidado, valor, participacao);
-            convite.getEventoAjudando().getParticipantes().add(convidado);
-            conviteDAO.salvar(convite);
-        	System.out.println("convite 5");
-
-        } else {
-        	System.out.println("convite 6");
-
-        }
+//        if (!evento.getParticipantes().contains(convidado)) {
+//        	System.out.println("convite 4");
+//
+//        	ConviteAjudando convite = new ConviteAjudando(evento, convidado, valor, participacao);
+//            convite.getEventoAjudando().getParticipantes().add(convidado);
+//            conviteDAO.salvar(convite);
+//        	System.out.println("convite 5");
+//
+//        } else {
+//        	System.out.println("convite 6");
+//
+//        }
 	}
 
 

@@ -9,15 +9,16 @@ import framework.br.com.caelum.vraptor.model.Atleta;
 import framework.br.com.caelum.vraptor.model.ConviteCasamento;
 import framework.br.com.caelum.vraptor.model.EventoCasamento;
 import framework.br.com.caelum.vraptor.model.UsuarioCasamento;
+import framework.br.com.caelum.vraptor.negocio.ConviteNegocio;
 import framework.br.com.caelum.vraptor.util.exception.AtletaInexistenteException;
 
 import javax.inject.Inject;
 import java.util.List;
 
-//import framework.br.com.caelum.vraptor.dao.EventoCasamentoDAO;
-//import framework.br.com.caelum.vraptor.dao.EventoCasamentoJpaDao;
 
-public class ConviteCasamentoNegocio {
+
+
+public class ConviteCasamentoNegocio implements ConviteNegocio<ConviteCasamento>{
 
     protected UsuarioCasamentoDAO usuarioDAO;
 
@@ -68,26 +69,7 @@ public class ConviteCasamentoNegocio {
     	
     }
 
-    public void aceitar(Long id) {
-//        ConviteCasamento convite = conviteDAO.buscarPorId(id);
-//        convite.getEvento().getParticipantes().add(convite.getConvidado());
-//        convite.getConvidado().getEventos().add(convite.getEvento());
-//        convite.setAceito(true);
-//        eventoDAO.salvar(convite.getEvento());
-    }
-
-    public void rejeitar(Long id) {
-    	ConviteCasamento convite = conviteDAO.buscarPorId(id);
-        convite.setAceito(false);
-        convite.setDeletado(true);
-        conviteDAO.salvar(convite);
-    }
-
-    public void remover(Long id) {
-    	ConviteCasamento convite = conviteDAO.buscarPorId(id);
-        convite.setDeletado(true);
-        conviteDAO.salvar(convite);
-    }
+    
     
     
     public List<ConviteCasamento> meusConvites() {

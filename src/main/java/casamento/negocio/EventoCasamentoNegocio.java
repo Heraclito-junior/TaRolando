@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class EventoCasamentoNegocio extends EventoNegocio {
+public class EventoCasamentoNegocio implements EventoNegocio<EventoCasamento> {
 
 	@Inject
 	private EventoCasamentoDAO dao;
@@ -137,5 +137,9 @@ public class EventoCasamentoNegocio extends EventoNegocio {
 	public Download relatorio(Long id) {
 		return relat.gerarRelatorio(id);
 	}
+
+	
+
+
 
 }

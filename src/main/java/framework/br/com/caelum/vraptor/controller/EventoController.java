@@ -78,25 +78,6 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	}
 
 	@Transacional
-	public void convidarAtleta(Long id, String login) {
-		
-		try {
-			negocio.inserirAtleta(id, login);
-		} catch (AtletaInexistenteException e) {
-			this.resultado.redirectTo(this).detalhar(id);
-			return;
-		}
-		this.resultado.redirectTo(this).detalhar(id);
-
-	}
-
-	@Transacional
-	public void deletarAtleta(Long id, String login) {
-		negocio.removerAtleta(id,login);
-		this.resultado.redirectTo(this).detalhar(id);
-
-	}
-	@Transacional
 	@Post
 	public void salvar(EventoCasamento evento) {
 		try {
@@ -111,13 +92,7 @@ public class EventoController extends ControladorTaRolando<Evento> {
 
 		
 	}
-	
-	public void criarAlerta(Long id, String login) {
-		negocio.criarAlerta(id,login);
-		this.resultado.redirectTo(this).detalhar(id);
 
-
-	}
 	public void editar(Long id) {		
 		
         Evento evento = this.negocio.detalhar(id);		

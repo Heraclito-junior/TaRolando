@@ -13,8 +13,6 @@ import framework.br.com.caelum.vraptor.util.exception.AtletaInexistenteException
 
 import javax.inject.Inject;
 
-import ajudando.negocio.ConviteNegocioAjudando;
-
 @Controller
 public class ConviteController extends ControladorTaRolando<Convite> {
 
@@ -52,23 +50,6 @@ public class ConviteController extends ControladorTaRolando<Convite> {
         resultado.redirectTo(EventoController.class).detalhar(id);
     }
 
-    @Transacional
-    public void remover(Long id) {
-        conviteNegocio.remover(id);
-        resultado.redirectTo(this).meusConvites();
-    }
-
-    @Transacional
-    public void aceitar(Long id) {
-        conviteNegocio.aceitar(id);		
-        resultado.redirectTo(this).meusConvites();
-    }
-
-    @Transacional
-    public void rejeitar(Long id) {
-        conviteNegocio.rejeitar(id);
-        resultado.redirectTo(this).meusConvites();
-    }
 
     @Get
     public void meusConvites() {

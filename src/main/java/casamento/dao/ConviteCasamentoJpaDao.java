@@ -46,7 +46,7 @@ public class ConviteCasamentoJpaDao extends EntidadeJpaDao<ConviteCasamento> imp
     @Override
     public List<ConviteCasamento> convitesPorEvento(Long idEvento) {
         Query query = manager.createQuery("SELECT c FROM ConviteCasamento c WHERE c.deletado = false AND " +
-                "c.eventoAjudando.id = :idEvento")
+                "c.eventoCasamento.id = :idEvento")
                 .setParameter("idEvento", idEvento);
         List<ConviteCasamento> convites = query.getResultList();
         return convites;

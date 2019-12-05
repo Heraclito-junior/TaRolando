@@ -5,6 +5,7 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.SimpleMessage;
+import casamento.negocio.ConviteCasamentoNegocio;
 import framework.br.com.caelum.vraptor.anotacoes.Transacional;
 import framework.br.com.caelum.vraptor.model.Convite;
 import framework.br.com.caelum.vraptor.negocio.ConviteNegocio;
@@ -17,20 +18,20 @@ import ajudando.negocio.ConviteNegocioAjudando;
 @Controller
 public class ConviteController extends ControladorTaRolando<Convite> {
 
-    private ConviteNegocioAjudando conviteNegocio;
+    private ConviteCasamentoNegocio conviteNegocio;
     
     @Deprecated
     public ConviteController() { this(null, null); }
 
     @Inject
-    public ConviteController(Result resultado, ConviteNegocioAjudando conviteNegocio) {
+    public ConviteController(Result resultado, ConviteCasamentoNegocio conviteNegocio) {
         super(resultado);
         this.conviteNegocio = conviteNegocio;
     }
     @Transacional
-    public void convidar(Long id, String login, Double val, String participacao) {
+    public void convidar(Long id, String login, String nome, String email, String grupo) {
         try {
-            conviteNegocio.convidar(id, login, val, participacao);
+            conviteNegocio.convidar(id, nome, email, grupo);
             resultado.include("mensagem", new SimpleMessage("success", "mensagem.convite.convidar.sucesso"));
         } catch (AtletaInexistenteException at) {
             resultado.include("mensagem", new SimpleMessage("error", "mensagem.atleta.inexistente"));

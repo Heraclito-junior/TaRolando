@@ -23,8 +23,12 @@ public class ConviteCasamento extends Convite {
         super();
     }
 
-    public ConviteCasamento(EventoCasamento evento,UsuarioCasamento convidado,double valor,String participacao) {
+    public ConviteCasamento(EventoCasamento evento,String nome,String email, String grupo) {
         super();
+        this.eventoCasamento = evento;
+        this.nomeConvidado = nome;
+        this.email = email;
+        this.grupo = grupo;
     }
 
     public String getEmail() {

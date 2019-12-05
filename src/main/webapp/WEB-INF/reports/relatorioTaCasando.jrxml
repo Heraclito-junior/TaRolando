@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioServico" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0765742a-c4b3-407d-9f7e-24738a5dfbbe">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="Dataset1" uuid="7157d34f-c831-4524-a735-fbe043bae1d9">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="titulo" class="java.lang.String">
+		<fieldDescription><![CDATA[titulo]]></fieldDescription>
+	</field>
+	<field name="data" class="java.lang.String">
+		<fieldDescription><![CDATA[data]]></fieldDescription>
+	</field>
+	<field name="numTotalConvidados" class="java.lang.Integer">
+		<fieldDescription><![CDATA[numTotalConvidados]]></fieldDescription>
+	</field>
+	<field name="horaInicio" class="java.lang.String">
+		<fieldDescription><![CDATA[horaInicio]]></fieldDescription>
+	</field>
+	<field name="horaFim" class="java.lang.String">
+		<fieldDescription><![CDATA[horaFim]]></fieldDescription>
+	</field>
+	<field name="valorEsperado" class="java.lang.Double">
+		<fieldDescription><![CDATA[valorEsperado]]></fieldDescription>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[descricao]]></fieldDescription>
+	</field>
+	<field name="valorArrecadadoPresentes" class="java.lang.Double">
+		<fieldDescription><![CDATA[valorArrecadadoPresentes]]></fieldDescription>
+	</field>
+	<field name="numPadrinhos" class="java.lang.Integer">
+		<fieldDescription><![CDATA[numPadrinhos]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="0" width="540" height="80" uuid="2996dc50-8b37-4517-a7c6-842320602f0a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Copperplate Gothic Light" size="26"/>
+				</textElement>
+				<text><![CDATA[Tá CASANDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="80" width="524" height="14" uuid="111d2502-d7ec-4bc1-9d1a-5c8c3d8e5650"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[____________________________________________________________________________________________]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="234" splitType="Stretch">
+			<staticText>
+				<reportElement x="30" y="3" width="80" height="25" uuid="f042d6fd-07e7-4715-b581-ad58549aa11f"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[Nome do Evento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="3" width="80" height="25" uuid="cfe6da1c-313d-41ff-865c-c2ffccf2c6e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="3" width="80" height="25" uuid="98beee94-5a9e-4abc-9e96-2340827ae36c"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[Hora de Início]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="3" width="80" height="25" uuid="5b7d387e-08b8-413b-b622-1d68489d9c4c"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[Hora do Fim]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="30" y="30" width="80" height="30" uuid="b59e9359-bb22-45e8-b382-2d2c0cf560f1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="30" width="80" height="30" uuid="734bd807-e17b-4cfc-9998-e7aff0111fd5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="30" width="80" height="30" uuid="fdb41177-3e56-4a53-b0b7-d6b8d99960be"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{horaInicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="30" width="80" height="30" uuid="b275cf27-dfc6-4918-81fc-07d87cbd6b14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{horaFim}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="30" y="80" width="80" height="25" uuid="53b86a1e-fe73-4993-bc87-0f3e794829d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="160" width="120" height="25" uuid="a5721f2f-0ec8-4cf1-9737-f66ab20af4c1"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[Num.Total de Convidados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="160" width="100" height="25" uuid="b0ea797c-827e-4038-b1dc-12464111557f"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[Num. de Padrinhos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="160" width="150" height="25" uuid="2e949f88-189f-4f72-bb5c-706d01517a61"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[Valor Esperado de Presentes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="160" width="140" height="25" uuid="d5f5215b-0b90-430b-9132-4c45a7add908"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[Valor Arrecadado de Presentes]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="30" y="107" width="520" height="30" uuid="5597562a-6a7f-4e77-a37f-a26d4a42dc95"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="187" width="120" height="30" uuid="5b2ac2eb-a63c-4af7-9d3e-e2fee4a16b30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{numTotalConvidados}
+]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="187" width="100" height="30" uuid="2303f013-9486-4a2c-b9a4-f3dc77371b35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{numPadrinhos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="187" width="150" height="30" uuid="137e08dc-7f00-41c2-8db8-9fc9fd6551ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valorEsperado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="185" width="140" height="30" uuid="1e3657ff-2771-4e28-bb86-eebbe062a473"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valorArrecadadoPresentes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="70" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="55" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="72" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

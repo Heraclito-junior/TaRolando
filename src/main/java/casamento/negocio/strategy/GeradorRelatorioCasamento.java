@@ -50,6 +50,10 @@ public class GeradorRelatorioCasamento implements GeradorRelatorio{
 		List<ConviteCasamento> convites = conviteDao.convitesPorEvento(evento.getId());
 
 		for (ConviteCasamento c : convites) {
+			if (c.getGrupo().equals("Padrinho")) {
+				numPadrinhos++;
+			}
+
 			if (c.isCompareceu()) {
 				valorArrecadadoPresentes += c.getPresente().getValor();
 				numConvidadosParticipou++;
@@ -86,7 +90,7 @@ public class GeradorRelatorioCasamento implements GeradorRelatorio{
 		List<RelatorioCasamento> relatorios = new ArrayList<>();
 		relatorios.add(relatorio);
 
-		report = new EntidadeReport<RelatorioCasamento>(relatorios, "relatorioCasamento.jasper", context);
+		report = new EntidadeReport<RelatorioCasamento>(relatorios, "relatorioTaCasando.jasper", context);
 		download = new ReportDownload(report, ExportFormats.pdf(), false);
 		return download;
 	}

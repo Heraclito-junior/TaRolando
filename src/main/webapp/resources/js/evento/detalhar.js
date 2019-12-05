@@ -6,6 +6,7 @@ $(document).ready( function () {
     var urlParticipar=$('#btnParticipar').attr('url-participar');
     var valorDoacao;
     var contribuicaoLaboral;
+    var urlConvidar=$('#btnConvidar').attr('url-convidar');
 
     $('#btnConvidar').click( function () {
         valueLogin = $('#login_participante').val();
@@ -28,6 +29,15 @@ $(document).ready( function () {
         var urlNovo = urlParticipar + valorDoacao + "&contribuicaoLaboral=" + contribuicaoLaboral;
         console.log(urlNovo);
         $('#btnParticipar').attr('href', urlNovo);
+    });
+
+    $('#btnConvidar').click( function () {
+        var nomeConvidado = $('#nome_convidado').val();
+        var emailConvidado = $('#email_convidado').val();
+        var grupo = $('#grupoConvidado').val()
+        var urlNovo = urlConvidar + nomeConvidado + "&email=" + emailConvidado + "&grupo=" + grupo;
+        console.log(urlNovo);
+        $('#btnConvidar').attr('href', urlNovo);
     });
     
     

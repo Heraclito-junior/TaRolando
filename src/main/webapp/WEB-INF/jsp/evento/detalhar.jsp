@@ -51,11 +51,11 @@
 										readonly="readonly" name="evento.dataInicio" />
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="dataFinal_evento">Data Final</label>
+                                    <label for="custo_pessoa">Custo Por Pessoa:</label>
                                     <input type="text"
-										class="form-control datePicker" id="dataFinal_evento"
-										value="${evento.dataFim}" disabled placeholder="(Opcional)"
-										readonly="readonly" name="evento.dataFim" />
+										class="form-control datePicker" id="custo_pessoa"
+										value="${evento.custoPorPessoa}" disabled placeholder="(Opcional)"
+										readonly="readonly" name="evento.custoPorPessoa" />
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="horario_inicio">Horário de Início </label>
@@ -69,22 +69,22 @@
 										class="form-control timePickerFim" name="evento.horaFim"
 										type="time" value="${evento.horaFim}" required disabled>
                                 </div>
-                                <div class="form-group col-md-2">
-                                    <label for="num_vagas_min">Meta de Doações </label>
-                                    <input id="num_vagas_min"
-										class="form-control" name="evento.numVagasMin" min="0"
-										type="number" value="${evento.metaDoacoes}" disabled>
-                                </div>
-                                <div
-									class="form-group col-md-2 col-md-offset-2">
-                                    <label for="num_vagas_max">Meta de Voluntários </label>
-                                    <input id="num_vagas_max"
-										class="form-control" name="evento.numVagasMax" min="0"
-										type="number" value="${evento.metaVoluntarios}" disabled>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <a href="#">Integrar uma Reserva ao Evento</a>
-                                </div>
+<%--                                <div class="form-group col-md-2">--%>
+<%--                                    <label for="num_vagas_min">Meta de Doações </label>--%>
+<%--                                    <input id="num_vagas_min"--%>
+<%--										class="form-control" name="evento.numVagasMin" min="0"--%>
+<%--										type="number" value="${evento.metaDoacoes}" disabled>--%>
+<%--                                </div>--%>
+<%--                                <div--%>
+<%--									class="form-group col-md-2 col-md-offset-2">--%>
+<%--                                    <label for="num_vagas_max">Meta de Voluntários </label>--%>
+<%--                                    <input id="num_vagas_max"--%>
+<%--										class="form-control" name="evento.numVagasMax" min="0"--%>
+<%--										type="number" value="${evento.metaVoluntarios}" disabled>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group col-md-6">--%>
+<%--                                    <a href="#">Integrar uma Reserva ao Evento</a>--%>
+<%--                                </div>--%>
                                 <div class="form-group col-md-12">
                                     <label for="localizacao">Localização </label>
                                     <input id="localizacao"
@@ -114,65 +114,44 @@
                             <div class="col-md-4 order-md-2 mb-4">
                                 <h4 class="text-center"
 									style="margin-top: 0px; padding-top: 0px;">
-                                    <a
-										href="${linkTo[ChatController].chat}?id=${evento.id}">Chat do Grupo</a><br>
+<%--                                    <a--%>
+<%--										href="${linkTo[ChatController].chat}?id=${evento.id}">Chat do Grupo</a><br>--%>
 									<button class="btn btn-link" data-toggle="modal"
 										data-target="#addParticipante">
-												Adicionar Atleta
+												Adicionar Convidado
 											</button>
+
                                     <span class="text-muted bold">Atletas Participantes</span>
+
                                     <span
 										class="badge badge-secondary badge-pill">${numParticipantes}</span>
                                     <c:if
 										test="${usuarioLogado.usuario.id == evento.organizador.id}">
-                                        <span class="icon text-right">
-                                            <button class="btn btn-link"
-												data-toggle="modal" data-target="#addParticipante">
-                                            <i class="fa fa-plus"></i>
-											</button>
-
-										</span>
                                     </c:if>
                                 </h4>
                                 <ul class="list-group mb-3">
                                     <c:forEach
-										items="${evento.participantes}" var="participante">
+										items="${convites}" var="convite">
                                             <input type="hidden"
-											value="${participante.id}" name="atleta.id" />
+											value="${convite.id}" name="atleta.id" />
                                         <li
 											class="list-group-item justify-content-between"
 											style="padding-left: 0px;">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <img
-														class="img-circle"
-														src="${ctx}/resources/imagens/icons_map/futebol.png"
-														width="60px" height="60px" />
+                                            <div class="row" style="margin-left: 25px;">
+                                                <div class="row">
+                                                    <p>
+                                                        <h4>${convite.nomeConvidado}</h4>
+                                                    </p>
                                                 </div>
-                                                <div class="col-md-7">
-                                                    <a
-														href="${linkTo[AtletaController].perfil}?id=${participante.id}">
-                                                        <h4>${participante.nome}</h4>
-                                                    </a>
+                                                <div class="row">
+                                                    <p>
+                                                        ${convite.email}
+                                                    </p>
                                                 </div>
-                                                <div class="col-md-2"
-													style="margin-left: 0px; padding-left: 0px">
-													<c:if
-														test="${usuarioLogado.usuario.id == evento.organizador.id}">
-<%--                                                        <a--%>
-<%--                                                        	href="${linkTo[ConviteController].confirmarPresenca}?id=${convite.id}&login=${participante.login}"--%>
-<%--															class="btn btn-link">--%>
-<%--															<i class="fa fa-check"></i>--%>
-<%--														</a>--%>
-
-                                                        <form
-															action="${ctx}/evento">
-                                                            <a
-																href="${linkTo[EventoController].deletarAtleta}?id=${evento.id}&login=${participante.login}"
-																class="
-                                                        btnbtn-primary">remover</a>
-                                                        </form>
-                                                    </c:if>
+                                                <div class="row">
+                                                    <p>
+                                                            ${convite.grupo}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </li>
@@ -206,28 +185,35 @@
 								data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-                            <h4 class="modal-title">Participar de Evento</h4>
+                            <h4 class="modal-title">Gerar Convite</h4>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="valor_doacao">Valor de doação:</label>
-                                <input type="text" name="valor"
-									class="form-control" required value="" id="valor_doacao"
-									placeholder="Digite aqui o valor a ser doado" />
+                                <label for="nome_convidado">Nome do Convidado:</label>
+                                <input type="text" name="nome_convidado"
+									class="form-control" required value="" id="nome_convidado"
+									placeholder="Digite aqui o nome do convidado" />
                             </div>
                             <div class="form-group">
-                                <label for="contribuicao_laboral">Contribuição laboral:</label>
+                                <label for="email_convidado">E-mail do convidado: </label>
                                 <input type="text" name="laboral"
-									class="form-control" required value="" id="contribuicao_laboral"
-									placeholder="Descreva seu tipo de ajuda" />
+									class="form-control" required value="" id="email_convidado"
+									placeholder="Digite aqui o email do convidado" />
+                            </div>
+                            <div class="form-group">
+                                <label for="email_convidado">E-mail do convidado: </label>
+                                <select id="grupoConvidado" class="form-control">
+                                    <option value="Padrinho">Padrinho/Madrinha</option>
+                                    <option value="Comum">Convidado Comum</option>
+                                </select>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button"
 								class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <a id="btnParticipar" href="#"
-								url-participar="${linkTo[ConviteController].participar}?id=${evento.id}&login=${usuarioLogado.usuario.login}&valor="
-								class="btn btn-primary">Participar</a>
+                            <a id="btnConvidar" href="#"
+								url-convidar="${linkTo[ConviteController].convidar}?id=${evento.id}&nome="
+								class="btn btn-primary">Convidar</a>
                         </div>
                     </div>
 					<!-- /.modal-content -->

@@ -7,8 +7,10 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.observer.download.Download;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import casamento.negocio.ConviteCasamentoNegocio;
 import casamento.negocio.EventoCasamentoNegocio;
 import framework.br.com.caelum.vraptor.anotacoes.Transacional;
+import framework.br.com.caelum.vraptor.model.ConviteCasamento;
 import framework.br.com.caelum.vraptor.model.Evento;
 //import framework.br.com.caelum.vraptor.negocio.EventoNegocio;
 import framework.br.com.caelum.vraptor.model.EventoCasamento;
@@ -16,6 +18,7 @@ import framework.br.com.caelum.vraptor.util.exception.AtletaInexistenteException
 import framework.br.com.caelum.vraptor.util.exception.VagasInvalidasException;
 
 import javax.inject.Inject;
+import java.util.List;
 
 
 @Path("/evento")
@@ -24,6 +27,9 @@ public class EventoController extends ControladorTaRolando<Evento> {
 
 	private EventoCasamentoNegocio negocio;
 	private Validator validator;
+
+	@Inject
+	private ConviteCasamentoNegocio conviteNegocio;
 
 	@Deprecated
 	public EventoController() {
@@ -65,6 +71,8 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	public void detalhar(Long id) {
 		EventoCasamento evento = negocio.detalhar(id);
 //		this.resultado.include("numParticipantes", evento.getParticipantes().size());
+		List<ConviteCasamento> convites = conviteNegocio.convitesPorEvento(evento.getId());
+		this.resultado.include("convites", convites);
 		this.resultado.include("evento", evento);
 //		this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
 	}

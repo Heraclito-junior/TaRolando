@@ -41,24 +41,24 @@ public class ConviteCasamentoNegocio {
     }
 
 
-    public void convidar(Long id, String login, Double val, String participacao) throws AtletaInexistenteException {
+    public void convidar(Long id, String nome, String email, String grupo) throws AtletaInexistenteException {
 
     	System.out.println("convite 1");
     	EventoCasamento evento = eventoDAO.buscarPorId(id);
     	System.out.println("convite 2");
 
-        UsuarioCasamento convidado = usuarioDAO.buscarPorLogin(login);
+//        UsuarioCasamento convidado = usuarioDAO.buscarPorLogin(login);
     	System.out.println("convite 3");
 
 
-        if (convidado == null) {
-        	System.out.println("não valeu");
-            throw new AtletaInexistenteException("Usuario não existe");
-        }
+//        if (convidado == null) {
+//        	System.out.println("não valeu");
+//            throw new AtletaInexistenteException("Usuario não existe");
+//        }
 
         	System.out.println("convite 4");
 
-        	ConviteCasamento convite = new ConviteCasamento(evento, convidado, val, participacao);
+        	ConviteCasamento convite = new ConviteCasamento(evento, nome, email, grupo);
 //            convite.getEvento().getParticipantes().add(convidado.get());
             conviteDAO.salvar(convite);
         	System.out.println("convite 5");
@@ -129,4 +129,8 @@ public class ConviteCasamentoNegocio {
 	}
 
 
+    public List<ConviteCasamento> convitesPorEvento(Long id) {
+        List<ConviteCasamento> convites = conviteDAO.convitesPorEvento(id);
+        return convites;
+    }
 }

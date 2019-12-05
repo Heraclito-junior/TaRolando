@@ -133,27 +133,6 @@ public class EventoCasamentoNegocio extends EventoNegocio {
 		return this.dao.meusAlertas();
 	}
 
-	public void criarAlerta(Long id, String login) {
-
-		Evento evento = detalhar(id);
-		Long ultimoNumero = (long) 0;
-//		for (Atleta i : evento.getParticipantes()) {
-//			Optional<Alerta> teste = daoJpa.buscarUltimoAlerta();
-//			if (teste.isPresent()) {
-//				ultimoNumero = teste.get().getId();
-//				ultimoNumero = ultimoNumero + 1;
-//
-//			}
-//
-//			daoJpa.inserirAlerta(ultimoNumero, login, id, i.getId());
-//			if (!teste.isPresent()) {
-//				ultimoNumero = (long) 1;
-//
-//			}
-//
-//		}
-
-	}
 	
 	public Download relatorio(Long id) {
 		return relat.gerarRelatorio(id);

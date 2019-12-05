@@ -30,9 +30,7 @@ public class EventoCasamentoJpaDao extends EntidadeJpaDao<EventoCasamento> imple
 
     @Override
     public List<EventoCasamento> meusEventos() {
-        Query query = this.manager.createQuery("SELECT e FROM EventoCasamento e WHERE (:usuario MEMBER OF e.participantes OR " +
-                                                  "e.organizador.id = :id) AND e.deletado = false")
-                .setParameter("usuario", usuarioLogado.getUsuario())
+        Query query = this.manager.createQuery("SELECT e FROM EventoCasamento e WHERE e.organizador.id = :id AND e.deletado = false")
                 .setParameter("id", usuarioLogado.getUsuario().getId());
         List<EventoCasamento> eventos = query.getResultList();
         return eventos;

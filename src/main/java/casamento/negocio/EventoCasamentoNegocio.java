@@ -78,30 +78,10 @@ public class EventoCasamentoNegocio implements EventoNegocio<EventoCasamento> {
 	}
 
 
-
-
-	public void removerAtleta(Long id, String login) {
-		EventoCasamento evento = detalhar(id);
-
-		UsuarioCasamento usuario = this.usuarioCasamentoDAO.buscarPorLogin(login);
-		if (usuario.getId() == null) {
-			return;
-		}
-
-		this.dao.salvar(evento);
-	}
-
 	public Object meusEventos() {
 		return this.dao.meusEventos();
 	}
-	public List<OpcaoSelect> geraListaOpcoesEventos() {
-		List<EventoCasamento> todos = this.dao.listar().stream().collect(Collectors.toList());
-		return todos.stream().map(evento -> new OpcaoSelect(evento.getTitulo(), evento.getId()))
-				.collect(Collectors.toList());
-	}
 
-
-	
 	public Download relatorio(Long id) {
 		return relat.gerarRelatorio(id);
 	}

@@ -51,24 +51,6 @@ public class ConviteController extends ControladorTaRolando<Convite> {
         resultado.redirectTo(EventoController.class).detalhar(id);
     }
 
-    @Transacional
-    public void remover(Long id) {
-        conviteNegocio.remover(id);
-        resultado.redirectTo(this).meusConvites();
-    }
-
-    @Transacional
-    public void aceitar(Long id) {
-        conviteNegocio.aceitar(id);		
-        resultado.redirectTo(this).meusConvites();
-    }
-
-    @Transacional
-    public void rejeitar(Long id) {
-        conviteNegocio.rejeitar(id);
-        resultado.redirectTo(this).meusConvites();
-    }
-
     @Get
     public void meusConvites() {
         resultado.include("convitesRecebidos", conviteNegocio.meusConvites());

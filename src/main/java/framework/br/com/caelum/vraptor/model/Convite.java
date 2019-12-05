@@ -12,8 +12,7 @@ public abstract class Convite extends Entidade {
     protected boolean aceito;
     protected boolean deletado;
 
-    @ManyToOne
-    protected Atleta convidado;
+    
 
     
 
@@ -21,9 +20,7 @@ public abstract class Convite extends Entidade {
     public Convite() {
     }
 
-    public Convite( Atleta convidado){
-        this.convidado = convidado;
-    }
+
 
     @Override
     public Long getId() {
@@ -43,13 +40,7 @@ public abstract class Convite extends Entidade {
         this.aceito = aceito;
     }
 
-    public Atleta getConvidado() {
-        return convidado;
-    }
 
-    public void setConvidado(Atleta convidado) {
-        this.convidado = convidado;
-    }
 
 
     public boolean isDeletado() {

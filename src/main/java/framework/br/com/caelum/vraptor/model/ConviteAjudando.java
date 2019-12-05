@@ -14,6 +14,9 @@ public class ConviteAjudando extends Convite {
 
     @ManyToOne
     private EventoAjudando eventoAjudando;
+    
+    @ManyToOne
+	private Atleta convidado;
 
     @Deprecated
     public ConviteAjudando() {
@@ -22,7 +25,7 @@ public class ConviteAjudando extends Convite {
 
     public ConviteAjudando(EventoAjudando evento, Atleta convidado, Double val, String ajudas){
         this.setEventoAjudando(evento);
-        this.convidado = convidado;
+        this.setConvidado(convidado);
         this.setValor(val);
         this.setAjuda(ajudas);
         this.participou = false;
@@ -58,6 +61,14 @@ public class ConviteAjudando extends Convite {
 
 	public void setParticipou(Boolean participou) {
 		this.participou = participou;
+	}
+
+	public Atleta getConvidado() {
+		return convidado;
+	}
+
+	public void setConvidado(Atleta convidado) {
+		this.convidado = convidado;
 	}
 
     

@@ -30,7 +30,6 @@ import java.util.stream.Collectors;
 
 public class EventoAjudandoNegocio implements EventoNegocio<EventoAjudando> {
 
-	private EsporteDAO esporteDAO;
 	@Inject
 	private EventoAjudandoDAO dao;
 
@@ -47,20 +46,14 @@ public class EventoAjudandoNegocio implements EventoNegocio<EventoAjudando> {
 
 	@Deprecated
 	public EventoAjudandoNegocio() {
-		this(null,null);
+		this(null);
 	}
 
 	@Inject
-	public EventoAjudandoNegocio(EsporteDAO esporteDAO, GeradorRelatorioAjudando relat2) {
-		this.esporteDAO = esporteDAO;
+	public EventoAjudandoNegocio( GeradorRelatorioAjudando relat2) {
 		this.relat=relat2;
 	}
 
-	public List<OpcaoSelect> geraListaOpcoesEsportes() {
-		List<Esporte> todos = this.esporteDAO.listar().stream().collect(Collectors.toList());
-		return todos.stream().map(esporte -> new OpcaoSelect(esporte.getNome(), esporte.getId()))
-				.collect(Collectors.toList());
-	}
 
 	public List<OpcaoSelect> geraListaOpcoesEventos() {
 		List<EventoAjudando> todos = this.dao.listar().stream().collect(Collectors.toList());
@@ -72,25 +65,13 @@ public class EventoAjudandoNegocio implements EventoNegocio<EventoAjudando> {
 		if (evento.getParticipantes() == null) {
 			evento.setParticipantes(new ArrayList<>());
 		}
-//		if(evento.getNumVagasMin()>evento.getNumVagasMax()) {
-//			throw new VagasInvalidasException("Numero de vagas minimas nao pode ser superior as maximas");
-//		}
 		evento.setOrganizador((Atleta) this.usuarioLogado.getUsuario());
-//		evento.getParticipantes().add((Atleta) usuarioLogado.getUsuario());
 		this.dao.salvar(evento);
 		return;
 	}
 	
 	public void modificarEvento(EventoAjudando evento) {
-////	evento.setOrganizador(this.atletaLogado.getAtleta());
-//	System.out.println("organizador "+evento.getOrganizador());
-//	System.out.println("evento "+evento.getTitulo());
-
-
-//	evento.setOrganizador(this.usuarioLogado.getUsuario());
-
 	this.dao.salvar(evento);
-//	this.dao.
 	return;
 }
 

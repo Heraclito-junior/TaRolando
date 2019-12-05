@@ -55,12 +55,6 @@ public class EventoAjudandoNegocio implements EventoNegocio<EventoAjudando> {
 	}
 
 
-	public List<OpcaoSelect> geraListaOpcoesEventos() {
-		List<EventoAjudando> todos = this.dao.listar().stream().collect(Collectors.toList());
-		return todos.stream().map(evento -> new OpcaoSelect(evento.getTitulo(), evento.getId()))
-				.collect(Collectors.toList());
-	}
-
 	public void definirAdministradorESalvar(EventoAjudando evento) throws VagasInvalidasException {
 		if (evento.getParticipantes() == null) {
 			evento.setParticipantes(new ArrayList<>());

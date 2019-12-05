@@ -40,7 +40,6 @@ public class EventoController extends ControladorTaRolando<Evento> {
 	}
 
 	public void form() {
-		resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
 	}
 
 	
@@ -68,7 +67,6 @@ public class EventoController extends ControladorTaRolando<Evento> {
 		EventoAjudando evento = negocio.detalhar(id);
 		this.resultado.include("numParticipantes", evento.getParticipantes().size());
 		this.resultado.include("evento", evento);
-		this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());
 	}
 
 	@Transacional
@@ -116,7 +114,6 @@ public class EventoController extends ControladorTaRolando<Evento> {
 		
         Evento evento = this.negocio.detalhar(id);		
         this.resultado.include("evento", evento);		
-        this.resultado.include("esportes", this.negocio.geraListaOpcoesEsportes());		
 	
     }
 	

@@ -61,27 +61,6 @@ public class ConviteNegocioAjudando implements ConviteNegocio<ConviteAjudando>{
     	
     	
     }
-
-    public void aceitar(Long id) {
-        ConviteAjudando convite = conviteDAO.buscarPorId(id);
-        convite.getEventoAjudando().getParticipantes().add(convite.getConvidado());
-        convite.getConvidado().getEventos().add(convite.getEventoAjudando());
-        convite.setAceito(true);
-        eventoDAO.salvar(convite.getEventoAjudando());
-    }
-
-    public void rejeitar(Long id) {
-    	ConviteAjudando convite = conviteDAO.buscarPorId(id);
-        convite.setAceito(false);
-        convite.setDeletado(true);
-        conviteDAO.salvar(convite);
-    }
-
-    public void remover(Long id) {
-    	ConviteAjudando convite = conviteDAO.buscarPorId(id);
-        convite.setDeletado(true);
-        conviteDAO.salvar(convite);
-    }
     
     
     public List<ConviteAjudando> meusConvites() {

@@ -34,7 +34,6 @@
                     </div>
                         <button class="btn btn-primary btn-block" style="margin-bottom: 5px">Entrar</button>
                         <a href="${linkTo[LoginController].registro}" class="btn btn-primary btn-block">Registre-se</a>
-                    <a href="${linkTo[LoginController].formParceiro}" class="btn btn-primary btn-block">Área do Parceiro</a>
                 </form>
             </div>
         </div>

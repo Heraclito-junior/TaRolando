@@ -82,9 +82,7 @@
 										class="form-control" name="evento.numVagasMax" min="0"
 										type="number" value="${evento.metaVoluntarios}" disabled>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <a href="#">Integrar uma Reserva ao Evento</a>
-                                </div>
+                                
                                 <div class="form-group col-md-12">
                                     <label for="localizacao">Localização </label>
                                     <input id="localizacao"
@@ -118,9 +116,9 @@
 										href="${linkTo[ChatController].chat}?id=${evento.id}">Chat do Grupo</a><br>
 									<button class="btn btn-link" data-toggle="modal"
 										data-target="#addParticipante">
-												Adicionar Atleta
+												Participar
 											</button>
-                                    <span class="text-muted bold">Atletas Participantes</span>
+                                    <span class="text-muted bold">Nº Participantes</span>
                                     <span
 										class="badge badge-secondary badge-pill">${numParticipantes}</span>
                                     <c:if
@@ -136,23 +134,22 @@
                                 </h4>
                                 <ul class="list-group mb-3">
                                     <c:forEach
-										items="${evento.participantes}" var="participante">
+										items="${convites}" var="convite">
                                             <input type="hidden"
-											value="${participante.id}" name="atleta.id" />
+											value="${convite.convidado.id}" name="atleta.id" />
                                         <li
 											class="list-group-item justify-content-between"
 											style="padding-left: 0px;">
                                             <div class="row">
-                                                <div class="col-md-3">
-                                                    <img
-														class="img-circle"
-														src="${ctx}/resources/imagens/icons_map/futebol.png"
-														width="60px" height="60px" />
-                                                </div>
+                                                
                                                 <div class="col-md-7">
                                                     <a
-														href="${linkTo[AtletaController].perfil}?id=${participante.id}">
-                                                        <h4>${participante.nome}</h4>
+														href="${linkTo[AtletaController].perfil}?id=${convite.convidado.id}">
+                                                        <h4>${convite.convidado.nome}</h4>
+                                                        <h3>${convite.valor}</h3>
+                                                        <h3>${convite.ajuda}</h3>
+                                                        
+                                                        
                                                     </a>
                                                 </div>
                                                 <div class="col-md-2"
@@ -168,7 +165,7 @@
                                                         <form
 															action="${ctx}/evento">
                                                             <a
-																href="${linkTo[EventoController].deletarAtleta}?id=${evento.id}&login=${participante.login}"
+																href="${linkTo[EventoController].deletarAtleta}?id=${evento.id}&login=${convite.convidado.login}"
 																class="
                                                         btnbtn-primary">remover</a>
                                                         </form>
@@ -185,11 +182,14 @@
 
                 <button href="" class="btn btn-default"
 					onclick="history.back(1)">Voltar</button>
+					<c:if
+										test="${usuarioLogado.usuario.id == evento.organizador.id}">
                 <form action="${linkTo[EventoController].gerarRelatorio}?idEvento=${evento.id}" method="post">
                     <input hidden id="idEvento" value="${evento.id}"/>
 
                     <button type="submit" class="btn btn-success">Gerar Relatório</button>
                 </form>
+                </c:if>
 
 				</div>
             </div>
